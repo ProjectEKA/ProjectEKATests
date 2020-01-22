@@ -1,5 +1,6 @@
 package Tests.APITests.ConsentManager;
 
+import com.google.gson.JsonObject;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -27,5 +28,29 @@ public class DiscoveryAPITest {
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(jsonPathEvaluator.getString("identifier[0].name"), "Tata Memorial Hospital");
         Assert.assertEquals(jsonPathEvaluator.getString("identifier[0].id"), "10000002");
+    }
+
+    @Test
+    public void discoverPatientsAPI() {
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        request.header("Authorization", "MQ==");
+
+        JsonObject hip = new JsonObject();
+        JsonObject innerObject = new JsonObject();
+
+        innerObject.addProperty("id", "10000003");
+        hip.add("hip", innerObject);
+
+        request.body(hip.toString());
+
+        Response response = request.post("/patients/discover");
+
+        JsonPath jsonPathEvaluator = response.jsonPath();
+
+        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "1");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doee");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "123");
     }
 }
