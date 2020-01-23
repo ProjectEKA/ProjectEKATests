@@ -1,12 +1,8 @@
 name: Java CI
 
-on:
-  push:
-    # Sequence of patterns matched against refs/heads
-    branches:
-      - manualGithubActions
-    repository_dispatch:
-      types: do-something
+on: [push,repository_dispatch]
+repository_dispatch:
+  types: do-something
 
 jobs:
   build:
