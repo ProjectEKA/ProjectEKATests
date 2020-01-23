@@ -1,6 +1,9 @@
 name: Java CI
 
-on: [push]
+on:
+
+repository_dispatch:
+  types: do-something
 
 jobs:
   build:
