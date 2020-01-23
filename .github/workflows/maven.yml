@@ -2,7 +2,7 @@ name: Java CI
 
 on:
   repository_dispatch:
-    types: do-something
+    types: run-tests
   push:
     # Sequence of patterns matched against refs/heads
     branches:
@@ -21,3 +21,10 @@ jobs:
       - name: Run tests
         run: mvn "-Dtest=*APITest" test
 
+
+
+#curl -H "Accept: application/vnd.github.everest-preview+json" \
+#  -H "Authorization: token <TOKEN>" \
+#  --request POST \
+#  --data '{"event_type": "run-tests"}' \
+#  https://api.github.com/repos/ProjectEKA/ProjectEKATests/dispatches
