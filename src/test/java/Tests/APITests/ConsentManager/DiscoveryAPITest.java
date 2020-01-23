@@ -34,7 +34,7 @@ public class DiscoveryAPITest {
     public void discoverPatientsAPI() {
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", "MQ==");
+        request.header("Authorization", "MUBuY2c=");//1@ncg
 
         JsonObject hip = new JsonObject();
         JsonObject innerObject = new JsonObject();
