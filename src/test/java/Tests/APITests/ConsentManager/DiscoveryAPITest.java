@@ -21,7 +21,7 @@ public class DiscoveryAPITest {
     public void listProvidersAPI() {
         RequestSpecification request = RestAssured.given();
 
-        Response response = request.queryParam("name", "Tata").get("/providers");
+        Response response =  request.header("Authorization", "MUBuY2c=").queryParam("name", "Tata").get("/providers");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
