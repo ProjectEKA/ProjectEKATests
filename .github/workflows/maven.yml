@@ -21,14 +21,14 @@ jobs:
       - name: Run tests
         run: mvn "-Dtest=*APITest" test
       - uses: 8398a7/action-slack@v2
-          with:
-            status: ${{ job.status }}
-            author_name: Functional Tests
-            text: overwrite text
-            channel: '@shridhk'
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        with:
+          status: ${{ job.status }}
+          author_name: Functional Tests
+          text: overwrite text
+          channel: '@shridhk'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
 
 
 
