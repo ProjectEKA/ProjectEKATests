@@ -25,7 +25,7 @@ jobs:
           status: ${{ job.status }}
           author_name: Functional Tests
           text: Functional Tests
-          only_mention_fail: USXBM5WPQ
+          only_mention_fail: shridhk
           channel: '@shridhk'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
