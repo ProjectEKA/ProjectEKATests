@@ -21,7 +21,7 @@ jobs:
       - name: Run tests
         run: mvn "-Dtest=*APITest" test
       - name: Print Run id
-        run: echo ${{ GITHUB_RUN_ID }}
+        run: echo $GITHUB_RUN_ID
       - uses: 8398a7/action-slack@v2
         with:
           status: ${{ job.status }}
