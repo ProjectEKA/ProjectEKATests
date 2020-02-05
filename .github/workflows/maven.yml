@@ -20,6 +20,7 @@ jobs:
           java-version: 1.8
       - name: Run tests
         run: mvn "-Dtest=*APITest" test
+        run: echo ${{ secrets.GITHUB_RUN_ID }}
       - uses: 8398a7/action-slack@v2
         with:
           status: ${{ job.status }}
@@ -31,6 +32,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always()
+
 
 
 
