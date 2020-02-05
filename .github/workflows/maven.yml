@@ -25,11 +25,12 @@ jobs:
           status: ${{ job.status }}
           author_name: Functional Tests
           text: Functional Tests
-          only_mention_fail: shridhk
           channel: '@shridhk'
+          only_mention_fail: channel
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always()
 
 
 
