@@ -49,7 +49,7 @@ public class DiscoveryAPITest {
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200);
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "1");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "2");
         Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doee");
         Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "123");
     }
