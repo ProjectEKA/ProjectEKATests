@@ -7,6 +7,7 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:
       - master
+      - andoridGithubActions
 jobs:
 #  build:
 #    runs-on: ubuntu-latest
