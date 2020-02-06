@@ -9,29 +9,29 @@ on:
       - master
       - andoridGithubActions
 jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v1
-#      - name: Set up JDK 1.8
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: 1.8
-#      - name: Run tests
-#        run: mvn "-Dtest=*APITest" test
-#      - name: Print Run id
-#        run: echo $GITHUB_RUN_ID
-#      - uses: 8398a7/action-slack@v2
-#        with:
-#          status: ${{ job.status }}
-#          author_name: Functional Tests
-#          text: Functional Tests
-#          channel: '@shridhk'
-#          only_mention_fail: USXBM5WPQ
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
-#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-#        if: always()
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Run tests
+        run: mvn "-Dtest=*APITest" test
+      - name: Print Run id
+        run: echo $GITHUB_RUN_ID
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+          author_name: Functional Tests
+          text: Functional Tests
+          channel: '@shridhk'
+          only_mention_fail: USXBM5WPQ
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always()
 
   ui-test:
     runs-on: macOS-latest
@@ -47,14 +47,11 @@ jobs:
           node-version: '10.16'
           java-version: 1.8
       - run: npm install -g appium
-      - run: which appium
-      - run: which node
-      - run: mvn clean
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: mvn -Dtest=RegistrationPageTest test
+          script: mvn clean -Dtest=RegistrationPageTest test
         env:
           Authorization: ${{ secrets.Authorization }}
 
