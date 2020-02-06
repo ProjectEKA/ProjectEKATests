@@ -47,6 +47,8 @@ jobs:
           node-version: '10.16'
           java-version: 1.8
       - run: npm install -g appium
+      - run: which appium
+      - run: which node
       - run: mvn clean
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
