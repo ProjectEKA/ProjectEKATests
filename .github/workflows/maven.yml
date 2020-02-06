@@ -35,14 +35,9 @@ jobs:
 
   ui-test:
     runs-on: macOS-latest
-    strategy:
-      matrix:
-        api-level: 29
-        target: [default] #[default, google_apis]
-        profile: [Pixel]
     steps:
       - name: checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: set up node
         uses: actions/setup-node@v1
       - name: Set up JDK 1.8
@@ -54,12 +49,9 @@ jobs:
       - run: npm install -g appium
       - run: mvn clean
       - name: run tests
-        uses: reactivecircus/android-emulator-runner@v1
+        uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: x86_64
-          profile: Nexus 6
+          api-level: 29
           script: mvn clean
 
 
