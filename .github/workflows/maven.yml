@@ -54,7 +54,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: ${{ secrets.Authorization }} mvn -Dtest=RegistrationPageTest test
+          script: mvn -Dtest=RegistrationPageTest test
+        env:
+          Authorization: ${{ secrets.Authorization }}
 
 
 #curl -H "Accept: application/vnd.github.everest-preview+json" \
