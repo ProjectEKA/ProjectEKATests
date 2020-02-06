@@ -7,7 +7,12 @@ import org.testng.annotations.Test;
 public class DiscoverPatientTest extends BaseDriver {
 
     @Test
-    public void sample() {
+    public void DiscoverPatientTest() {
+        new HomePage(driver).clickAddNewProvider().searchAndSelectProvider("Tata").clickConfirmProvider();
+    }
+
+    @Test
+    public void RegistrationTest() {
         new HomePage(driver).clickAddNewProvider().searchAndSelectProvider("Tata").clickConfirmProvider();
     }
 }

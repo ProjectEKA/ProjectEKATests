@@ -14,4 +14,9 @@ public class WaitUtils {
                 .elementToBeClickable(id));
         return id;
     }
+    public MobileElement waitForElementToBeVisible(AppiumDriver driver, MobileElement id) {
+        wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOf(id));
+        return id;
+    }
 }

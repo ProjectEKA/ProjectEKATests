@@ -3,6 +3,8 @@ package Tests.MobileAppTests.Utils;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -22,18 +24,25 @@ public class BaseDriver {
         service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
                 .usingAnyFreePort()
                 .usingDriverExecutable(new File(
-                        "/Users/shridhk/.nvm/versions/node/v12.4.0/bin/node")).withAppiumJS(
-                        new File("/usr/local/bin/appium")));
+                        "/Users/shridhk/.nvm/versions/node/v12.4.0/bin/node"))
+                .withAppiumJS(new File("/usr/local/bin/appium"))
+        );
         service.start();
 
         if (service == null || !service.isRunning()) {
             throw new AppiumServerHasNotBeenStartedLocallyException(
                     "Failed to start the Appium Server");
         }
-        File app = new File("/Users/shridhk/Documents/GitHubNew/ProjectEKA/Jataayu/app/build/outputs/apk/debug/app-debug.apk");
+        String path = new AppUtility().getAPP();
+        File app = new File(path + "/app-debug.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", "Android Emulator");
         capabilities.setCapability("app", app.getAbsolutePath());
+        capabilities.setCapability( "automationName", "UIAutomator2");
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 700000);
+        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.org.projecteka.jataayu.ui.LauncherActivity");
+        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.org.projecteka.jataayu.debug");
+
         driver = new AndroidDriver<>(service.getUrl(), capabilities);
     }
 
