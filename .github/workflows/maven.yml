@@ -37,7 +37,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        api-level: [23, 29]
+        api-level: 29
         target: [default] #[default, google_apis]
         profile: [Pixel]
     steps:
@@ -51,6 +51,8 @@ jobs:
           fetch-depth: 1
           node-version: '10.16'
           java-version: 1.8
+      - run: npm install -g appium
+      - run: mvn clean
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v1
         with:
@@ -58,8 +60,8 @@ jobs:
           target: ${{ matrix.target }}
           arch: x86_64
           profile: Nexus 6
-      - run: npm install -g appium
-      - run: mvn clean
+          script: mvn clean
+
 
 #curl -H "Accept: application/vnd.github.everest-preview+json" \
 #  -H "Authorization: token <TOKEN>" \
