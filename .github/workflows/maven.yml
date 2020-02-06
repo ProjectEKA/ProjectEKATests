@@ -53,17 +53,18 @@ jobs:
           script: mvn clean -Dtest=RegistrationPageTest test
         env:
           Authorization: ${{ secrets.Authorization }}
-      - uses: 8398a7/action-slack@v2
-          with:
-            status: ${{ job.status }}
-            author_name: Functional Tests
-            text: Functional Mobile Tests
-            channel: '@shridhk'
-            only_mention_fail: USXBM5WPQ
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-          if: always()
+      - name: Notify on Slack
+        uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+          author_name: Functional Tests
+          text: Functional Mobile Tests
+          channel: '@shridhk'
+          only_mention_fail: USXBM5WPQ
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always()
 
 
 
