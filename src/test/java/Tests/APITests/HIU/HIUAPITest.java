@@ -1,6 +1,5 @@
 package Tests.APITests.HIU;
 
-import com.google.gson.JsonObject;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -14,7 +13,8 @@ public class HIUAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "http://hiu-dev.projecteka.in";
+        RestAssured.baseURI = "https://hiu-dev.projecteka.in/api";
+        RestAssured.useRelaxedHTTPSValidation();
     }
 
     @Test

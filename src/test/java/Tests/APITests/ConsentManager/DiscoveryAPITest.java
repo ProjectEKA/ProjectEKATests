@@ -14,14 +14,15 @@ public class DiscoveryAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "http://consent-manager-dev.projecteka.in";
+        RestAssured.baseURI = "https://consent-manager-dev.projecteka.in";
+        RestAssured.useRelaxedHTTPSValidation();
     }
 
     @Test
     public void listProvidersAPI() {
         RequestSpecification request = RestAssured.given();
 
-        Response response =  request.header("Authorization", "MUBuY2c=").queryParam("name", "Tata").get("/providers");
+        Response response = request.header("Authorization", "MUBuY2c=").queryParam("name", "Tata").get("/providers");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
