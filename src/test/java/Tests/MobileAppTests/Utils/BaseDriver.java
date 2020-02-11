@@ -42,8 +42,8 @@ public class BaseDriver {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability( "automationName", "UIAutomator2");
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 700000);
-        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.org.projecteka.jataayu.ui.LauncherActivity");
-        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.org.projecteka.jataayu.debug");
+        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.projecteka.jataayu.ui.LauncherActivity");
+        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.projecteka.jataayu.debug");
 
         driver = new AndroidDriver<>(service.getUrl(), capabilities);
     }
