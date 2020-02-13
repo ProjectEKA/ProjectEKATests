@@ -24,20 +24,19 @@ public class GitHubAPITest {
         JsonObject obj = new JsonObject();
         obj.addProperty("content","asdasd");
 
-//        GistRequest gistRequest = new GistRequest("Created from API", true, new GistRequest
-//                .FileDetails(new GistRequest.FileContent("Gist created from API")));
+        GistRequest gistRequest = new GistRequest("Created from API", true, new GistRequest
+                .FileDetails(new GistRequest.FileContent("Gist created from API")));
 
 
 
         RequestSpecification request = RestAssured.given();
-//
-//        request.header("Content-Type", "application/json");
-//        request.header("Authorization", "Basic c2hyaWRoYXJrYWxhZ2k6NjAzZDdiMzA3YWExZWFiODFiODAxNTYyOTFjMTVmM2M1NWNlMDQwZQ==");//1@ncg
+
+        request.header("Content-Type", "application/json");
+        request.header("Authorization", "Basic c2hyaWRoYXJrYWxhZ2k6NjAzZDdiMzA3YWExZWFiODFiODAxNTYyOTFjMTVmM2M1NWNlMDQwZQ==");//1@ncg
 
 
-        Response response = request.get("/");
-
-        GistRequest gistRequest = response.as(GistRequest.class);
+        request.body(gistRequest);
+        Response response = request.post("/gists");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
