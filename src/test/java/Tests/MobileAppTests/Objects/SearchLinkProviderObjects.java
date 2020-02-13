@@ -6,12 +6,12 @@ import io.appium.java_client.pagefactory.AndroidFindBys;
 
 public class SearchLinkProviderObjects {
 
-    @AndroidFindBy(id = "in.org.projecteka.jataayu.debug:id/sv_provider")
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/sv_provider")
     public MobileElement providerInput;
-    @AndroidFindBy( id = "in.org.projecteka.jataayu.debug:id/provider_name")
+    @AndroidFindBy( id = "in.projecteka.jataayu.debug:id/provider_name")
     public MobileElement providerName;
-    @AndroidFindBy( id = "in.org.projecteka.jataayu.debug:id/tv_mobile_number")
+    @AndroidFindBy( id = "in.projecteka.jataayu.debug:id/tv_mobile_number")
     public MobileElement verifiedMobileNo;
-    @AndroidFindBy( id = "in.org.projecteka.jataayu.debug:id/btn_search")
+    @AndroidFindBy( id = "in.projecteka.jataayu.debug:id/btn_search")
     public MobileElement confirmMobileNo;
 }
