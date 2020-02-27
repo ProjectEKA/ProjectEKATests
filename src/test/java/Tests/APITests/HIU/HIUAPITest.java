@@ -21,7 +21,7 @@ public class HIUAPITest {
     @Test
     public void discoverPatientAPI() {
         RequestSpecification request = RestAssured.given();
-        String patientID = "1@ncg";
+        String patientID = "Shreya@ncg";
 
         Response response = request.pathParam("patientID", patientID).get("/patients/{patientID}");
         JsonPath jsonPathEvaluator = response.jsonPath();
@@ -35,9 +35,9 @@ public class HIUAPITest {
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", "MUBuY2c=");//1@ncg
+        request.header("Authorization", "U2hyZXlhQG5jZw==");//1@ncg
 
-        HIUConsentRequest hiuConsentRequest = new HIUConsentRequest.ConsentRequestBuilder("1@ncg").buildConsentReuqest();
+        HIUConsentRequest hiuConsentRequest = new HIUConsentRequest.ConsentRequestBuilder("Shreya@ncg").buildConsentReuqest();
 
         request.body(hiuConsentRequest.getJSONRequestBody().toString());
         Response response = request.post("/consent-requests");

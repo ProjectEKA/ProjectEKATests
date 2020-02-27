@@ -22,7 +22,7 @@ public class DiscoveryAPITest {
     public void listProvidersAPI() {
         RequestSpecification request = RestAssured.given();
 
-        Response response = request.header("Authorization", "MUBuY2c=").queryParam("name", "Tata").get("/providers");
+        Response response = request.header("Authorization", "U2hyZXlhQG5jZw==").queryParam("name", "Tata").get("/providers");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
@@ -35,12 +35,12 @@ public class DiscoveryAPITest {
     public void discoverPatientsAPI() {
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", "MUBuY2c=");//1@ncg
+        request.header("Authorization", "S3VtYXJhc3dhbXlAbmNn");//1@ncg
 
         JsonObject hip = new JsonObject();
         JsonObject innerObject = new JsonObject();
 
-        innerObject.addProperty("id", "10000003");
+        innerObject.addProperty("id", "10000005");
         hip.add("hip", innerObject);
 
         request.body(hip.toString());
@@ -50,8 +50,8 @@ public class DiscoveryAPITest {
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200);
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "1");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doee");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "123");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "5");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "Ron Doe");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "131");
     }
 }
