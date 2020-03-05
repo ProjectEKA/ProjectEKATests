@@ -21,7 +21,7 @@ public class HIUAPITest {
     @Test
     public void discoverPatientAPI() {
         RequestSpecification request = RestAssured.given();
-        String patientID = "Shreya@ncg";
+        String patientID = "shreya@ncg";
 
         Response response = request.pathParam("patientID", patientID).get("/patients/{patientID}");
         JsonPath jsonPathEvaluator = response.jsonPath();

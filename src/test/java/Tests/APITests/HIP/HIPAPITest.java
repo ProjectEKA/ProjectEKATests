@@ -31,9 +31,9 @@ public class HIPAPITest {
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200);
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "1");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doee");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "123");
-        jsonPathEvaluator.getString("patient.matchedBy").equals("[Mobile, LastName, Gender]");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "123");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "TestFirstName TestLastName");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "121");
+        jsonPathEvaluator.getString("patient.matchedBy").equals("[Mobile, Gender]");
     }
 }

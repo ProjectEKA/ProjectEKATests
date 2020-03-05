@@ -1,5 +1,6 @@
 package Tests.APITests.ConsentManager;
 
+import Tests.APITests.APIUtils.LoginUser;
 import com.google.gson.JsonObject;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -10,19 +11,20 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class DiscoveryAPITest {
-
+    String authToken;
 
     @BeforeClass
     public void setup() {
         RestAssured.baseURI = "https://consent-manager-dev.projecteka.in";
         RestAssured.useRelaxedHTTPSValidation();
+        authToken = "Bearer " + new LoginUser().getAuthToken();
     }
 
     @Test
     public void listProvidersAPI() {
         RequestSpecification request = RestAssured.given();
 
-        Response response = request.header("Authorization", "U2hyZXlhQG5jZw==").queryParam("name", "Tata").get("/providers");
+        Response response = request.header("Authorization", authToken).queryParam("name", "Tata").get("/providers");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
@@ -35,7 +37,8 @@ public class DiscoveryAPITest {
     public void discoverPatientsAPI() {
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", "S3VtYXJhc3dhbXlAbmNn");//1@ncg
+
+        request.header("Authorization", authToken);
 
         JsonObject hip = new JsonObject();
         JsonObject innerObject = new JsonObject();
@@ -50,8 +53,8 @@ public class DiscoveryAPITest {
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200);
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "5");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "Ron Doe");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "131");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "123");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "TestFirstName TestLastName");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "121");
     }
 }
