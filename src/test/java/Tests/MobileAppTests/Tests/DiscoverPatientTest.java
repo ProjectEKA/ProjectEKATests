@@ -9,11 +9,11 @@ public class DiscoverPatientTest extends BaseDriver {
 
     @Test
     public void DiscoverPatientTest() {
-        new LoginPage(driver).loginUser().clickAddNewProvider().searchAndSelectProvider("Tata").clickConfirmProvider();
+        new LoginPage(driver).loginUser().clickAddNewProvider().searchAndSelectProvider("Max").clickConfirmProvider();
     }
 
     @Test(enabled=false) //Disabled as the test user is not there yet for this flow
     public void RegistrationTest() {
-        new HomePage(driver).clickAddNewProvider().searchAndSelectProvider("Tata").clickConfirmProvider();
+        new HomePage(driver).clickAddNewProvider().searchAndSelectProvider("max").clickConfirmProvider();
     }
 }
