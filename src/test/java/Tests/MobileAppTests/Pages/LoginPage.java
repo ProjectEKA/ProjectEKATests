@@ -39,4 +39,9 @@ public class LoginPage {
         return new HomePage(driver);
 
     }
+
+    public RegistrationPage navigateToCreateAccount() {
+        loginPageObjects.registerButton.click();
+        return new RegistrationPage(driver);
+    }
 }

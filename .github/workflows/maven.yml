@@ -50,7 +50,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: mvn clean -Dtest=RegistrationPageTest test
+          script: mvn clean "-Dtest=/**/MobileAppTests/Tests/*Test" test
         env:
           Authorization: ${{ secrets.Authorization }}
       - name: Notify on Slack
