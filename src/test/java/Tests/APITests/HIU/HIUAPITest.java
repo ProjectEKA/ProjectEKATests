@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 
 public class HIUAPITest {
 
-
     @BeforeClass
     public void setup() {
         RestAssured.baseURI = "https://hiu-dev.projecteka.in/api";
@@ -32,7 +31,6 @@ public class HIUAPITest {
 
     @Test
     public void createConsentRequest() {
-
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", "U2hyZXlhQG5jZw==");//1@ncg
