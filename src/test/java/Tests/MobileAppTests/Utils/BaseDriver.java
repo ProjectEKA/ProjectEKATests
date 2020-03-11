@@ -35,24 +35,32 @@ public class BaseDriver {
             throw new AppiumServerHasNotBeenStartedLocallyException(
                     "Failed to start the Appium Server");
         }
-        String path = new AppUtility().getAPP();
+        path = AppUtility.getInstance().getPath();
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+
         File app = new File(path + "/app-debug.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", "Android Emulator");
         capabilities.setCapability("app", app.getAbsolutePath());
-        capabilities.setCapability( "automationName", "UIAutomator2");
+        capabilities.setCapability("automationName", "UIAutomator2");
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 700000);
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.projecteka.jataayu.ui.LauncherActivity");
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.projecteka.jataayu.debug");
-
         driver = new AndroidDriver<>(service.getUrl(), capabilities);
     }
 
-    @AfterClass
-    public void tearDown() {
+    @AfterMethod
+    public void quitApp() {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    @AfterClass
+    public void afterClass() {
         if (service != null) {
             service.stop();
         }

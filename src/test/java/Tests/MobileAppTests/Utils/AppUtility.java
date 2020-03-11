@@ -13,6 +13,27 @@ import java.net.URL;
 
 public class AppUtility {
 
+    private static AppUtility instance = null;
+    private final String path = System.getProperty("user.dir") + "/target/apk";
+
+    private AppUtility() {
+        try {
+            UnzipUtility.unpackArchive(new URL(getArtifactURL()), new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // static method to create instance of Singleton class
+    public static AppUtility getInstance() {
+        if (instance == null)
+            instance = new AppUtility();
+
+
+        return instance;
+    }
+
     private String getArtifactURL() {
         RestAssured.baseURI = "https://api.github.com";
 
@@ -38,20 +59,12 @@ public class AppUtility {
         requestSpecification.config(new RestAssuredConfig().redirect(new RedirectConfig().followRedirects(false)));
         response = requestSpecification.get(artifactURL);
 
-        System.out.println("Artifact will be downloaded from URL - "+response.getHeader("Location"));
+        System.out.println("Artifact will be downloaded from URL - " + response.getHeader("Location"));
 
         return response.getHeader("Location");
     }
 
-
-    public String getAPP() {
-
-        String path = System.getProperty("user.dir") + "/target/apk";
-        try {
-            UnzipUtility.unpackArchive(new URL(getArtifactURL()), new File(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String getPath() {
         return path;
     }
 }
