@@ -11,13 +11,16 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 
 public class BaseDriver {
-    private static AppiumDriverLocalService service;
     public AppiumDriver<WebElement> driver;
+    private AppiumDriverLocalService service;
+    private static String path = null;
 
     @BeforeClass
     public void setUp() {
