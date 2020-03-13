@@ -28,8 +28,8 @@ jobs:
           channel: '@shridhk'
           only_mention_fail: USXBM5WPQ
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          ConsentManagerSecret: ${{ secrets.ConsentManagerSecret }} # required
         if: always()
 
   mobile-test:
@@ -64,7 +64,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-          ConsentManagerSecret: ${{ secrets.ConsentManagerSecret }} # required
         if: always()
 
 #curl -H "Accept: application/vnd.github.everest-preview+json" \
