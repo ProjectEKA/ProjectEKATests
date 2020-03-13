@@ -16,7 +16,7 @@ public class CentralRegistry {
         request.header("Content-Type", "application/json");
 
         Response response = request.body(getClientRegistryRequestBody()).post("/api/1.0/sessions");
-
+        System.out.println("test    "+getClientRegistryRequestBody());
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
