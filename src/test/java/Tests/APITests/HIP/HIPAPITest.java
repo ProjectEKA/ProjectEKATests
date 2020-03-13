@@ -1,5 +1,6 @@
 package Tests.APITests.HIP;
 
+import Tests.APITests.APIUtils.CentralRegistry;
 import Tests.APITests.APIUtils.HIPPatientDiscovery;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -22,6 +23,7 @@ public class HIPAPITest {
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
+        request.header("Authorization","Bearer "+ new CentralRegistry().getAuthToken());
 
         String patientDiscoverRequestBody = new HIPPatientDiscovery().getPatientDiscoverRequestBody();
 
