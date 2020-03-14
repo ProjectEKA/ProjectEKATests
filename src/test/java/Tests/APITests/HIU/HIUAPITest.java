@@ -13,7 +13,7 @@ public class HIUAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "https://hiu-dev.projecteka.in/api";
+        RestAssured.baseURI = "https://ncg-dev.projecteka.in/hiu-api";
         RestAssured.useRelaxedHTTPSValidation();
     }
 

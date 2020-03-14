@@ -15,7 +15,7 @@ public class DiscoveryAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "https://consent-manager-dev.projecteka.in";
+        RestAssured.baseURI = "https://ncg-dev.projecteka.in/consent-manager";
         RestAssured.useRelaxedHTTPSValidation();
         authToken = "Bearer " + new LoginUser().getAuthToken();
     }

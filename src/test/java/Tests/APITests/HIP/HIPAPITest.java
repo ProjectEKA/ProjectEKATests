@@ -14,7 +14,7 @@ public class HIPAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "https://hip-dev.projecteka.in";
+        RestAssured.baseURI = "https://ncg-dev.projecteka.in/hip";
         RestAssured.useRelaxedHTTPSValidation();
     }
 
