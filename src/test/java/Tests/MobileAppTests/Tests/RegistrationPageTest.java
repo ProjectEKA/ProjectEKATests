@@ -8,6 +8,6 @@ import org.testng.annotations.Test;
 public class RegistrationPageTest extends BaseDriver {
     @Test
     public void RegistrationTest() {
-        new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue();
+        new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue().enterOTP().enterUserDetails();
     }
 }
