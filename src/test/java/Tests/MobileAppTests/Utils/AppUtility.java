@@ -1,15 +1,22 @@
 package Tests.MobileAppTests.Utils;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.restassured.RestAssured;
 import io.restassured.config.RedirectConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
+import java.util.Arrays;
 
 public class AppUtility {
 
