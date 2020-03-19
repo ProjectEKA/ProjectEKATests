@@ -17,4 +17,8 @@ public class LinkAccountsPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver), linkAccountsPageObjects);
         new WaitUtils().waitForElement(driver, linkAccountsPageObjects.patientName);
     }
+
+    public String getPatientName() {
+        return linkAccountsPageObjects.patientName.getText();
+    }
 }
