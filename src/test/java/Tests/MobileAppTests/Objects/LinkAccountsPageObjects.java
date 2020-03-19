@@ -7,4 +7,7 @@ public class LinkAccountsPageObjects {
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tv_patient_name")
     public MobileElement patientName;
 
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_search")
+    public MobileElement linkSelected;
+
 }

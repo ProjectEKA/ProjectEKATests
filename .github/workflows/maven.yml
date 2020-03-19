@@ -7,7 +7,7 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:
       - master
-      - consentManagerAuth
+      - registrationTest
 jobs:
   API-test:
     runs-on: ubuntu-latest
