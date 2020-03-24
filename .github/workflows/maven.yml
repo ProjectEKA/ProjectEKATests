@@ -25,9 +25,9 @@ jobs:
         run: echo $GITHUB_RUN_ID
       - uses: 8398a7/action-slack@v2
         with:
-          status: ${{ job.status }}
+          type: ${{ job.status }}
           text: Functional API Tests
-          mention: @shridhk,C010PLR2KL6
+          channel: '#botcave'
           only_mention_fail: USXBM5WPQ,C010PLR2KL6
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
