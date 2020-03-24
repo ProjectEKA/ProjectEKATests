@@ -28,7 +28,7 @@ jobs:
           status: ${{ job.status }}
           text: Functional API Tests
           channel: '#botcave'
-          only_mention_fail: USXBM5WPQ,C010PLR2KL6
+          only_mention_fail: USXBM5WPQ,here
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always()
