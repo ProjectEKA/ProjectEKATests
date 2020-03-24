@@ -25,7 +25,7 @@ jobs:
         run: echo $GITHUB_RUN_ID
       - uses: 8398a7/action-slack@v2
         with:
-          type: ${{ job.status }}
+          status: ${{ job.status }}
           text: Functional API Tests
           channel: '#botcave'
           only_mention_fail: USXBM5WPQ,C010PLR2KL6
