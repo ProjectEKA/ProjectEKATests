@@ -7,7 +7,7 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:
       - master
-      - registrationTest
+      - slack-notification
 jobs:
   API-test:
     runs-on: ubuntu-latest
@@ -27,7 +27,8 @@ jobs:
         with:
           status: ${{ job.status }}
           text: Functional API Tests
-          channel: '@shridhk'
+#          mention: C010PLR2KL6
+          channel: '@shridhk','C010PLR2KL6'
           only_mention_fail: USXBM5WPQ
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
