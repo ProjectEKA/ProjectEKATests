@@ -27,7 +27,6 @@ jobs:
         with:
           status: ${{ job.status }}
           text: Functional API Tests
-#          mention: C010PLR2KL6
           channel: '@shridhk','C010PLR2KL6'
           only_mention_fail: USXBM5WPQ
         env:
