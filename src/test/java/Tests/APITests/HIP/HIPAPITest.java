@@ -23,7 +23,7 @@ public class HIPAPITest {
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization","Bearer "+ new CentralRegistry().getAuthToken());
+        request.header("Authorization","Bearer "+ new CentralRegistry().getAuthTokenForHIP());
 
         String patientDiscoverRequestBody = new HIPPatientDiscovery().getPatientDiscoverRequestBody();
 

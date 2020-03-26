@@ -22,7 +22,7 @@ public class HIUAPITest {
         RequestSpecification request = RestAssured.given();
         String patientID = "shreya@ncg";
 
-        Response response = request.pathParam("patientID", patientID).get("/patients/{patientID}");
+        Response response = request.header("Authorization", "U2hyZXlhQG5jZw==").pathParam("patientID", patientID).get("/patients/{patientID}");
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200);
