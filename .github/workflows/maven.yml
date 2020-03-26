@@ -60,8 +60,8 @@ jobs:
           status: ${{ job.status }}
           author_name: Functional Tests
           text: Functional Mobile Tests
-          channel: '@shridhk'
-          only_mention_fail: USXBM5WPQ
+          channel: '#botcave'
+          only_mention_fail: USXBM5WPQ,here
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
