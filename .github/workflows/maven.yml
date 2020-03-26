@@ -7,7 +7,7 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:
       - master
-      - registrationTest
+      - slack-notification
 jobs:
   API-test:
     runs-on: ubuntu-latest
@@ -28,8 +28,8 @@ jobs:
         with:
           status: ${{ job.status }}
           text: Functional API Tests
-          channel: '@shridhk'
-          only_mention_fail: USXBM5WPQ
+          channel: '#botcave'
+          only_mention_fail: USXBM5WPQ,here
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always()
@@ -61,8 +61,8 @@ jobs:
           status: ${{ job.status }}
           author_name: Functional Tests
           text: Functional Mobile Tests
-          channel: '@shridhk'
-          only_mention_fail: USXBM5WPQ
+          channel: '#botcave'
+          only_mention_fail: USXBM5WPQ,here
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
