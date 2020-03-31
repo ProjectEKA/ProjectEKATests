@@ -2,6 +2,7 @@ package Tests.MobileAppTests.Utils;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.functions.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,9 +15,16 @@ public class WaitUtils {
                 .elementToBeClickable(id));
         return id;
     }
+
     public MobileElement waitForElementToBeVisible(AppiumDriver driver, MobileElement id) {
         wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(id));
+        return id;
+    }
+
+    public MobileElement waitForTextToAppear(AppiumDriver driver, MobileElement id) {
+        wait = new WebDriverWait(driver, 30);
+        wait.until((ExpectedCondition<Boolean>) d -> id.getText().length() != 0);
         return id;
     }
 }

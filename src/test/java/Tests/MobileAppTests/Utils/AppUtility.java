@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Random;
 
 public class AppUtility {
 
@@ -74,4 +75,10 @@ public class AppUtility {
     public String getPath() {
         return path;
     }
+
+    public static String generateRandomNo() {
+        Random r = new Random(System.currentTimeMillis());
+        return String.valueOf(10000 + r.nextInt(20000));
+    }
+
 }

@@ -21,4 +21,8 @@ public class LinkAccountsPage {
     public String getPatientName() {
         return linkAccountsPageObjects.patientName.getText();
     }
+
+    public void linkCareContext() {
+         linkAccountsPageObjects.linkSelected.click();
+    }
 }

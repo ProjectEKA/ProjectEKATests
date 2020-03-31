@@ -33,8 +33,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public SearchLinkProviderPage enterUserDetails() {
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.userName).sendKeys("TestUser" + generateRandomNo());
+    public SearchLinkProviderPage enterUserDetails(String userName) {
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.userName).sendKeys(userName);
         registrationPageObjects.password.sendKeys("Test@135");
         registrationPageObjects.firstName.sendKeys("Test");
         new Gestures().verticalSwipe(driver, registrationPageObjects.firstName);
@@ -50,11 +50,4 @@ public class RegistrationPage {
 
         return new SearchLinkProviderPage(driver);
     }
-
-    private String generateRandomNo() {
-        Random r = new Random(System.currentTimeMillis());
-        return String.valueOf(10000 + r.nextInt(20000));
-    }
-
-
 }
