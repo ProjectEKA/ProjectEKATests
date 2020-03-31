@@ -54,7 +54,7 @@ public class DiscoveryAPITest {
 
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "RVH1004");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "TestFName TestLName");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "999");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doe");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "NCP10091");
     }
 }

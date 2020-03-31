@@ -34,5 +34,8 @@ public class HIPAPITest {
 
         Assert.assertEquals(response.getStatusCode(), 200);
         Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "RVH1004");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doe");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "NCP10091");
+        jsonPathEvaluator.getString("patient.matchedBy").equals("[Mobile, Gender]");
     }
 }
