@@ -1,16 +1,18 @@
 package Tests.APITests.APIUtils;
 
+import java.util.Random;
+
 public class HIPPatientDiscovery {
 
     public String getPatientDiscoverRequestBody() {
         return "{\n" +
-                "  \"transactionId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n" +
+                "  \"transactionId\": \"3fa85f64-5717-4562-b3fc-"+generateRandomNo()+"\",\n" +
                 "  \"patient\": {\n" +
                 "    \"id\": \""+PropertiesCache.getInstance().getProperty("userName")+"\",\n" +
                 "    \"verifiedIdentifiers\": [\n" +
                 "      {\n" +
                 "        \"type\": \"MOBILE\",\n" +
-                "        \"value\": \"+91-9036346498\"\n" +
+                "        \"value\": \"+91-9999999999\"\n" +
                 "      }\n" +
                 "    ],\n" +
                 "    \"unverifiedIdentifiers\": [\n" +
@@ -26,6 +28,10 @@ public class HIPPatientDiscovery {
                 "  }\n" +
                 "}";
 
+    }
+    private String generateRandomNo() {
+        Random r = new Random(System.currentTimeMillis());
+        return String.valueOf(10000 + r.nextInt(20000));
     }
 
 }
