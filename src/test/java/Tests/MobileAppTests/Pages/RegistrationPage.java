@@ -35,7 +35,7 @@ public class RegistrationPage {
 
     public SearchLinkProviderPage enterUserDetails() {
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.userName).sendKeys("TestUser" + generateRandomNo());
-        registrationPageObjects.password.sendKeys("Test@123");
+        registrationPageObjects.password.sendKeys("Test@135");
         registrationPageObjects.firstName.sendKeys("Test");
         new Gestures().verticalSwipe(driver, registrationPageObjects.firstName);
         registrationPageObjects.lastName.sendKeys("Test");
