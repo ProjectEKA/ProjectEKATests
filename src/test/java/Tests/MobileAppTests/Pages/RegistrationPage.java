@@ -7,8 +7,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.Random;
-
 public class RegistrationPage {
     RegistrationPageObjects registrationPageObjects;
     AppiumDriver driver;
@@ -20,17 +18,10 @@ public class RegistrationPage {
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.continueButton);
     }
 
-    public RegistrationPage enterContactNoAndContinue() {
+    public OTPPage enterContactNoAndContinue() {
         registrationPageObjects.mobileNo.sendKeys("9999999999");
-        registrationPageObjects.continueButton.click();
-        return this;
-    }
-
-    public RegistrationPage enterOTP() {
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.otpField).sendKeys("666666");
-        ;
-        registrationPageObjects.continueButton.click();
-        return this;
+        new WaitUtils().waitForElement(driver, registrationPageObjects.continueButton).click();
+        return new OTPPage(driver);
     }
 
     public SearchLinkProviderPage enterUserDetails(String userName) {

@@ -3,17 +3,12 @@ package Tests.MobileAppTests.Objects;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
-import java.util.List;
-
 public class RegistrationPageObjects {
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_continue")
     public MobileElement continueButton;
 
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_mobile_number")
     public MobileElement mobileNo;
-
-    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_otp")
-    public MobileElement otpField;
 
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_username")
     public MobileElement userName;

@@ -1,6 +1,7 @@
 package Tests.MobileAppTests.Utils;
 
 
+import Tests.MobileAppTests.Pages.RegistrationPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;

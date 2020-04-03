@@ -22,7 +22,8 @@ public class LinkAccountsPage {
         return linkAccountsPageObjects.patientName.getText();
     }
 
-    public void linkCareContext() {
+    public OTPPage linkCareContext() {
          linkAccountsPageObjects.linkSelected.click();
+         return new OTPPage(driver);
     }
 }

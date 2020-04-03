@@ -22,4 +22,8 @@ public class HomePage extends WaitUtils {
         homePageObjects.addProvider.click();
         return new SearchLinkProviderPage(driver);
     }
+
+    public String getPatientName() {
+        return homePageObjects.patientName.getText();
+    }
 }

@@ -1,27 +1,25 @@
 package Tests.MobileAppTests.Tests;
 
 import Tests.APITests.APIUtils.APIUtils;
+import Tests.MobileAppTests.Pages.HomePage;
 import Tests.MobileAppTests.Pages.LoginPage;
+import Tests.MobileAppTests.Pages.RegistrationPage;
 import Tests.MobileAppTests.Utils.AppUtility;
 import Tests.MobileAppTests.Utils.BaseDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class RegistrationTest extends BaseDriver {
+    
     @Test
-    public void RegistrationTest() {
-
+    public void RegisterLinkCareContext() {
         String userName = "TestUser" + AppUtility.generateRandomNo();
 
-        new APIUtils().createConsent(userName+"@ncg"); //Create Consent Request
+        new APIUtils().createConsent(userName + "@ncg"); //Create Consent Request
 
-        String patientName = new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue().enterOTP().enterUserDetails(userName)
-                .searchAndSelectProvider("Max").clickConfirmProvider().getPatientName();
+        HomePage homePage = new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue().enterOTP(new RegistrationPage(driver)).enterUserDetails(userName)
+                .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext().enterOTP(new HomePage(driver));
 
-
-        new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue().enterOTP().enterUserDetails(userName)
-                .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext();
-
-        Assert.assertTrue(patientName.length() > 0, "Patient Name not displayed on Link Provider screen");
+        Assert.assertTrue(homePage.getPatientName().length() > 0, "Patient Name not displayed on Link Provider screen");
     }
 }
