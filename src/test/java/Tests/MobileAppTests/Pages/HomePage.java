@@ -26,4 +26,10 @@ public class HomePage extends WaitUtils {
     public String getPatientName() {
         return homePageObjects.patientName.getText();
     }
+
+    public HomePage navigateToConsentsTab() {
+        homePageObjects.consentTab.click();
+        new WaitUtils().waitForTextToAppear(driver,homePageObjects.requestedDate);
+        return this;
+    }
 }
