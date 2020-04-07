@@ -15,7 +15,7 @@ public class HomePage extends WaitUtils {
         this.driver = driver;
         homePageObjects = new HomePageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), homePageObjects);
-        new WaitUtils().waitForElement(driver, homePageObjects.patientName);
+//        new WaitUtils().waitForElement(driver, homePageObjects.consentTab);
     }
 
     public SearchLinkProviderPage clickAddNewProvider() {
@@ -28,8 +28,17 @@ public class HomePage extends WaitUtils {
     }
 
     public HomePage navigateToConsentsTab() {
-        homePageObjects.consentTab.click();
-        new WaitUtils().waitForTextToAppear(driver,homePageObjects.requestedDate);
+        new WaitUtils().waitForElement(driver, homePageObjects.consentTab).click();
+        new WaitUtils().waitForTextToAppear(driver, homePageObjects.requestedDate);
         return this;
+    }
+
+    public ConsentArtifactPage clickConsent() {
+        homePageObjects.nameInConsent.click();
+        return new ConsentArtifactPage(driver);
+    }
+
+    public String getSnackBarText() {
+        return new WaitUtils().waitForTextToAppear(driver, homePageObjects.snackBar).getText();
     }
 }

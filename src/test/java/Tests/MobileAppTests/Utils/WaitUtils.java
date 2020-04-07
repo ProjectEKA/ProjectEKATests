@@ -27,4 +27,16 @@ public class WaitUtils {
         wait.until((ExpectedCondition<Boolean>) d -> id.getText().length() != 0);
         return id;
     }
+
+    public MobileElement waitForSpecificTextToBeDisplayed(AppiumDriver driver, MobileElement id, String text) {
+        wait = new WebDriverWait(driver, 30);
+        wait.until((ExpectedCondition<Boolean>) d -> id.getText().contains(text));
+        return id;
+    }
+
+    public MobileElement waitForElementToBeDisabled(AppiumDriver driver, MobileElement id) {
+        wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(id)));
+        return id;
+    }
 }

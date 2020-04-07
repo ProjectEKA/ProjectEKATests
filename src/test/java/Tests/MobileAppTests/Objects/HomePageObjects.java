@@ -13,5 +13,9 @@ public class HomePageObjects {
     public MobileElement consentTab;
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tv_requested_date")
     public MobileElement requestedDate;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tv_requester_name")
+    public MobileElement nameInConsent;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/snackbar_text")
+    public MobileElement snackBar;
 
 }

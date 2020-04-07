@@ -9,4 +9,10 @@ public class OTPPageObjects {
 
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_otp")
     public MobileElement otpField;
+
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_pin")
+    public MobileElement consentPin;
+
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/lbl_enter_otp")
+    public MobileElement consentPinLabel;
 }

@@ -3,6 +3,7 @@ package Tests.MobileAppTests.Tests;
 import Tests.APITests.APIUtils.APIUtils;
 import Tests.MobileAppTests.Pages.HomePage;
 import Tests.MobileAppTests.Pages.LoginPage;
+import Tests.MobileAppTests.Pages.OTPPage;
 import Tests.MobileAppTests.Pages.RegistrationPage;
 import Tests.MobileAppTests.Utils.AppUtility;
 import Tests.MobileAppTests.Utils.BaseDriver;
@@ -27,12 +28,16 @@ public class RegistrationTest extends BaseDriver {
     public void grantConsent() {
         String userName = "TestUser" + AppUtility.generateRandomNo();
 
-        new APIUtils().createConsent(userName + "@ncg"); //Create Consent Request
-
         HomePage homePage = new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue().enterOTP(new RegistrationPage(driver)).enterUserDetails(userName)
                 .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext()
-                .enterOTP(new HomePage(driver)).navigateToConsentsTab();
+                .enterOTP(new HomePage(driver));
 
-        Assert.assertTrue(homePage.getPatientName().length() > 0, "Patient Name not displayed on Link Provider screen");
+        new APIUtils().createConsent(userName + "@ncg"); //Create Consent Request
+
+        String snackBarText = homePage.navigateToConsentsTab().clickConsent().grantConsent()
+                .enterPin(new OTPPage(driver),"Create")
+                .enterPin(new HomePage(driver),"Confirm").getSnackBarText();
+
+        Assert.assertEquals(snackBarText,"Consent Granted" );
     }
 }

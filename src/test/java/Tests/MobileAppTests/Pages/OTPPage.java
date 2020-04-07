@@ -20,7 +20,14 @@ public class OTPPage {
     }
 
     public <T> T enterOTP(T nextPage) {
-        new WaitUtils().waitForElementToBeVisible(driver, otpPageObjects.otpField).sendKeys("666666");
+        new WaitUtils().waitForElement(driver, otpPageObjects.otpField).sendKeys("666666");
+        otpPageObjects.continueButton.click();
+        return nextPage;
+    }
+
+    public <T> T enterPin(T nextPage, String text) {
+        new WaitUtils().waitForSpecificTextToBeDisplayed(driver, otpPageObjects.consentPinLabel, text);
+        otpPageObjects.consentPin.sendKeys("1234");
         otpPageObjects.continueButton.click();
         return nextPage;
     }
