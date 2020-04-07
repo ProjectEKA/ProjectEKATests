@@ -3,6 +3,7 @@ package Tests.MobileAppTests.Utils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.functions.ExpectedCondition;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -40,7 +41,14 @@ public class WaitUtils {
         return id;
     }
 
-    public boolean isDisplayed(MobileElement id) {
-        return id.isDisplayed();
+    public boolean isElementPresent(AppiumDriver driver, MobileElement id) {
+        try {
+            wait = new WebDriverWait(driver, 30);
+            wait.until(ExpectedConditions.visibilityOf(id));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+
     }
 }

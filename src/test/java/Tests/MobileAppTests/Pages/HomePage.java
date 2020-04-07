@@ -42,6 +42,6 @@ public class HomePage extends WaitUtils {
     }
 
     public boolean isFilterDisplayed() {
-        return new WaitUtils().isDisplayed(homePageObjects.requestFilter);
+        return new WaitUtils().isElementPresent(driver, homePageObjects.requestFilter);
     }
 }
