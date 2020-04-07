@@ -15,7 +15,6 @@ public class HomePage extends WaitUtils {
         this.driver = driver;
         homePageObjects = new HomePageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), homePageObjects);
-//        new WaitUtils().waitForElement(driver, homePageObjects.consentTab);
     }
 
     public SearchLinkProviderPage clickAddNewProvider() {
@@ -40,5 +39,9 @@ public class HomePage extends WaitUtils {
 
     public String getSnackBarText() {
         return new WaitUtils().waitForTextToAppear(driver, homePageObjects.snackBar).getText();
+    }
+
+    public boolean isFilterDisplayed() {
+        return new WaitUtils().isDisplayed(homePageObjects.requestFilter);
     }
 }

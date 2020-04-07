@@ -39,4 +39,8 @@ public class WaitUtils {
         wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(id)));
         return id;
     }
+
+    public boolean isDisplayed(MobileElement id) {
+        return id.isDisplayed();
+    }
 }

@@ -17,5 +17,7 @@ public class HomePageObjects {
     public MobileElement nameInConsent;
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/snackbar_text")
     public MobileElement snackBar;
+   @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/sp_request_filter")
+    public MobileElement requestFilter;
 
 }

@@ -34,10 +34,10 @@ public class RegistrationTest extends BaseDriver {
 
         new APIUtils().createConsent(userName + "@ncg"); //Create Consent Request
 
-        String snackBarText = homePage.navigateToConsentsTab().clickConsent().grantConsent()
-                .enterPin(new OTPPage(driver),"Create")
-                .enterPin(new HomePage(driver),"Confirm").getSnackBarText();
+        boolean filterDisplayed = homePage.navigateToConsentsTab().clickConsent().grantConsent()
+                .enterPin(new OTPPage(driver), "Create")
+                .enterPin(new HomePage(driver), "Confirm").isFilterDisplayed();
 
-        Assert.assertEquals(snackBarText,"Consent Granted" );
+        Assert.assertTrue(filterDisplayed,"Not navigated to HomePage" );
     }
 }
