@@ -16,8 +16,6 @@ public class RegistrationTest extends BaseDriver {
     public void registerLinkCareContext() {
         String userName = "TestUser" + AppUtility.generateRandomNo();
 
-        new APIUtils().createConsent(userName + "@ncg"); //Create Consent Request
-
         HomePage homePage = new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue().enterOTP(new RegistrationPage(driver)).enterUserDetails(userName)
                 .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext().enterOTP(new HomePage(driver));
 

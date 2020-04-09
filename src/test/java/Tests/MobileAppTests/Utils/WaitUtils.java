@@ -22,6 +22,11 @@ public class WaitUtils {
         wait.until(ExpectedConditions.visibilityOf(id));
         return id;
     }
+    public MobileElement refreshAndwaitForElementToBeVisible(AppiumDriver driver, MobileElement id) {
+        wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(id)));
+        return id;
+    }
 
     public MobileElement waitForTextToAppear(AppiumDriver driver, MobileElement id) {
         wait = new WebDriverWait(driver, 30);

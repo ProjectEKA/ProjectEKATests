@@ -23,7 +23,7 @@ public class HomePage extends WaitUtils {
     }
 
     public String getPatientName() {
-        return homePageObjects.patientName.getText();
+        return new WaitUtils().refreshAndwaitForElementToBeVisible(driver, homePageObjects.patientName).getText();
     }
 
     public HomePage navigateToConsentsTab() {
