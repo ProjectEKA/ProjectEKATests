@@ -18,7 +18,7 @@ public class HomePage extends WaitUtils {
     }
 
     public SearchLinkProviderPage clickAddNewProvider() {
-        homePageObjects.addProvider.click();
+        new WaitUtils().waitForElement(driver, homePageObjects.addProvider).click();
         return new SearchLinkProviderPage(driver);
     }
 
