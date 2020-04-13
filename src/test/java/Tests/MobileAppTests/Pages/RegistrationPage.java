@@ -7,8 +7,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.Random;
-
 public class RegistrationPage {
     RegistrationPageObjects registrationPageObjects;
     AppiumDriver driver;
@@ -20,21 +18,14 @@ public class RegistrationPage {
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.continueButton);
     }
 
-    public RegistrationPage enterContactNoAndContinue() {
+    public OTPPage enterContactNoAndContinue() {
         registrationPageObjects.mobileNo.sendKeys("9999999999");
-        registrationPageObjects.continueButton.click();
-        return this;
+        new WaitUtils().waitForElement(driver, registrationPageObjects.continueButton).click();
+        return new OTPPage(driver);
     }
 
-    public RegistrationPage enterOTP() {
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.otpField).sendKeys("666666");
-        ;
-        registrationPageObjects.continueButton.click();
-        return this;
-    }
-
-    public SearchLinkProviderPage enterUserDetails() {
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.userName).sendKeys("TestUser" + generateRandomNo());
+    public SearchLinkProviderPage enterUserDetails(String userName) {
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.userName).sendKeys(userName);
         registrationPageObjects.password.sendKeys("Test@135");
         registrationPageObjects.firstName.sendKeys("Test");
         new Gestures().verticalSwipe(driver, registrationPageObjects.firstName);
@@ -50,11 +41,4 @@ public class RegistrationPage {
 
         return new SearchLinkProviderPage(driver);
     }
-
-    private String generateRandomNo() {
-        Random r = new Random(System.currentTimeMillis());
-        return String.valueOf(10000 + r.nextInt(20000));
-    }
-
-
 }

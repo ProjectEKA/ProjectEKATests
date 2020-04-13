@@ -9,5 +9,15 @@ public class HomePageObjects {
     public MobileElement addProvider;
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tv_patient_name")
     public MobileElement patientName;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/action_consents")
+    public MobileElement consentTab;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tv_requested_date")
+    public MobileElement requestedDate;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tv_requester_name")
+    public MobileElement nameInConsent;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/snackbar_text")
+    public MobileElement snackBar;
+   @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/sp_request_filter")
+    public MobileElement requestFilter;
 
 }

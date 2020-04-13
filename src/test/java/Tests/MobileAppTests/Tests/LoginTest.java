@@ -7,12 +7,11 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseDriver {
 
+    String userName = PropertiesCache.getInstance().getProperty("user");
+    String password = PropertiesCache.getInstance().getProperty("password");
+
     @Test
     public void loginUser() {
-
-        String userName = PropertiesCache.getInstance().getProperty("user");
-        String password = PropertiesCache.getInstance().getProperty("password");
-
         new LoginPage(driver).loginUser(userName, password);
     }
 }

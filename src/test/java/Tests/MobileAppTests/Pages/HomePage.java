@@ -15,11 +15,33 @@ public class HomePage extends WaitUtils {
         this.driver = driver;
         homePageObjects = new HomePageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), homePageObjects);
-        new WaitUtils().waitForElement(driver, homePageObjects.patientName);
     }
 
     public SearchLinkProviderPage clickAddNewProvider() {
-        homePageObjects.addProvider.click();
+        new WaitUtils().waitForElement(driver, homePageObjects.addProvider).click();
         return new SearchLinkProviderPage(driver);
+    }
+
+    public String getPatientName() {
+        return new WaitUtils().refreshAndwaitForElementToBeVisible(driver, homePageObjects.patientName).getText();
+    }
+
+    public HomePage navigateToConsentsTab() {
+        new WaitUtils().waitForElement(driver, homePageObjects.consentTab).click();
+        new WaitUtils().waitForTextToAppear(driver, homePageObjects.requestedDate);
+        return this;
+    }
+
+    public ConsentArtifactPage clickConsent() {
+        homePageObjects.nameInConsent.click();
+        return new ConsentArtifactPage(driver);
+    }
+
+    public String getSnackBarText() {
+        return new WaitUtils().waitForTextToAppear(driver, homePageObjects.snackBar).getText();
+    }
+
+    public boolean isRequestedDateDisplayed() {
+        return new WaitUtils().isElementPresent(driver, homePageObjects.requestedDate);
     }
 }

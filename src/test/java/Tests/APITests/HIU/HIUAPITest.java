@@ -1,6 +1,6 @@
 package Tests.APITests.HIU;
 
-import Tests.APITests.APIUtils.HIUConsentRequest;
+import Tests.APITests.APIUtils.APIUtils;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -31,14 +31,7 @@ public class HIUAPITest {
 
     @Test
     public void createConsentRequest() {
-        RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json");
-        request.header("Authorization", "U2hyZXlhQG5jZw==");//1@ncg
-
-        HIUConsentRequest hiuConsentRequest = new HIUConsentRequest.ConsentRequestBuilder("Shreya@ncg").buildConsentReuqest();
-
-        request.body(hiuConsentRequest.getJSONRequestBody().toString());
-        Response response = request.post("/consent-requests");
+        Response response = new APIUtils().createConsent("Shreya@ncg");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 

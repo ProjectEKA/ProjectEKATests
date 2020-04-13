@@ -1,22 +1,16 @@
 package Tests.MobileAppTests.Utils;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.restassured.RestAssured;
 import io.restassured.config.RedirectConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.Duration;
-import java.util.Arrays;
+import java.util.Random;
 
 public class AppUtility {
 
@@ -41,13 +35,18 @@ public class AppUtility {
         return instance;
     }
 
+    public static String generateRandomNo() {
+        Random r = new Random(System.currentTimeMillis());
+        return String.valueOf(10000 + r.nextInt(20000));
+    }
+
     private String getArtifactURL() {
         RestAssured.baseURI = "https://api.github.com";
 
         RequestSpecification request = RestAssured.given();
 
         //Auth Headers added to avoid the rate limiting
-        Response response = request.header("Authorization", System.getenv("Authorization")).get("/repos/ProjectEKA/Jataayu/actions/runs");
+        Response response = request.header("Authorization", System.getenv("Authorization")).get("/repos/ProjectEKA/Jataayu/actions/runs?branch=master&status=completed");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
         String run_id = jsonPathEvaluator.getString("workflow_runs[0].id");
@@ -74,4 +73,5 @@ public class AppUtility {
     public String getPath() {
         return path;
     }
+
 }
