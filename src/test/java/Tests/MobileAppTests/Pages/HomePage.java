@@ -41,7 +41,7 @@ public class HomePage extends WaitUtils {
         return new WaitUtils().waitForTextToAppear(driver, homePageObjects.snackBar).getText();
     }
 
-    public boolean isFilterDisplayed() {
-        return new WaitUtils().isElementPresent(driver, homePageObjects.requestFilter);
+    public boolean isRequestedDateDisplayed() {
+        return new WaitUtils().isElementPresent(driver, homePageObjects.requestedDate);
     }
 }
