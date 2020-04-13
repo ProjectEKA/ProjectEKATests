@@ -28,7 +28,7 @@ public class HIPAPITest {
         String patientDiscoverRequestBody = new HIPPatientDiscovery().getPatientDiscoverRequestBody();
 
         request.body(patientDiscoverRequestBody);
-        Response response = request.post("/patients/discover");
+        Response response = request.post("/patients/discover/carecontexts");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
