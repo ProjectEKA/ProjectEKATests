@@ -46,7 +46,7 @@ public class AppUtility {
         RequestSpecification request = RestAssured.given();
 
         //Auth Headers added to avoid the rate limiting
-        Response response = request.header("Authorization", System.getenv("Authorization")).get("/repos/ProjectEKA/Jataayu/actions/runs");
+        Response response = request.header("Authorization", System.getenv("Authorization")).get("/repos/ProjectEKA/Jataayu/actions/runs?branch=master&status=completed");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
         String run_id = jsonPathEvaluator.getString("workflow_runs[0].id");
