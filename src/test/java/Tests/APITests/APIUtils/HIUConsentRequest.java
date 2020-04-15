@@ -41,7 +41,7 @@ public class HIUConsentRequest {
                 "        \"from\": \"" + fromDate + "\",\n" +
                 "        \"to\": \"" + toDate + "\"\n" +
                 "      },\n" +
-                "      \"dataExpiryAt\": \"" + expiryDate + "\"\n" +
+                "      \"dataEraseAt\": \"" + expiryDate + "\"\n" +
                 "    }\n" +
                 "  }\n" +
                 "}";
