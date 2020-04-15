@@ -21,9 +21,9 @@ public class HIPPatientDiscovery {
                 "        \"value\": \"+919999999999\"\n" +
                 "      }\n" +
                 "    ],\n" +
-                "    \"name\": \"John Doee\",\n" +
+                "    \"name\": \"John Doe\",\n" +
                 "    \"gender\": \"M\",\n" +
-                "    \"yearOfBirth\": \"1992\"\n" +
+                "    \"yearOfBirth\": \"1966\"\n" +
                 "  }\n" +
                 "}";
 

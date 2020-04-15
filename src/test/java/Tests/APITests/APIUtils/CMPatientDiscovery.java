@@ -8,8 +8,7 @@ public class CMPatientDiscovery {
                 "    \"id\": \"10000005\",\n" +
                 "    \"name\": \"Max Health Care\"\n" +
                 "  },\n" +
-                "    \"unverifiedIdentifiers\": [\n" +
-                "    ]\n" +
+                "    \"unverifiedIdentifiers\": []\n" +
                 "}";
 
     }
