@@ -1,5 +1,7 @@
 package Tests.APITests.ConsentManager;
 
+import Tests.APITests.APIUtils.CMPatientDiscovery;
+import Tests.APITests.APIUtils.HIPPatientDiscovery;
 import Tests.APITests.APIUtils.LoginUser;
 import com.google.gson.JsonObject;
 import io.restassured.RestAssured;
@@ -40,15 +42,10 @@ public class DiscoveryAPITest {
 
         request.header("Authorization", authToken);
 
-        JsonObject hip = new JsonObject();
-        JsonObject innerObject = new JsonObject();
+        String patientDiscoverRequestBody = new CMPatientDiscovery().getPatientDiscoverRequestBody();
+        request.body(patientDiscoverRequestBody);
 
-        innerObject.addProperty("id", "10000005");
-        hip.add("hip", innerObject);
-
-        request.body(hip.toString());
-
-        Response response = request.post("/patients/discover");
+        Response response = request.post("/patients/discover/carecontexts");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
