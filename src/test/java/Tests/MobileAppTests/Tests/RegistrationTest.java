@@ -34,7 +34,7 @@ public class RegistrationTest extends BaseDriver {
 
         boolean filterDisplayed = homePage.navigateToConsentsTab().clickConsent().grantConsent()
                 .enterPin(new OTPPage(driver), "Create")
-                .enterPin(new HomePage(driver), "Confirm").isRequestedDateDisplayed();
+                .enterPin(new HomePage(driver), "Confirm").isRequestedDateDisplayed() ;
 
         Assert.assertTrue(filterDisplayed,"Not navigated to HomePage" );
     }
