@@ -36,7 +36,7 @@ public class WaitUtils {
 
     public MobileElement waitForSpecificTextToBeDisplayed(AppiumDriver driver, MobileElement id, String text) {
         wait = new WebDriverWait(driver, 30);
-        wait.until((ExpectedCondition<Boolean>) d -> id.getText().contains(text));
+        wait.until(ExpectedConditions.refreshed((ExpectedCondition<Boolean>) d -> id.getText().contains(text)));
         return id;
     }
 

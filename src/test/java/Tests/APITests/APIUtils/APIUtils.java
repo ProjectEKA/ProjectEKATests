@@ -12,7 +12,7 @@ public class APIUtils {
         RestAssured.useRelaxedHTTPSValidation();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", "U2hyZXlhQG5jZw==");//1@ncg
+        request.header("Authorization", new HIULogin().getHIUAuthToken());
 
         HIUConsentRequest hiuConsentRequest = new HIUConsentRequest.ConsentRequestBuilder(id.toLowerCase()).buildConsentReuqest();
 
