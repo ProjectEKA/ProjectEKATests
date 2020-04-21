@@ -31,7 +31,7 @@ public class HIUConsentRequest {
                 "      \"id\": \"" + id + "\"\n" +
                 "    },\n" +
                 "    \"purpose\": {\n" +
-                "      \"code\": \"Encounter\"\n" +
+                "      \"code\": \"CAREMGT\"\n" +
                 "    },\n" +
                 "    \"hiTypes\": [\n" +
                 "      \"Condition\"\n" +
