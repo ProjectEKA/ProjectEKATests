@@ -3,6 +3,8 @@ package Tests.MobileAppTests.Objects;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 
+import java.util.List;
+
 public class RegistrationPageObjects {
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_continue")
     public MobileElement continueButton;
@@ -16,17 +18,21 @@ public class RegistrationPageObjects {
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_password")
     public MobileElement password;
 
-    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_first_name")
-    public MobileElement firstName;
-
-    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_last_name")
-    public MobileElement lastName;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_name")
+    public MobileElement patientName;
 
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/chip_male")
     public MobileElement genderMale;
 
+
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_dob")
     public MobileElement dateOfBirth;
+
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/spinner_yob")
+    public MobileElement yearOfBirth;
+
+    @AndroidFindBy(className = "android.widget.CheckedTextView")
+    public List<MobileElement> dropDownList;
 
     @AndroidFindBy(id = "android:id/prev")
     public MobileElement calendarPrev;

@@ -21,8 +21,8 @@ public class LoginPage {
     }
 
     public HomePage loginUser() {
-        String userName = PropertiesCache.getInstance().getProperty("user");
-        String password = PropertiesCache.getInstance().getProperty("password");
+        String userName = PropertiesCache.getInstance().getProperty("mobileUser");
+        String password = PropertiesCache.getInstance().getProperty("mobilePassword");
 
         loginPageObjects.userName.sendKeys(userName);
         loginPageObjects.password.sendKeys(password);
