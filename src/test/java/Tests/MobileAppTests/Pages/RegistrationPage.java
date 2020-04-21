@@ -27,16 +27,11 @@ public class RegistrationPage {
     public SearchLinkProviderPage enterUserDetails(String userName) {
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.userName).sendKeys(userName);
         registrationPageObjects.password.sendKeys("Test@135");
-        registrationPageObjects.firstName.sendKeys("Test");
-        new Gestures().verticalSwipe(driver, registrationPageObjects.firstName);
-        registrationPageObjects.lastName.sendKeys("Test");
+
+        new Gestures().verticalSwipe(driver, registrationPageObjects.patientName);
+        registrationPageObjects.patientName.sendKeys("John Doe");
 
         registrationPageObjects.genderMale.click();
-        registrationPageObjects.dateOfBirth.click();
-
-        registrationPageObjects.calendarPrev.click();
-        registrationPageObjects.date.click();
-        registrationPageObjects.okCalendar.click();
         registrationPageObjects.registerButton.click();
 
         return new SearchLinkProviderPage(driver);
