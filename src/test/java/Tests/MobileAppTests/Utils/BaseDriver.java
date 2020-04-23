@@ -28,7 +28,7 @@ public class BaseDriver {
 //        service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
 //                .usingAnyFreePort()
 //                .usingDriverExecutable(new File(
-//                        "/Users/shridhk/.nvm/versions/node/v12.4.0/bin/node"))
+//                        "/usr/local/bin/node"))
 //                .withAppiumJS(new File("/usr/local/bin/appium")));
 
         service = AppiumDriverLocalService.buildDefaultService();
