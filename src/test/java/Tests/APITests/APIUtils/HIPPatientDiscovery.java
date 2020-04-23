@@ -6,7 +6,7 @@ public class HIPPatientDiscovery {
 
     public String getPatientDiscoverRequestBody() {
         return "{\n" +
-                "  \"transactionId\": \"3fa85f64-5717-4562-b3fc-"+generateRandomNo()+"\",\n" +
+                "  \"requestId\": \"3fa85f64-5717-4562-b3fc-"+generateRandomNo()+"\",\n" +
                 "  \"patient\": {\n" +
                 "    \"id\": \""+PropertiesCache.getInstance().getProperty("userName")+"\",\n" +
                 "    \"verifiedIdentifiers\": [\n" +
