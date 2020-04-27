@@ -2,6 +2,7 @@ package Tests.HIUTests.testcase;
 
 import Tests.HIUTests.pages.NCGHomepage;
 import Tests.HIUTests.wrappers.ProjectWrappers;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -19,6 +20,9 @@ public class HIULoginTest extends ProjectWrappers {
     public void loginUser() throws InterruptedException {
 
         new NCGHomepage(driver).enterUsername().enterPassword().clickOnSignin();
+
+        // To check User login Success
+       String title= driver.getTitle();Assert.assertEquals(title, obj.getProperty("LoginTrue"));
 
     }
 

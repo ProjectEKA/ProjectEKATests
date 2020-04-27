@@ -253,7 +253,7 @@ public class GenricWrappers implements wrappers {
     public void requestAssert(String text) throws InterruptedException {
         Thread.sleep(1000);
         Assert.assertTrue( driver.getPageSource().contains(text), "Consent Request sent successfully!! ");
-        System.out.println("Consent Request sent successfully!!");
+        System.out.println("User logged in successfully");
     }
 
 }

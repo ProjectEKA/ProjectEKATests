@@ -35,8 +35,7 @@ public class NCGHomepage extends NCGHomepageObjects {
 
         checkVisibility(signinButton);
         signinButton.click();
-        //assertion
-        loginAssert(obj.getProperty("LoginTrue"));
+        Thread.sleep(1000);
         return new ConsentRequestPage(driver);
 
     }

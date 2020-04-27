@@ -18,6 +18,7 @@ public class ConsentRequestPage extends ConsentRequestPageObjects {
     }
 
     public ConsentRequestPage clickOnNewRequest() throws InterruptedException {
+        Thread.sleep(2000);
         checkVisibility(RequestButton);
         RequestButton.click();
         return this;
@@ -51,7 +52,7 @@ public class ConsentRequestPage extends ConsentRequestPageObjects {
 
         checkVisibility(SubmitButton);
         SubmitButton.click();
-        requestAssert(obj.getProperty("requestTrue"));
+        Thread.sleep(2000);
         return this;
 
     }
