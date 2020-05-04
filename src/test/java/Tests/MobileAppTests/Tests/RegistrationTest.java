@@ -36,6 +36,6 @@ public class RegistrationTest extends BaseDriver {
                 .enterPin(new OTPPage(driver), "Create")
                 .enterPin(new HomePage(driver), "Confirm").getSnackBarText();
 
-        Assert.assertEquals(snackBarText,"Consent granted" );
+        Assert.assertEquals(snackBarText,"Consent Granted Successfully" );
     }
 }
