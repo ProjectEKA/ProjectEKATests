@@ -27,7 +27,7 @@ public class LoginUser {
 
     private String getLoginRequestBody() {
         return "{\n" +
-                "    \"username\": \"" + PropertiesCache.getInstance().getProperty("username") + "\",\n" +
+                "    \"username\": \"" + PropertiesCache.getInstance().getProperty("userName") + "\",\n" +
                 "    \"password\": \"" + PropertiesCache.getInstance().getProperty("password") + "\",\n" +
                 "    \"grantType\": \"password\"\n" +
                 "}";
