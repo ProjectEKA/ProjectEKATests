@@ -16,6 +16,10 @@ public class HIPPatientDiscovery {
                 "      }\n" +
                 "    ],\n" +
                 "    \"unverifiedIdentifiers\": [\n" +
+                "      {\n" +
+                "        \"type\": \"MOBILE\",\n" +
+                "        \"value\": \"+91-9999999999\"\n" +
+                "      }\n" +
                 "    ],\n" +
                 "    \"name\": \"John Doe\",\n" +
                 "    \"gender\": \"M\",\n" +
@@ -28,5 +32,4 @@ public class HIPPatientDiscovery {
         Random r = new Random(System.currentTimeMillis());
         return String.valueOf(10000 + r.nextInt(20000));
     }
-
 }
