@@ -1,7 +1,6 @@
 package Tests.MobileAppTests.Pages;
 
 import Tests.MobileAppTests.Objects.RegistrationPageObjects;
-import Tests.MobileAppTests.Utils.Gestures;
 import Tests.MobileAppTests.Utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -25,15 +24,16 @@ public class RegistrationPage {
     }
 
     public SearchLinkProviderPage enterUserDetails(String userName) {
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.userName).sendKeys(userName);
-        registrationPageObjects.password.sendKeys("Test@135");
-
-        new Gestures().verticalSwipe(driver, registrationPageObjects.patientName);
-        registrationPageObjects.patientName.sendKeys("John Doe");
-
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.patientName).sendKeys("John Doe"); //
         registrationPageObjects.genderMale.click();
         registrationPageObjects.registerButton.click();
-
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.password).sendKeys("Test@135");
+        registrationPageObjects.userName.clear();
+        registrationPageObjects.userName.sendKeys(userName);
+        registrationPageObjects.confirmPassword.sendKeys("Test@135");
+        registrationPageObjects.confirmRegisterButton.click();
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.confirmationMessage);
+        registrationPageObjects.confirmRegisterButton.click();
         return new SearchLinkProviderPage(driver);
     }
 }

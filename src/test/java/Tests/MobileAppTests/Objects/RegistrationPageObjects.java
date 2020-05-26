@@ -18,10 +18,13 @@ public class RegistrationPageObjects {
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_password")
     public MobileElement password;
 
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_confirm_password")
+    public MobileElement confirmPassword;
+
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_name")
     public MobileElement patientName;
 
-    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/chip_male")
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/gender_chip_male")
     public MobileElement genderMale;
 
 
@@ -45,4 +48,10 @@ public class RegistrationPageObjects {
 
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_register")
     public MobileElement registerButton;
+
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_confirm_registration")
+    public MobileElement confirmRegisterButton;
+
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tv_cm_id_info")
+    public MobileElement confirmationMessage;
 }

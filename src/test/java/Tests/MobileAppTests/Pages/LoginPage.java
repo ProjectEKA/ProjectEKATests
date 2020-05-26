@@ -25,7 +25,9 @@ public class LoginPage {
         String password = PropertiesCache.getInstance().getProperty("mobilePassword");
 
         loginPageObjects.userName.sendKeys(userName);
-        loginPageObjects.password.sendKeys(password);
+        new WaitUtils().waitForElementToBeEnabled(driver, loginPageObjects.nextButton).click();
+
+        new WaitUtils().waitForElement(driver, loginPageObjects.password).sendKeys(password);
         loginPageObjects.loginButton.click();
 
         return new HomePage(driver);
@@ -33,7 +35,9 @@ public class LoginPage {
 
     public HomePage loginUser(String username, String password) {
         loginPageObjects.userName.sendKeys(username);
-        loginPageObjects.password.sendKeys(password);
+        new WaitUtils().waitForElementToBeEnabled(driver, loginPageObjects.nextButton).click();
+
+        new WaitUtils().waitForElement(driver, loginPageObjects.password).sendKeys(password);
         loginPageObjects.loginButton.click();
 
         return new HomePage(driver);
