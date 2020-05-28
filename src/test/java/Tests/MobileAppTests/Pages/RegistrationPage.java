@@ -26,9 +26,9 @@ public class RegistrationPage {
 
     public SearchLinkProviderPage enterUserDetails(Patient patient, String username) {
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.patientName).sendKeys(patient.getPatientName());
-        if (patient.getGender().contains("male")) {
+        if (patient.getGender().equals("male")) {
             registrationPageObjects.genderMale.click();
-        } else if (patient.getGender().contains("female")) {
+        } else if (patient.getGender().equals("female")) {
             registrationPageObjects.genderFemale.click();
         }
 
