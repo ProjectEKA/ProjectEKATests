@@ -7,7 +7,7 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:
       - master
-      - pipeline-api-test
+      - mobiletests
 jobs:
   API-test:
     runs-on: ubuntu-latest
