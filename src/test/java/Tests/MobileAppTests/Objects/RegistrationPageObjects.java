@@ -27,6 +27,8 @@ public class RegistrationPageObjects {
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/gender_chip_male")
     public MobileElement genderMale;
 
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/gender_chip_female")
+    public MobileElement genderFemale;
 
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_dob")
     public MobileElement dateOfBirth;

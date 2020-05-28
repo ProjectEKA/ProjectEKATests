@@ -1,6 +1,7 @@
 package Tests.MobileAppTests.Pages;
 
 import Tests.MobileAppTests.Objects.RegistrationPageObjects;
+import Tests.MobileAppTests.Utils.Patient;
 import Tests.MobileAppTests.Utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -17,19 +18,24 @@ public class RegistrationPage {
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.continueButton);
     }
 
-    public OTPPage enterContactNoAndContinue() {
-        registrationPageObjects.mobileNo.sendKeys("9999999999");
+    public OTPPage enterContactNoAndContinue(String phoneNumber) {
+        registrationPageObjects.mobileNo.sendKeys(phoneNumber);
         new WaitUtils().waitForElement(driver, registrationPageObjects.continueButton).click();
         return new OTPPage(driver);
     }
 
-    public SearchLinkProviderPage enterUserDetails(String userName) {
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.patientName).sendKeys("John Doe"); //
-        registrationPageObjects.genderMale.click();
+    public SearchLinkProviderPage enterUserDetails(Patient patient, String username) {
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.patientName).sendKeys(patient.getPatientName());
+        if (patient.getGender().contains("male")) {
+            registrationPageObjects.genderMale.click();
+        } else if (patient.getGender().contains("female")) {
+            registrationPageObjects.genderFemale.click();
+        }
+
         registrationPageObjects.registerButton.click();
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.password).sendKeys("Test@135");
         registrationPageObjects.userName.clear();
-        registrationPageObjects.userName.sendKeys(userName);
+        registrationPageObjects.userName.sendKeys(username);
         registrationPageObjects.confirmPassword.sendKeys("Test@135");
         registrationPageObjects.confirmRegisterButton.click();
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.confirmationMessage);
