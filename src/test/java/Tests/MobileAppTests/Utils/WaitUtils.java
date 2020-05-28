@@ -40,9 +40,9 @@ public class WaitUtils {
         return id;
     }
 
-    public MobileElement waitForElementToBeDisabled(AppiumDriver driver, MobileElement id) {
+    public MobileElement waitForElementToBeEnabled(AppiumDriver driver, MobileElement id) {
         wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(id)));
+        wait.until(ExpectedConditions.elementToBeClickable(id));
         return id;
     }
 

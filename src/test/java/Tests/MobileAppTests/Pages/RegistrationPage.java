@@ -1,7 +1,7 @@
 package Tests.MobileAppTests.Pages;
 
 import Tests.MobileAppTests.Objects.RegistrationPageObjects;
-import Tests.MobileAppTests.Utils.Gestures;
+import Tests.MobileAppTests.Utils.Patient;
 import Tests.MobileAppTests.Utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -18,22 +18,28 @@ public class RegistrationPage {
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.continueButton);
     }
 
-    public OTPPage enterContactNoAndContinue() {
-        registrationPageObjects.mobileNo.sendKeys("9999999999");
+    public OTPPage enterContactNoAndContinue(String phoneNumber) {
+        registrationPageObjects.mobileNo.sendKeys(phoneNumber);
         new WaitUtils().waitForElement(driver, registrationPageObjects.continueButton).click();
         return new OTPPage(driver);
     }
 
-    public SearchLinkProviderPage enterUserDetails(String userName) {
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.userName).sendKeys(userName);
-        registrationPageObjects.password.sendKeys("Test@135");
+    public SearchLinkProviderPage enterUserDetails(Patient patient, String username) {
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.patientName).sendKeys(patient.getPatientName());
+        if (patient.getGender().equals("male")) {
+            registrationPageObjects.genderMale.click();
+        } else if (patient.getGender().equals("female")) {
+            registrationPageObjects.genderFemale.click();
+        }
 
-        new Gestures().verticalSwipe(driver, registrationPageObjects.patientName);
-        registrationPageObjects.patientName.sendKeys("John Doe");
-
-        registrationPageObjects.genderMale.click();
         registrationPageObjects.registerButton.click();
-
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.password).sendKeys("Test@135");
+        registrationPageObjects.userName.clear();
+        registrationPageObjects.userName.sendKeys(username);
+        registrationPageObjects.confirmPassword.sendKeys("Test@135");
+        registrationPageObjects.confirmRegisterButton.click();
+        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.confirmationMessage);
+        registrationPageObjects.confirmRegisterButton.click();
         return new SearchLinkProviderPage(driver);
     }
 }
