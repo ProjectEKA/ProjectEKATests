@@ -14,6 +14,8 @@ public class LoginPageObjects {
     public MobileElement loginButton;
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_register")
     public MobileElement registerButton;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/text_input_end_icon")
+    public MobileElement showPasswordButton;
 }
 
 

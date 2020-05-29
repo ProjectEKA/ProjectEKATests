@@ -16,7 +16,7 @@ public class OTPPage {
         this.driver = driver;
         otpPageObjects = new OTPPageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), otpPageObjects);
-        new WaitUtils().waitForElementToBeVisible(driver, otpPageObjects.continueButton);
+        new WaitUtils().refreshAndwaitForElementToBeVisible(driver, otpPageObjects.continueButton);
     }
 
     public <T> T enterOTP(T nextPage) {

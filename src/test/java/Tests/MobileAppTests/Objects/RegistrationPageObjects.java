@@ -9,11 +9,11 @@ public class RegistrationPageObjects {
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_continue")
     public MobileElement continueButton;
 
-    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_mobile_number")
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tie_mobile_number")
     public MobileElement mobileNo;
 
-    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_username")
-    public MobileElement userName;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_cmid")
+    public MobileElement cmID;
 
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/et_password")
     public MobileElement password;
