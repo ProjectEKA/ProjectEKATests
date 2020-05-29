@@ -26,8 +26,10 @@ public class LoginPage {
 
         loginPageObjects.userName.sendKeys(userName);
         new WaitUtils().waitForElementToBeEnabled(driver, loginPageObjects.nextButton).click();
-
         new WaitUtils().waitForElement(driver, loginPageObjects.password).sendKeys(password);
+
+        //TODO - To enable the login button. Temp fix to pass test
+        loginPageObjects.showPasswordButton.click();
         loginPageObjects.loginButton.click();
 
         return new HomePage(driver);
