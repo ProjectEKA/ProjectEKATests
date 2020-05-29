@@ -15,7 +15,7 @@ public class RegistrationPage {
         this.driver = driver;
         registrationPageObjects = new RegistrationPageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), registrationPageObjects);
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.continueButton);
+        new WaitUtils().refreshAndwaitForElementToBeVisible(driver, registrationPageObjects.continueButton);
     }
 
     public OTPPage enterContactNoAndContinue(String phoneNumber) {
