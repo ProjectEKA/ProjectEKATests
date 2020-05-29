@@ -17,7 +17,7 @@ public class LoginPage {
         this.driver = driver;
         loginPageObjects = new LoginPageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), loginPageObjects);
-        new WaitUtils().waitForElement(driver, loginPageObjects.registerButton);
+        new WaitUtils().waitForElement(driver, loginPageObjects.userName);
     }
 
     public HomePage loginUser() {
@@ -45,6 +45,7 @@ public class LoginPage {
     }
 
     public RegistrationPage navigateToCreateAccount() {
+        driver.hideKeyboard();
         loginPageObjects.registerButton.click();
         return new RegistrationPage(driver);
     }

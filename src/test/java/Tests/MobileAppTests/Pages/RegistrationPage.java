@@ -34,8 +34,8 @@ public class RegistrationPage {
 
         registrationPageObjects.registerButton.click();
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.password).sendKeys("Test@135");
-        registrationPageObjects.userName.clear();
-        registrationPageObjects.userName.sendKeys(username);
+        registrationPageObjects.cmID.clear();
+        registrationPageObjects.cmID.sendKeys(username);
         registrationPageObjects.confirmPassword.sendKeys("Test@135");
         registrationPageObjects.confirmRegisterButton.click();
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.confirmationMessage);
