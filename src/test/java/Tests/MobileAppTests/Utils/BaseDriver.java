@@ -45,7 +45,7 @@ public class BaseDriver {
     @BeforeMethod
     public void beforeMethod() {
 
-        File app = new File(path + "/app-debug.apk");
+        File app = new File(path + "/app-ncg-debug.apk");//NCG APK
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", "Android Emulator");
         capabilities.setCapability("app", app.getAbsolutePath());
