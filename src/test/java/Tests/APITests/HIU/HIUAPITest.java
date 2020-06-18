@@ -1,6 +1,8 @@
 package Tests.APITests.HIU;
 
 import Tests.APITests.APIUtils.APIUtils;
+import Tests.APITests.APIUtils.LoginUser;
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -11,18 +13,21 @@ import org.testng.annotations.Test;
 
 public class HIUAPITest {
 
+    String authToken;
+
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "https://ncg-dev.projecteka.in/hiu-api";
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
         RestAssured.useRelaxedHTTPSValidation();
+        authToken = new LoginUser().getHIUAuthToken();
     }
 
     @Test
     public void discoverPatientAPI() {
         RequestSpecification request = RestAssured.given();
-        String patientID = "shreya@ncg";
+        String patientID = PropertiesCache.getInstance().getProperty("HIUPatient");
 
-        Response response = request.header("Authorization", "U2hyZXlhQG5jZw==").pathParam("patientID", patientID).get("/patients/{patientID}");
+        Response response = request.header("Authorization", authToken).pathParam("patientID", patientID).get("/v1/patients/{patientID}");
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -31,12 +36,8 @@ public class HIUAPITest {
 
     @Test
     public void createConsentRequest() {
-        Response response = new APIUtils().createConsent("Shreya@ncg");
+        Response response = new APIUtils().createConsent(PropertiesCache.getInstance().getProperty("HIUPatient"));
 
-        JsonPath jsonPathEvaluator = response.jsonPath();
-
-        Assert.assertEquals(response.getStatusCode(), 200);
-        System.out.println("Consent request created with ID " + jsonPathEvaluator.getString("id"));
-        Assert.assertTrue(jsonPathEvaluator.getString("id").length() > 1);
+        Assert.assertEquals(response.getStatusCode(), 202);
     }
 }

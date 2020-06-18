@@ -3,26 +3,19 @@ package Tests.APITests.APIUtils;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 
 public class APIUtils {
 
     public Response createConsent(String id) {
-        RestAssured.baseURI = "https://ncg-dev.projecteka.in/hiu-api";
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
         RestAssured.useRelaxedHTTPSValidation();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", new HIULogin().getHIUAuthToken());
+        request.header("Authorization", new LoginUser().getHIUAuthToken());
 
         HIUConsentRequest hiuConsentRequest = new HIUConsentRequest.ConsentRequestBuilder(id.toLowerCase()).buildConsentReuqest();
-
         request.body(hiuConsentRequest.getJSONRequestBody().toString());
-        Response response = request.post("/consent-requests");
-
-
-        Assert.assertEquals(response.getStatusCode(), 200);
-//        System.out.println("Consent request created with ID " + jsonPathEvaluator.getString("id"));
-//        Assert.assertTrue(jsonPathEvaluator.getString("id").length() > 1);
+        Response response = request.post("/v1/hiu/consent-requests");
 
         return response;
     }

@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class LoginUser {
 
-    public String getAuthToken() {
+    public String getCMAuthToken() {
 
         RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
         RestAssured.useRelaxedHTTPSValidation();
@@ -16,21 +16,45 @@ public class LoginUser {
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
 
-        Response response = request.body(getLoginRequestBody()).post("/sessions");
+        Response response = request.body(getCMLoginRequestBody()).post("/sessions");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
-        System.out.println("Login Successful");
+        System.out.println("CM Login Successful");
         return jsonPathEvaluator.getString("accessToken");
     }
 
-    private String getLoginRequestBody() {
+    private String getCMLoginRequestBody() {
         return "{\n" +
                 "    \"username\": \"" + PropertiesCache.getInstance().getProperty("userName") + "\",\n" +
                 "    \"password\": \"" + PropertiesCache.getInstance().getProperty("password") + "\",\n" +
                 "    \"grantType\": \"password\"\n" +
                 "}";
+    }
+
+    private String getHIULoginRequestBody() {
+        return "{\n" +
+                "    \"username\": \"" + PropertiesCache.getInstance().getProperty("HIUuserName") + "\",\n" +
+                "    \"password\": \"" + PropertiesCache.getInstance().getProperty("HIUpassword") + "\"" +
+                "}";
+    }
+
+    public String getHIUAuthToken() {
+
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
+        RestAssured.useRelaxedHTTPSValidation();
+
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+
+        Response response = request.body(getHIULoginRequestBody()).post("/sessions");
+
+        JsonPath jsonPathEvaluator = response.jsonPath();
+
+        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+        System.out.println("HIU Login Successful");
+        return jsonPathEvaluator.getString("accessToken");
     }
 
 }

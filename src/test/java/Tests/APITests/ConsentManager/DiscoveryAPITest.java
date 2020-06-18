@@ -1,9 +1,7 @@
 package Tests.APITests.ConsentManager;
 
 import Tests.APITests.APIUtils.CMPatientDiscovery;
-import Tests.APITests.APIUtils.HIPPatientDiscovery;
 import Tests.APITests.APIUtils.LoginUser;
-import com.google.gson.JsonObject;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -19,7 +17,7 @@ public class DiscoveryAPITest {
     public void setup() {
         RestAssured.baseURI = "https://ncg-dev.projecteka.in/consent-manager";
         RestAssured.useRelaxedHTTPSValidation();
-        authToken = "Bearer " + new LoginUser().getAuthToken();
+        authToken = "Bearer " + new LoginUser().getCMAuthToken();
     }
 
     @Test
@@ -45,7 +43,7 @@ public class DiscoveryAPITest {
         String patientDiscoverRequestBody = new CMPatientDiscovery().getPatientDiscoverRequestBody();
         request.body(patientDiscoverRequestBody);
 
-        Response response = request.post("/patients/discover/carecontexts");
+        Response response = request.post("/v1/care-contexts/discover");
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 

@@ -1,23 +1,27 @@
 package Tests.APITests.APIUtils;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class CMPatientDiscovery {
 
     public String getPatientDiscoverRequestBody() {
         return "{\n" +
-                "  \"hip\": {\n" +
-                "    \"id\": \"10000004\" \n" +
-                "  },\n" +
-                "  \"requestId\": \"4a5cede1-ed50-4f30-90ee-db0ebd8"+ generateRandomNo() +"\",\n" +
-                "  \"unverifiedIdentifiers\": []\n" +
+                "\"requestId\":\"" + generateUUID() +"\""+"," +
+                "    \"hip\": {\n" +
+                "        \"id\": \"10000005\",\n" +
+                "        \"name\":\"Max Health Care\"\n" +
+                "    }\n" +
                 "}";
-
     }
 
     private String generateRandomNo() {
         Random r = new Random(System.currentTimeMillis());
         return String.valueOf(10000 + r.nextInt(20000));
+    }
+
+    private String generateUUID() {
+        return String.valueOf(UUID.randomUUID());
     }
 
 }
