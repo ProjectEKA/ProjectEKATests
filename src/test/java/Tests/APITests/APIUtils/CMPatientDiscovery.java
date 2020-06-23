@@ -15,11 +15,6 @@ public class CMPatientDiscovery {
                 "}";
     }
 
-    private String generateRandomNo() {
-        Random r = new Random(System.currentTimeMillis());
-        return String.valueOf(10000 + r.nextInt(20000));
-    }
-
     private String generateUUID() {
         return String.valueOf(UUID.randomUUID());
     }
