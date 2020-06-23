@@ -18,7 +18,7 @@ public class RegistrationTest extends BaseDriver {
         String userName = "TestUser" + AppUtility.generateRandomNo();
         Patient patient = new Patient("Hina Patel", "8888888888", "female");
         HomePage homePage = new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue(patient.getMobile())
-                .enterOTP(new RegistrationPage(driver)).enterUserDetails(patient, userName)
+                .enterOTP(new RegistrationPage(driver)).enterUserDetails(patient, userName).clickAddNewProvider()
                 .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext().enterOTP(new HomePage(driver));
 
         Assert.assertTrue(homePage.getPatientName().length() > 0, "Patient Name not displayed on Link Provider screen");
@@ -29,7 +29,7 @@ public class RegistrationTest extends BaseDriver {
         String userName = "TestUser" + AppUtility.generateRandomNo();
         Patient patient = new Patient("John  Doe", "9999999999", "male");
         HomePage homePage = new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue("9999999999")
-                .enterOTP(new RegistrationPage(driver)).enterUserDetails(patient, userName)
+                .enterOTP(new RegistrationPage(driver)).enterUserDetails(patient, userName).clickAddNewProvider()
                 .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext()
                 .enterOTP(new HomePage(driver));
 
