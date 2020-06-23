@@ -1,14 +1,13 @@
 package Tests.MobileAppTests.Utils;
 
 
-import Tests.MobileAppTests.Pages.RegistrationPage;
+import Tests.MobileAppTests.Pages.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
@@ -19,9 +18,9 @@ import org.testng.annotations.BeforeMethod;
 import java.io.File;
 
 public class BaseDriver {
+    private static String path = null;
     public AppiumDriver<WebElement> driver;
     private AppiumDriverLocalService service;
-    private static String path = null;
 
     @BeforeClass
     public void setUp() {
@@ -54,6 +53,11 @@ public class BaseDriver {
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.projecteka.jataayu.LauncherActivity");
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.projecteka.jataayu.debug");
         driver = new AndroidDriver<>(service.getUrl(), capabilities);
+        handleSplashScreen();
+    }
+
+    private void handleSplashScreen() {
+        new BasePage(this.driver).moveSplashScreens();
     }
 
     @AfterMethod

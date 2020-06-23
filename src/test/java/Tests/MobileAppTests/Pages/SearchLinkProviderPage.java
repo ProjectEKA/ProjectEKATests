@@ -25,8 +25,7 @@ public class SearchLinkProviderPage extends WaitUtils {
     }
 
     public LinkAccountsPage clickConfirmProvider() {
-        waitForTextToAppear(driver, searchLinkProviderObjects.verifiedMobileNo);
-        searchLinkProviderObjects.confirmProvider.click();
+        waitForElementToBeVisible(driver, searchLinkProviderObjects.confirmProvider).click();
         return new LinkAccountsPage(driver);
     }
 }

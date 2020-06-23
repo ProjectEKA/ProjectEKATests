@@ -24,7 +24,7 @@ public class RegistrationPage {
         return new OTPPage(driver);
     }
 
-    public SearchLinkProviderPage enterUserDetails(Patient patient, String username) {
+    public HomePage enterUserDetails(Patient patient, String username) {
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.patientName).sendKeys(patient.getPatientName());
         if (patient.getGender().equals("male")) {
             registrationPageObjects.genderMale.click();
@@ -40,6 +40,6 @@ public class RegistrationPage {
         registrationPageObjects.confirmRegisterButton.click();
         new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.confirmationMessage);
         registrationPageObjects.confirmRegisterButton.click();
-        return new SearchLinkProviderPage(driver);
+        return new HomePage(driver);
     }
 }
