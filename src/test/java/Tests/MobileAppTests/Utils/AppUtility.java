@@ -61,7 +61,7 @@ public class AppUtility {
 
         RequestSpecification requestSpecification = RestAssured.given();
 
-        requestSpecification.header("Authorization", System.getenv("Authorization"));
+        requestSpecification.header("Authorization", "Bearer "+System.getenv("Authorization"));
 
         requestSpecification.config(new RestAssuredConfig().redirect(new RedirectConfig().followRedirects(false)));
         response = requestSpecification.get(artifactURL);
