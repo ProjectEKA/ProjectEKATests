@@ -10,7 +10,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-@Test(enabled = false)
 public class HIPAPITest {
 
     @BeforeClass
@@ -19,7 +18,7 @@ public class HIPAPITest {
         RestAssured.useRelaxedHTTPSValidation();
     }
 
-    @Test
+    @Test(enabled = false)
     public void discoverPatient() {
 
         RequestSpecification request = RestAssured.given();
