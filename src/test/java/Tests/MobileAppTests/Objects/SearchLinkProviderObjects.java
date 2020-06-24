@@ -13,4 +13,7 @@ public class SearchLinkProviderObjects {
     public MobileElement verifiedMobileNo;
     @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/btn_search")
     public MobileElement confirmProvider;
+    @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/lbl_mobile_number")
+    public MobileElement allRecordsLinkedText;
+
 }
