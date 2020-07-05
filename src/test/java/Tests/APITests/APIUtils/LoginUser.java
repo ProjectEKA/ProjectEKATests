@@ -25,6 +25,23 @@ public class LoginUser {
         return jsonPathEvaluator.getString("accessToken");
     }
 
+    public String getCMRefreshToken() {
+
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
+        RestAssured.useRelaxedHTTPSValidation();
+
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+
+        Response response = request.body(getCMLoginRequestBody()).post("/sessions");
+
+        JsonPath jsonPathEvaluator = response.jsonPath();
+
+        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+        System.out.println("CM Login Successful");
+        return jsonPathEvaluator.getString("refreshToken");
+    }
+
     private String getCMLoginRequestBody() {
         return "{\n" +
                 "    \"username\": \"" + PropertiesCache.getInstance().getProperty("userName") + "\",\n" +
@@ -55,6 +72,12 @@ public class LoginUser {
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
         System.out.println("HIU Login Successful");
         return jsonPathEvaluator.getString("accessToken");
+    }
+
+    public String getCMLogoutRequestBody(String refreshToken) {
+        return "{\n" +
+                "    \"refreshToken\": \"" + refreshToken + "\"" +
+                "}";
     }
 
 }

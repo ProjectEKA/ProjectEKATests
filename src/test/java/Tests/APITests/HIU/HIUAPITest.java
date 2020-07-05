@@ -27,7 +27,8 @@ public class HIUAPITest {
         RequestSpecification request = RestAssured.given();
         String patientID = PropertiesCache.getInstance().getProperty("HIUPatient");
 
-        Response response = request.header("Authorization", authToken).pathParam("patientID", patientID).get("/v1/patients/{patientID}");
+        Response response = request.header("Authorization", authToken).pathParam("patientID", patientID)
+                .get("/v1/patients/{patientID}");
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200);
@@ -37,7 +38,17 @@ public class HIUAPITest {
     @Test
     public void createConsentRequest() {
         Response response = new APIUtils().createConsent(PropertiesCache.getInstance().getProperty("HIUPatient"));
-
         Assert.assertEquals(response.getStatusCode(), 202);
+    }
+
+    @Test
+    public void fetchConsentRequestId() {
+        RequestSpecification request = RestAssured.given();
+
+        Response patientDetailsResponse = request.header("Authorization", authToken).get("/v1/hiu/consent-requests");
+        JsonPath jsonPathEvaluator = patientDetailsResponse.jsonPath();
+        String consentRequestId = jsonPathEvaluator.getString("consentRequestId[0]");
+        System.out.println(consentRequestId);
+
     }
 }
