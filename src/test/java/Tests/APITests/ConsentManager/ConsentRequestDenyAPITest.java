@@ -53,7 +53,7 @@ public class ConsentRequestDenyAPITest {
         request.header("Authorization", cmAuthToken);
         Response response = request.post("/consent-requests/"+consentRequestId+"/deny");
         JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(response.getStatusCode(), 204);
     }
 
 }

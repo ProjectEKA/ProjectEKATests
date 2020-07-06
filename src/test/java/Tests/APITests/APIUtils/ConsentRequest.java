@@ -40,10 +40,10 @@ public class ConsentRequest {
     }
 
     public String getRevokeConsentRequestBody(String consentArtefactId) {
-        return " {                                      \n" +
-            "       \"consents\": [                     \n" +
-            "           \" "+ consentArtefactId +" \"   \n" +
-            "       ]                                   \n" +
-            "    }                                      ";
+        return " {                                        \n" +
+                "   \"consents\": [                       \n" +
+                "           \""+ consentArtefactId +"\"   \n" +
+                "    ]                                    \n" +
+                "}                                        ";
     }
 }
