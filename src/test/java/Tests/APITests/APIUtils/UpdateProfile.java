@@ -14,7 +14,7 @@ public class UpdateProfile {
     public String getVerifyPINRequestBody() {
         return "{\n" +
                 "   \"pin\": \"1234\",\n" +
-                "   \"requestId\": \"" + generateUUID() +"\""+",\n" +
+                "   \"requestId\":\"" + generateUUID() +"\""+",\n" +
                 "   \"scope\": \"profile.changepin\" \n" +
                 "}";
     }

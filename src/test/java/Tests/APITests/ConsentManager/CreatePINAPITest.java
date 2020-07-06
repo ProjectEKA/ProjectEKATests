@@ -7,13 +7,13 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class CreatePINAPITest {
 
     String authToken;
-    String refreshToken;
 
     @BeforeClass
     public void setup() {
@@ -23,16 +23,17 @@ public class CreatePINAPITest {
     }
 
     @Test
-    public void updatePasswordAPI() {
+    public void createPINAPI() {
         RequestSpecification request = RestAssured.given();
 
         Response patientDetailsResponse = request.header("Authorization", authToken).get("/patients/me");
         JsonPath jsonPathEvaluator = patientDetailsResponse.jsonPath();
         String hasPIN = jsonPathEvaluator.getString("hasTransactionPin");
+        System.out.println(hasPIN);
         if(hasPIN.equalsIgnoreCase("true")) {
             System.out.println("Consent PIN already created for this user");
         }
-        else if(hasPIN.equalsIgnoreCase("true")) {
+        else if(hasPIN.equalsIgnoreCase("false")) {
 
             //post call
             request.header("Content-Type", "application/json");
@@ -40,11 +41,11 @@ public class CreatePINAPITest {
             String createPINRequestBody = new CreateConsentPIN().getCreatePINRequestBody();
             request.body(createPINRequestBody);
             Response response = request.post("/patients/pin");
-            Assert.assertEquals(response.getStatusCode(), 201);
+            Assert.assertEquals(response.getStatusCode(), 204);
         }
     }
 
-    @Test(dependsOnMethods = "updatePasswordAPI")
+    @AfterTest
     public void logoutAPI() {
         RequestSpecification request = RestAssured.given();
 

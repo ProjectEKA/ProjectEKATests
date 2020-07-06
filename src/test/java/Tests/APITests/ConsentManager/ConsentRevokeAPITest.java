@@ -8,7 +8,7 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ConsentRequestRevokeAPITest {
+public class ConsentRevokeAPITest {
 
     String hiuAuthToken;
     String cmAuthToken;
