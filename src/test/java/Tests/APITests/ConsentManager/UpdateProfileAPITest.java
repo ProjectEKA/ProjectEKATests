@@ -74,16 +74,16 @@ public class UpdateProfileAPITest {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
-    @AfterTest
-    public void logoutAPI() {
-        RequestSpecification request = RestAssured.given();
-
-        request.header("Content-Type", "application/json");
-        request.header("Authorization", authToken);
-        String logoutRequestBody = new LoginUser().getCMLogoutRequestBody(new LoginUser().getCMRefreshToken());
-        request.body(logoutRequestBody);
-        Response response = request.post("/logout");
-        Assert.assertEquals(response.getStatusCode(), 200);
-    }
+//    @Test(dependsOnMethods = "updatePINAPI")
+//    public void logoutAPI() {
+//        RequestSpecification request = RestAssured.given();
+//
+//        request.header("Content-Type", "application/json");
+//        request.header("Authorization", authToken);
+//        String logoutRequestBody = new LoginUser().getCMLogoutRequestBody(new LoginUser().getCMRefreshToken());
+//        request.body(logoutRequestBody);
+//        Response response = request.post("/logout");
+//        Assert.assertEquals(response.getStatusCode(), 200);
+//    }
 
 }
