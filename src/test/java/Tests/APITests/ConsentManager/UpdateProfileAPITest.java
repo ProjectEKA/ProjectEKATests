@@ -7,6 +7,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -70,6 +71,18 @@ public class UpdateProfileAPITest {
         Response response = request.post("/patients/change-pin");
         JsonPath jsonPathEvaluator = response.jsonPath();
 
+        Assert.assertEquals(response.getStatusCode(), 200);
+    }
+
+    @AfterTest
+    public void logoutAPI() {
+        RequestSpecification request = RestAssured.given();
+
+        request.header("Content-Type", "application/json");
+        request.header("Authorization", authToken);
+        String logoutRequestBody = new LoginUser().getCMLogoutRequestBody(new LoginUser().getCMRefreshToken());
+        request.body(logoutRequestBody);
+        Response response = request.post("/logout");
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
