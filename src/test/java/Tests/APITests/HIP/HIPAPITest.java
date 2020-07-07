@@ -1,7 +1,7 @@
 package Tests.APITests.HIP;
 
 import Tests.APITests.APIUtils.CentralRegistry;
-import Tests.APITests.APIUtils.HIPPatientDiscovery;
+import Tests.APITests.APIUtils.HIPRequest.HIPPatientDiscovery;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

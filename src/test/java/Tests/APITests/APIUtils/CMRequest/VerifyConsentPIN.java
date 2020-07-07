@@ -1,4 +1,4 @@
-package Tests.APITests.APIUtils;
+package Tests.APITests.APIUtils.CMRequest;
 
 import java.util.UUID;
 

@@ -1,7 +1,7 @@
 package Tests.APITests.ConsentManager;
 
-import Tests.APITests.APIUtils.CreateConsentPIN;
-import Tests.APITests.APIUtils.LoginUser;
+import Tests.APITests.APIUtils.CMRequest.CreateConsentPIN;
+import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

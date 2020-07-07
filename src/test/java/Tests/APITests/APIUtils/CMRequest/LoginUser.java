@@ -1,5 +1,6 @@
-package Tests.APITests.APIUtils;
+package Tests.APITests.APIUtils.CMRequest;
 
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

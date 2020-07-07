@@ -1,13 +1,12 @@
 package Tests.APITests.ConsentManager;
 
-import Tests.APITests.APIUtils.LoginUser;
-import Tests.APITests.APIUtils.UpdateProfile;
+import Tests.APITests.APIUtils.CMRequest.LoginUser;
+import Tests.APITests.APIUtils.CMRequest.UpdateProfile;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

@@ -1,7 +1,7 @@
 package Tests.APITests.HIU;
 
 import Tests.APITests.APIUtils.APIUtils;
-import Tests.APITests.APIUtils.LoginUser;
+import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;

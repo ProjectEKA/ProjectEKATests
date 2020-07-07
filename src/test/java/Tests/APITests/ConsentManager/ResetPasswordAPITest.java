@@ -1,7 +1,7 @@
 package Tests.APITests.ConsentManager;
 
-import Tests.APITests.APIUtils.LoginUser;
-import Tests.APITests.APIUtils.ResetPassword;
+import Tests.APITests.APIUtils.CMRequest.LoginUser;
+import Tests.APITests.APIUtils.CMRequest.ResetPassword;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

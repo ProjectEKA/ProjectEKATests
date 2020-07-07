@@ -1,6 +1,5 @@
-package Tests.APITests.APIUtils;
+package Tests.APITests.APIUtils.CMRequest;
 
-import java.util.Random;
 import java.util.UUID;
 
 public class CMPatientDiscovery {
