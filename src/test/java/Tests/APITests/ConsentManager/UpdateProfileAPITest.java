@@ -2,6 +2,7 @@ package Tests.APITests.ConsentManager;
 
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.CMRequest.UpdateProfile;
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -13,64 +14,53 @@ import org.testng.annotations.Test;
 public class UpdateProfileAPITest {
 
     String authToken;
-    String PINToken;
+    String pinAuthToken;
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "https://ncg-dev.projecteka.in/consent-manager";
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
         RestAssured.useRelaxedHTTPSValidation();
         authToken = "Bearer " + new LoginUser().getCMAuthToken();
     }
 
     @Test
     public void updatePasswordAPI() {
+
+        //update password from profile
         RequestSpecification request = RestAssured.given();
-
-        //get call
-        //Response response = request.header("Authorization", authToken).pathParam("patientID", patientID).get("/v1/patients/{patientID}");
-
-        //post call
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);
-        String updatePasswordRequestBody = new UpdateProfile().getUpdatePasswordRequestBody();
-        request.body(updatePasswordRequestBody);
-        Response response = request.put("/patients/profile/update-password");
-        JsonPath jsonPathEvaluator = response.jsonPath();
+        request.body(new UpdateProfile().getUpdatePasswordRequestBody());
 
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Response updatePasswordResponse = request.put("/patients/profile/update-password");
+        Assert.assertEquals(updatePasswordResponse.getStatusCode(), 200);
     }
 
     @Test
     public void verifyPINAPI() {
 
+        //verify-pin for update-pin
         RequestSpecification request = RestAssured.given();
-
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);
+        request.body(new UpdateProfile().getVerifyPINRequestBody());
 
-        String verifyPINRequestBody = new UpdateProfile().getVerifyPINRequestBody();
-        request.body(verifyPINRequestBody);
-        System.out.println(verifyPINRequestBody);
-        Response response = request.post("/patients/verify-pin");
-        JsonPath jsonPathEvaluator = response.jsonPath();
-
-        Assert.assertEquals(response.getStatusCode(), 200);
-        PINToken = jsonPathEvaluator.getString("temporaryToken");
+        Response verifyPINResponse = request.post("/patients/verify-pin");
+        Assert.assertEquals(verifyPINResponse.getStatusCode(), 200);
+        pinAuthToken = verifyPINResponse.jsonPath().getString("temporaryToken");
     }
 
     @Test(dependsOnMethods = "verifyPINAPI")
     public void updatePINAPI() {
 
+        //update PIN from profile
         RequestSpecification request = RestAssured.given();
-
         request.header("Content-Type", "application/json");
-        request.header("Authorization", PINToken);
-        String updatePINRequestBody = new UpdateProfile().getUpdatePINRequestBody();
-        request.body(updatePINRequestBody);
-        Response response = request.post("/patients/change-pin");
-        JsonPath jsonPathEvaluator = response.jsonPath();
+        request.header("Authorization", pinAuthToken);
+        request.body(new UpdateProfile().getUpdatePINRequestBody());
 
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Response updatePINResponse = request.post("/patients/change-pin");
+        Assert.assertEquals(updatePINResponse.getStatusCode(), 200);
     }
 
 //    @Test(dependsOnMethods = "updatePINAPI")

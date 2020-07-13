@@ -7,17 +7,16 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 
 public class CentralRegistry {
+
     public String getAuthTokenForHIP() {
 
         RestAssured.baseURI = PropertiesCache.getInstance().getProperty("centralRegistryURL");
         RestAssured.useRelaxedHTTPSValidation();
-
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
 
         Response response = request.body(getHIPRequestBody()).post("/api/1.0/sessions");
         JsonPath jsonPathEvaluator = response.jsonPath();
-
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
         return jsonPathEvaluator.getString("accessToken");
     }
@@ -26,13 +25,11 @@ public class CentralRegistry {
 
         RestAssured.baseURI = PropertiesCache.getInstance().getProperty("centralRegistryURL");
         RestAssured.useRelaxedHTTPSValidation();
-
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
 
         Response response = request.body(getConsentManagerRequestBody()).post("/api/1.0/sessions");
         JsonPath jsonPathEvaluator = response.jsonPath();
-
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
         return jsonPathEvaluator.getString("accessToken");
     }

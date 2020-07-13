@@ -2,8 +2,8 @@ package Tests.APITests.ConsentManager;
 
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.CMRequest.ResetPassword;
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
@@ -14,63 +14,52 @@ public class ResetPasswordAPITest {
 
     String authToken;
     String sessionId;
-    String OTPToken;
+    String otpAuthToken;
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "https://ncg-dev.projecteka.in/consent-manager";
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
         RestAssured.useRelaxedHTTPSValidation();
         authToken = "Bearer " + new LoginUser().getCMAuthToken();
     }
 
     @Test
     public void generateOTPAPI() {
+
+        //generate otp for enter phone #
         RequestSpecification request = RestAssured.given();
-
-        //get call
-        //Response response = request.header("Authorization", authToken).pathParam("patientID", patientID).get("/v1/patients/{patientID}");
-
-        //post call
         request.header("Content-Type", "application/json");
-        //request.header("Authorization", authToken);
-        String generateOTPRequestBody = new ResetPassword().getGenerateOTPRequestBody();
-        request.body(generateOTPRequestBody);
-        Response response = request.post("/patients/generateotp");
-        JsonPath jsonPathEvaluator = response.jsonPath();
+        request.body(new ResetPassword().getGenerateOTPRequestBody());
+        Response generateOTPResponse = request.post("/patients/generateotp");
 
-        Assert.assertEquals(response.getStatusCode(), 201);
-        sessionId = jsonPathEvaluator.getString("sessionId");
-        System.out.println(sessionId);
+        Assert.assertEquals(generateOTPResponse.getStatusCode(), 201);
+        sessionId = generateOTPResponse.jsonPath().getString("sessionId");
     }
 
     @Test(dependsOnMethods = "generateOTPAPI")
     public void verifyOTPAPI() {
 
+        //verify the otp
         RequestSpecification request = RestAssured.given();
-
         request.header("Content-Type", "application/json");
-        String verifyOTPRequestBody = new ResetPassword().getVerifyOTPRequestBody(sessionId);
-        request.body(verifyOTPRequestBody);
-        Response response = request.post("/patients/verifyotp");
-        JsonPath jsonPathEvaluator = response.jsonPath();
+        request.body(new ResetPassword().getVerifyOTPRequestBody(sessionId));
+        Response verifyOTPResponse = request.post("/patients/verifyotp");
 
-        Assert.assertEquals(response.getStatusCode(), 200);
-        OTPToken = jsonPathEvaluator.getString("temporaryToken");
-        System.out.println(jsonPathEvaluator.getString("temporaryToken"));
+        Assert.assertEquals(verifyOTPResponse.getStatusCode(), 200);
+        otpAuthToken = verifyOTPResponse.jsonPath().getString("temporaryToken");
     }
 
     @Test(dependsOnMethods = "verifyOTPAPI")
     public void resetPasswordAPI() {
 
+        //reset-password after otp confirmation
         RequestSpecification request = RestAssured.given();
-
         request.header("Content-Type", "application/json");
-        request.header("Authorization", OTPToken);
-        String resetPasswordRequestBody = new ResetPassword().getResetPasswordRequestBody();
-        request.body(resetPasswordRequestBody);
-        Response response = request.put("/patients/profile/reset-password");
+        request.header("Authorization", otpAuthToken);
+        request.body(new ResetPassword().getResetPasswordRequestBody());
 
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Response resetPasswordResponse = request.put("/patients/profile/reset-password");
+        Assert.assertEquals(resetPasswordResponse.getStatusCode(), 200);
     }
 
 }

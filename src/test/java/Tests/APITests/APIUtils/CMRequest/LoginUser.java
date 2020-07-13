@@ -13,14 +13,11 @@ public class LoginUser {
 
         RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
         RestAssured.useRelaxedHTTPSValidation();
-
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
 
         Response response = request.body(getCMLoginRequestBody()).post("/sessions");
-
         JsonPath jsonPathEvaluator = response.jsonPath();
-
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
         System.out.println("CM Login Successful");
         return jsonPathEvaluator.getString("accessToken");
@@ -30,14 +27,11 @@ public class LoginUser {
 
         RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
         RestAssured.useRelaxedHTTPSValidation();
-
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
 
         Response response = request.body(getCMLoginRequestBody()).post("/sessions");
-
         JsonPath jsonPathEvaluator = response.jsonPath();
-
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
         System.out.println("CM Login Successful");
         return jsonPathEvaluator.getString("refreshToken");
@@ -59,15 +53,12 @@ public class LoginUser {
     }
 
     public String getHIUAuthToken() {
-
         RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
         RestAssured.useRelaxedHTTPSValidation();
-
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
 
         Response response = request.body(getHIULoginRequestBody()).post("/sessions");
-
         JsonPath jsonPathEvaluator = response.jsonPath();
 
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");

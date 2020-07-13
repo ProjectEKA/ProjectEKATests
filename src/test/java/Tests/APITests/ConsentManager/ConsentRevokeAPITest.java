@@ -14,146 +14,63 @@ import java.util.List;
 
 public class ConsentRevokeAPITest {
 
-    String hiuAuthToken;
-    String cmAuthToken;
-    String PINToken;
     String consentArtefactId;
     String consentRequestId;
-    String status;
 
     @Test
-    public void createHIUSessionAPI() {
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        hiuAuthToken = new LoginUser().getHIUAuthToken();
-    }
+    public void HIUConsentRequestAPI() {
 
-    @Test(dependsOnMethods = "createHIUSessionAPI")
-    public void createConsentRequestAPI() {
-        Response response = new APIUtils().createConsent(PropertiesCache.getInstance().getProperty("HIUPatient"));
-        Assert.assertEquals(response.getStatusCode(), 202);
-    }
+        //create consent-request
+        Response createRequestResponse = new APIUtils()
+                .createConsent(PropertiesCache.getInstance().getProperty("HIUPatient"));
+        Assert.assertEquals(createRequestResponse.getStatusCode(), 202);
 
-    @Test(dependsOnMethods = "createConsentRequestAPI")
-    public void fetchConsentRequestIdAPI() {
+        //fetch consent-request id
         RequestSpecification request = RestAssured.given();
-
-        Response patientDetailsResponse = request.header("Authorization", hiuAuthToken).get("/v1/hiu/consent-requests");
-        JsonPath jsonPathEvaluator = patientDetailsResponse.jsonPath();
-        consentRequestId = jsonPathEvaluator.getString("consentRequestId[0]");
-        System.out.println(consentRequestId);
+        Response fetchConsentsResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
+                .get("/v1/hiu/consent-requests");
+        consentRequestId = fetchConsentsResponse.jsonPath().getString("consentRequestId[0]");
+        Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "fetchConsentRequestIdAPI")
-    public void createCMSessionAPI() {
-        RestAssured.baseURI = "https://ncg-dev.projecteka.in/consent-manager";
-        RestAssured.useRelaxedHTTPSValidation();
-        cmAuthToken = "Bearer " + new LoginUser().getCMAuthToken();
-    }
-
-    @Test(dependsOnMethods = "createCMSessionAPI")
-    public void verifyGrantConsentPINAPI() {
-
-        RequestSpecification request = RestAssured.given();
-
-        request.header("Content-Type", "application/json");
-        request.header("Authorization", cmAuthToken);
-
-        String verifyGrantPINRequestBody = new VerifyConsentPIN().getVerifyGrantPINRequestBody();
-        request.body(verifyGrantPINRequestBody);
-        System.out.println(verifyGrantPINRequestBody);
-        Response response = request.post("/patients/verify-pin");
-        JsonPath jsonPathEvaluator = response.jsonPath();
-
-        Assert.assertEquals(response.getStatusCode(), 200);
-        PINToken = jsonPathEvaluator.getString("temporaryToken");
-    }
-
-    @Test(dependsOnMethods = "verifyGrantConsentPINAPI")
+    @Test(dependsOnMethods = "HIUConsentRequestAPI")
     public void grantConsentRequestAPI() {
 
+        //grant consent-request
         RequestSpecification request = RestAssured.given();
-
         request.header("Content-Type", "application/json");
-        request.header("Authorization", PINToken);
+        request.header("Authorization", new APIUtils().verifyConsentPIN("grant"));
 
-        String grantConsentRequestBody = new ConsentRequest().getGrantConsentRequestBody();
-        request.body(grantConsentRequestBody);
-        System.out.println(grantConsentRequestBody);
-        Response response = request.post("/consent-requests/" + consentRequestId + "/approve");
-        JsonPath jsonPathEvaluator = response.jsonPath();
+        request.body(new ConsentRequest().getGrantConsentRequestBody());
+        Response grantConsentResponse = request.post("/consent-requests/" + consentRequestId + "/approve");
+        consentArtefactId = grantConsentResponse.jsonPath().getString("id");
+        Assert.assertEquals(grantConsentResponse.getStatusCode(), 200);
     }
 
     @Test(dependsOnMethods = "grantConsentRequestAPI")
-    public void fetchConsentArtefactIdAPI() {
-        RequestSpecification request = RestAssured.given();
-
-        Response patientDetailsResponse = request.header("Authorization", cmAuthToken)
-                .get("/consent-artefacts?limit=10&offset=0&status=GRANTED");
-        JsonPath jsonPathEvaluator = patientDetailsResponse.jsonPath();
-        consentArtefactId = jsonPathEvaluator.getString("consentArtefacts[0].consentDetail.consentId");
-        System.out.println(consentArtefactId);
-    }
-
-    @Test(dependsOnMethods = "fetchConsentArtefactIdAPI")
-    public void verifyRevokeConsentPINAPI() {
-
-        RequestSpecification request = RestAssured.given();
-
-        request.header("Content-Type", "application/json");
-        request.header("Authorization", cmAuthToken);
-
-        String verifyRevokePINRequestBody = new VerifyConsentPIN().getVerifyRevokePINRequestBody();
-        request.body(verifyRevokePINRequestBody);
-        System.out.println(verifyRevokePINRequestBody);
-        Response response = request.post("/patients/verify-pin");
-        JsonPath jsonPathEvaluator = response.jsonPath();
-
-        Assert.assertEquals(response.getStatusCode(), 200);
-        PINToken = jsonPathEvaluator.getString("temporaryToken");
-    }
-
-    @Test(dependsOnMethods = "verifyRevokeConsentPINAPI")
     public void revokeConsentRequestAPI() {
 
+        //revoke consent-request
         RequestSpecification request = RestAssured.given();
-
         request.header("Content-Type", "application/json");
-        request.header("Authorization", PINToken);
+        request.header("Authorization", new APIUtils().verifyConsentPIN("revoke"));
 
-        String revokeConsentRequestBody = new ConsentRequest().getRevokeConsentRequestBody(consentArtefactId);
-        request.body(revokeConsentRequestBody);
-        System.out.println(revokeConsentRequestBody);
-        Response response = request.post("/consents/revoke");
-        JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertEquals(response.getStatusCode(), 200);
+        request.body(new ConsentRequest().getRevokeConsentRequestBody(consentArtefactId));
+        Response revokeConsentResponse = request.post("/consents/revoke");
+        Assert.assertEquals(revokeConsentResponse.getStatusCode(), 200);
     }
 
     @Test(dependsOnMethods = "revokeConsentRequestAPI")
     public void checkHIUConsentStatusAPI() {
 
-        //create HIU session
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        hiuAuthToken = new LoginUser().getHIUAuthToken();
-
+        //fetch the consents list and fetch the status
         RequestSpecification request = RestAssured.given();
-        Response patientDetailsResponse = request.header("Authorization", hiuAuthToken)
+        Response consentStatusResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
                 .get("/v1/hiu/consent-requests");
-        System.out.println(patientDetailsResponse.asString());
-        JsonPath jsonPathEvaluator = patientDetailsResponse.jsonPath();
-        System.out.println(consentRequestId);
-        //fetching consent-status on the basis of consent-request-id
-        List<String> consentRequestIds = jsonPathEvaluator.getList("consentRequestId");
-        for(int i=0; i<(consentRequestIds.size()-1);i++) {
-            status="";
-            if(consentRequestIds.get(i).equalsIgnoreCase(consentRequestId)) {
-                status = jsonPathEvaluator.getString("status[" + i + "]");
-                break;
-            }
-        }
-        Assert.assertEquals(patientDetailsResponse.getStatusCode(), 200);
-        Assert.assertEquals(status, "REVOKED");
+        String actualStatus = new APIUtils().fetchConsentStatus(consentStatusResponse, consentRequestId);
+
+        Assert.assertEquals(consentStatusResponse.getStatusCode(), 200);
+        Assert.assertEquals(actualStatus, "REVOKED");
     }
 
 }

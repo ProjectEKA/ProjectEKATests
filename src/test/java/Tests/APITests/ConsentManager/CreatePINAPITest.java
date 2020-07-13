@@ -2,6 +2,7 @@ package Tests.APITests.ConsentManager;
 
 import Tests.APITests.APIUtils.CMRequest.CreateConsentPIN;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -16,31 +17,30 @@ public class CreatePINAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = "https://ncg-dev.projecteka.in/consent-manager";
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
         RestAssured.useRelaxedHTTPSValidation();
         authToken = "Bearer " + new LoginUser().getCMAuthToken();
     }
 
     @Test
     public void createPINAPI() {
-        RequestSpecification request = RestAssured.given();
 
+        //checks if the patient has consent-pin created
+        RequestSpecification request = RestAssured.given();
         Response patientDetailsResponse = request.header("Authorization", authToken).get("/patients/me");
-        JsonPath jsonPathEvaluator = patientDetailsResponse.jsonPath();
-        String hasPIN = jsonPathEvaluator.getString("hasTransactionPin");
-        System.out.println(hasPIN);
+        String hasPIN = patientDetailsResponse.jsonPath().getString("hasTransactionPin");
+
         if(hasPIN.equalsIgnoreCase("true")) {
             System.out.println("Consent PIN already created for this user");
         }
         else if(hasPIN.equalsIgnoreCase("false")) {
 
-            //post call
+            //if consent-pin not created for patient
             request.header("Content-Type", "application/json");
             request.header("Authorization", authToken);
-            String createPINRequestBody = new CreateConsentPIN().getCreatePINRequestBody();
-            request.body(createPINRequestBody);
-            Response response = request.post("/patients/pin");
-            Assert.assertEquals(response.getStatusCode(), 204);
+            request.body(new CreateConsentPIN().getCreatePINRequestBody());
+            Response generatePINResponse = request.post("/patients/pin");
+            Assert.assertEquals(generatePINResponse.getStatusCode(), 204);
         }
     }
 
