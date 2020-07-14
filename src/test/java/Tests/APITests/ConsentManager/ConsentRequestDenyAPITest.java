@@ -30,6 +30,7 @@ public class ConsentRequestDenyAPITest {
                 .get("/v1/hiu/consent-requests");
         consentRequestId = fetchConsentsResponse.jsonPath().getString("consentRequestId[0]");
         Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
+        System.out.println(">>>>>>>>>"+consentRequestId);
     }
 
     @Test(dependsOnMethods = "HIUConsentRequestAPI")

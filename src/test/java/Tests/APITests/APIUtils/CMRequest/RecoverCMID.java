@@ -4,9 +4,17 @@ public class RecoverCMID {
 
     public String getRecoverInitCMIDRequestBody() {
         return "{\n" +
-                "   \"name\": \"John Doe\", \n" +
+                "   \"name\": { \n" +
+                "       \"first\": \"John\", \n" +
+                "       \"last\": \"\", \n" +
+                "       \"middle\": \"Doe\" \n" +
+                "   }, \n" +
                 "   \"gender\": \"M\", \n" +
-                "   \"yearOfBirth\": 1966, \n" +
+                "   \"dateOfBirth\": { \n" +
+                "       \"date\": 1, \n" +
+                "       \"month\": 1, \n" +
+                "       \"year\": 1966 \n" +
+                "   }, \n" +
                 "   \"verifiedIdentifiers\": [ \n" +
                 "       {\n" +
                 "           \"type\": \"MOBILE\", \n" +

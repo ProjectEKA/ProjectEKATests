@@ -34,7 +34,6 @@ public class RecoverCMIDAPITest {
 
         Assert.assertEquals(initRecoveryResponse.getStatusCode(), 200);
         sessionId = initRecoveryResponse.jsonPath().getString("sessionId");
-        System.out.println(sessionId);
     }
 
     @Test(dependsOnMethods = "initRecoveryAPI")

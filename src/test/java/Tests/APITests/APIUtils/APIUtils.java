@@ -27,7 +27,6 @@ public class APIUtils {
                 .buildConsentReuqest();
         request.body(hiuConsentRequest.getJSONRequestBody().toString());
         Response response = request.post("/v1/hiu/consent-requests");
-
         return response;
     }
 
