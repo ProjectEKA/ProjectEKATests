@@ -50,6 +50,22 @@ public class APIUtils {
         return jsonPathEvaluator.getString("temporaryToken");
     }
 
+    public String fetchConsentRequestId(Response response, String patient) {
+
+        //identifies the consent-request-id of patient's consent-request in the GET consent-requests at HIU
+        String consentRequestId = "";
+        JsonPath jsonPathEvaluator = response.jsonPath();
+        List<String> patientList = jsonPathEvaluator.getList("patient.id");
+        for(int i=0; i<(patientList.size()-1);i++) {
+            if(patientList.get(i).equalsIgnoreCase(patient)) {
+                if((jsonPathEvaluator.getString("status[" + i + "]")).equalsIgnoreCase("REQUESTED")) {
+                    consentRequestId = jsonPathEvaluator.getString("consentRequestId[" + i + "]");
+                    break;
+                }
+            }
+        }
+        return consentRequestId;
+    }
 
     public String fetchConsentStatus(Response response, String consentRequestId) {
 
@@ -66,6 +82,8 @@ public class APIUtils {
         }
         return status;
     }
+
+
 
 
 }

@@ -21,15 +21,15 @@ public class ConsentRevokeAPITest {
     public void HIUConsentRequestAPI() {
 
         //create consent-request
-        Response createRequestResponse = new APIUtils()
-                .createConsent(PropertiesCache.getInstance().getProperty("HIUPatient"));
+        String patient = PropertiesCache.getInstance().getProperty("HIUPatient");
+        Response createRequestResponse = new APIUtils().createConsent(patient);
         Assert.assertEquals(createRequestResponse.getStatusCode(), 202);
 
         //fetch consent-request id
         RequestSpecification request = RestAssured.given();
         Response fetchConsentsResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
                 .get("/v1/hiu/consent-requests");
-        consentRequestId = fetchConsentsResponse.jsonPath().getString("consentRequestId[0]");
+        consentRequestId = new APIUtils().fetchConsentRequestId(fetchConsentsResponse, patient);
         Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 
@@ -37,13 +37,14 @@ public class ConsentRevokeAPITest {
     public void grantConsentRequestAPI() {
 
         //grant consent-request
+        String grantPINAuth = new APIUtils().verifyConsentPIN("grant");
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", new APIUtils().verifyConsentPIN("grant"));
+        request.header("Authorization", grantPINAuth);
 
         request.body(new ConsentRequest().getGrantConsentRequestBody());
         Response grantConsentResponse = request.post("/consent-requests/" + consentRequestId + "/approve");
-        consentArtefactId = grantConsentResponse.jsonPath().getString("id");
+        consentArtefactId = grantConsentResponse.jsonPath().getString("consents[0].id");
         Assert.assertEquals(grantConsentResponse.getStatusCode(), 200);
     }
 
@@ -51,9 +52,10 @@ public class ConsentRevokeAPITest {
     public void revokeConsentRequestAPI() {
 
         //revoke consent-request
+        String revokePINAuth = new APIUtils().verifyConsentPIN("revoke");
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", new APIUtils().verifyConsentPIN("revoke"));
+        request.header("Authorization", revokePINAuth);
 
         request.body(new ConsentRequest().getRevokeConsentRequestBody(consentArtefactId));
         Response revokeConsentResponse = request.post("/consents/revoke");
@@ -64,8 +66,9 @@ public class ConsentRevokeAPITest {
     public void checkHIUConsentStatusAPI() {
 
         //fetch the consents list and fetch the status
+        String authToken = new LoginUser().getHIUAuthToken();
         RequestSpecification request = RestAssured.given();
-        Response consentStatusResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
+        Response consentStatusResponse = request.header("Authorization", authToken)
                 .get("/v1/hiu/consent-requests");
         String actualStatus = new APIUtils().fetchConsentStatus(consentStatusResponse, consentRequestId);
 
