@@ -1,18 +1,17 @@
-package Tests.APITests.APIUtils;
+package Tests.APITests.APIUtils.CMRequest;
 
-import java.util.Random;
 import java.util.UUID;
 
 public class CMPatientDiscovery {
 
     public String getPatientDiscoverRequestBody() {
         return "{\n" +
-                "\"requestId\":\"" + generateUUID() +"\""+"," +
+                "\"requestId\":\"" + generateUUID() +"\""+",\n" +
+                "\"unverifiedIdentifiers\": [],\n" +
                 "    \"hip\": {\n" +
-                "        \"id\": \"10000005\",\n" +
-                "        \"name\":\"Max Health Care\"\n" +
+                "        \"id\": \"10000005\"\n" +
                 "    }\n" +
-                "}";
+               "}";
     }
 
     private String generateUUID() {

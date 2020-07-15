@@ -1,4 +1,4 @@
-package Tests.APITests.APIUtils;
+package Tests.APITests.APIUtils.HIURequest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

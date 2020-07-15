@@ -1,4 +1,6 @@
-package Tests.APITests.APIUtils;
+package Tests.APITests.APIUtils.HIPRequest;
+
+import Tests.APITests.APIUtils.PropertiesCache;
 
 import java.util.Random;
 
@@ -10,7 +12,7 @@ public class HIPPatientDiscovery {
                 "  \"transactionId\": \"3fa85f64-5717-4562-b3fc-"+generateRandomNo()+"\",\n" +
                 "  \"timestamp\": \"2020-05-19T11:24:47.429Z\",\n" +
                 "  \"patient\": {\n" +
-                "    \"id\": \""+PropertiesCache.getInstance().getProperty("userName")+"\",\n" +
+                "    \"id\": \""+ PropertiesCache.getInstance().getProperty("userName")+"\",\n" +
                 "    \"verifiedIdentifiers\": [\n" +
                 "      {\n" +
                 "        \"type\": \"MOBILE\",\n" +

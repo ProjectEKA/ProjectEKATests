@@ -1,7 +1,7 @@
 package Tests.APITests.HIU;
 
 import Tests.APITests.APIUtils.APIUtils;
-import Tests.APITests.APIUtils.LoginUser;
+import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -24,20 +24,14 @@ public class HIUAPITest {
 
     @Test
     public void discoverPatientAPI() {
+
+        //identifies patient by cm-id
         RequestSpecification request = RestAssured.given();
         String patientID = PropertiesCache.getInstance().getProperty("HIUPatient");
+        Response findPatientResponse = request.header("Authorization", authToken).pathParam("patientID", patientID)
+                .get("/v1/patients/{patientID}");
 
-        Response response = request.header("Authorization", authToken).pathParam("patientID", patientID).get("/v1/patients/{patientID}");
-        JsonPath jsonPathEvaluator = response.jsonPath();
-
-        Assert.assertEquals(response.getStatusCode(), 200);
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.id"), patientID);
-    }
-
-    @Test
-    public void createConsentRequest() {
-        Response response = new APIUtils().createConsent(PropertiesCache.getInstance().getProperty("HIUPatient"));
-
-        Assert.assertEquals(response.getStatusCode(), 202);
+        Assert.assertEquals(findPatientResponse.getStatusCode(), 200);
+        Assert.assertEquals(findPatientResponse.jsonPath().getString("patient.id"), patientID);
     }
 }
