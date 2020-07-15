@@ -34,20 +34,4 @@ public class HIUAPITest {
         Assert.assertEquals(findPatientResponse.getStatusCode(), 200);
         Assert.assertEquals(findPatientResponse.jsonPath().getString("patient.id"), patientID);
     }
-
-    @Test
-    public void createConsentRequest() {
-
-        Response createConsentResponse = new APIUtils().createConsent(PropertiesCache.getInstance().getProperty("HIUPatient"));
-        Assert.assertEquals(createConsentResponse.getStatusCode(), 202);
-    }
-
-    @Test
-    public void fetchConsentRequestId() {
-
-        RequestSpecification request = RestAssured.given();
-        Response fetchConsentsResponse = request.header("Authorization", authToken).get("/v1/hiu/consent-requests");
-        String consentRequestId = fetchConsentsResponse.jsonPath().getString("consentRequestId[0]");
-        Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 202);
-    }
 }
