@@ -25,11 +25,12 @@ public class ConsentRequestGrantAPITest {
         Assert.assertEquals(createRequestResponse.getStatusCode(), 202);
 
         //fetch consent-request id
-        RequestSpecification request = RestAssured.given();
-        Response fetchConsentsResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
-                .get("/v1/hiu/consent-requests");
-        consentRequestId = new APIUtils().fetchConsentRequestId(fetchConsentsResponse, patient);
-        Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
+            RequestSpecification request = RestAssured.given();
+            Response fetchConsentsResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
+                    .get("/v1/hiu/consent-requests");
+            consentRequestId = new APIUtils().fetchConsentRequestId(fetchConsentsResponse, patient);
+            Assert.assertNull(consentRequestId);
+            Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 
     @Test(dependsOnMethods = "HIUConsentRequestAPI")

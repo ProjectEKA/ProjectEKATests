@@ -30,7 +30,6 @@ public class APIUtils {
         return response;
     }
 
-    @Test
     public String verifyConsentPIN(String consent) {
 
         //verify consent-pin and generate pin-authorization token
