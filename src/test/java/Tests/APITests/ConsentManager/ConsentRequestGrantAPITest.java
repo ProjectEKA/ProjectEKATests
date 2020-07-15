@@ -29,7 +29,7 @@ public class ConsentRequestGrantAPITest {
             Response fetchConsentsResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
                     .get("/v1/hiu/consent-requests");
             consentRequestId = new APIUtils().fetchConsentRequestId(fetchConsentsResponse, patient);
-            Assert.assertNull(consentRequestId);
+            Assert.assertNotNull(consentRequestId);
             Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 

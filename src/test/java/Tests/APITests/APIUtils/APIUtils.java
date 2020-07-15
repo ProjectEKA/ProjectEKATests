@@ -75,7 +75,6 @@ public class APIUtils {
         for(int i=0; i<(consentRequestIds.size()-1);i++) {
             if(consentRequestIds.get(i).equalsIgnoreCase(consentRequestId)) {
                 status = jsonPathEvaluator.getString("status[" + i + "]");
-                System.out.println(status + i);
                 break;
             }
         }
