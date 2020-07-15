@@ -44,7 +44,7 @@ public class DiscoveryAPITest {
         request.header("Authorization", authToken);
         request.body(new CMPatientDiscovery().getPatientDiscoverRequestBody());
 
-        Response discoverCareContextResponse = request.post("/v0.5/care-contexts/discover");
+        Response discoverCareContextResponse = request.post("/v1/care-contexts/discover");
         Assert.assertEquals(discoverCareContextResponse.getStatusCode(), 200);
         JsonPath jsonPathEvaluator = discoverCareContextResponse.jsonPath();
         Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "RVH1004");
