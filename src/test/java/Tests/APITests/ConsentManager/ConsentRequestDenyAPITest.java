@@ -1,16 +1,14 @@
 package Tests.APITests.ConsentManager;
 
-import Tests.APITests.APIUtils.*;
+import Tests.APITests.APIUtils.APIUtils;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConsentRequestDenyAPITest {
 
@@ -22,14 +20,14 @@ public class ConsentRequestDenyAPITest {
         //create consent-request
         String patient = PropertiesCache.getInstance().getProperty("HIUPatient");
         Response createRequestResponse = new APIUtils().createConsent(patient);
-        Assert.assertEquals(createRequestResponse.getStatusCode(), 202);
+        assertThat(createRequestResponse.getStatusCode()).isEqualTo(202);
 
         //fetch consent-request id
         RequestSpecification request = RestAssured.given();
         Response fetchConsentsResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
                 .get("/v1/hiu/consent-requests");
         consentRequestId = new APIUtils().fetchConsentRequestId(fetchConsentsResponse, patient);
-        Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
+        assertThat(fetchConsentsResponse.getStatusCode()).isEqualTo(200);
     }
 
     @Test(dependsOnMethods = "HIUConsentRequestAPI")
@@ -42,7 +40,7 @@ public class ConsentRequestDenyAPITest {
         request.header("Authorization", authToken);
 
         Response denyConsentResponse = request.post("/consent-requests/" + consentRequestId + "/deny");
-        Assert.assertEquals(denyConsentResponse.getStatusCode(), 204);
+        assertThat(denyConsentResponse.getStatusCode()).isEqualTo(204);
     }
 
     @Test(dependsOnMethods = "denyConsentRequestAPI")
@@ -55,8 +53,8 @@ public class ConsentRequestDenyAPITest {
                 .get("/v1/hiu/consent-requests");
         String actualStatus = new APIUtils().fetchConsentStatus(consentStatusResponse, consentRequestId);
 
-        Assert.assertEquals(consentStatusResponse.getStatusCode(), 200);
-        Assert.assertEquals(actualStatus, "DENIED");
+        assertThat(consentStatusResponse.getStatusCode()).isEqualTo(200);
+        assertThat(actualStatus).isEqualTo("DENIED");
     }
 
 }

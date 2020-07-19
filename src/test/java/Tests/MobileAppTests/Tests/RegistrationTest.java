@@ -11,6 +11,8 @@ import Tests.MobileAppTests.Utils.Patient;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class RegistrationTest extends BaseDriver {
 
     @Test
@@ -21,7 +23,7 @@ public class RegistrationTest extends BaseDriver {
                 .enterOTP(new RegistrationPage(driver)).enterUserDetails(patient, userName).clickAddNewProvider()
                 .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext().enterOTP(new HomePage(driver));
 
-        Assert.assertTrue(homePage.getPatientName().length() > 0, "Patient Name not displayed on Link Provider screen");
+        assertThat(homePage.getPatientName().length() > 0).withFailMessage("Patient Name not displayed on Link Provider screen").isTrue();
     }
 
     @Test
@@ -39,6 +41,6 @@ public class RegistrationTest extends BaseDriver {
                 .enterPin(new OTPPage(driver), "Create")
                 .enterPin(new HomePage(driver), "Confirm").getSnackBarText();
 
-        Assert.assertEquals(snackBarText, "Consent Granted Successfully");
+        assertThat(snackBarText).isEqualTo("Consent Granted Successfully");
     }
 }

@@ -1,15 +1,14 @@
 package Tests.APITests.HIU;
 
-import Tests.APITests.APIUtils.APIUtils;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HIUAPITest {
 
@@ -31,7 +30,7 @@ public class HIUAPITest {
         Response findPatientResponse = request.header("Authorization", authToken).pathParam("patientID", patientID)
                 .get("/v1/patients/{patientID}");
 
-        Assert.assertEquals(findPatientResponse.getStatusCode(), 200);
-        Assert.assertEquals(findPatientResponse.jsonPath().getString("patient.id"), patientID);
+        assertThat(findPatientResponse.getStatusCode()).isEqualTo(200);
+        assertThat(findPatientResponse.jsonPath().getString("patient.id")).isEqualTo(patientID);
     }
 }

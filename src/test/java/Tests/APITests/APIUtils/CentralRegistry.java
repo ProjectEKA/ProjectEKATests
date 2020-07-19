@@ -6,6 +6,8 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class CentralRegistry {
 
     public String getAuthTokenForHIP() {
@@ -17,7 +19,7 @@ public class CentralRegistry {
 
         Response response = request.body(getHIPRequestBody()).post("/api/1.0/sessions");
         JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+        assertThat(response.getStatusCode()).withFailMessage("Login failed").isEqualTo(200);
         return jsonPathEvaluator.getString("accessToken");
     }
 
@@ -30,7 +32,7 @@ public class CentralRegistry {
 
         Response response = request.body(getConsentManagerRequestBody()).post("/api/1.0/sessions");
         JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+        assertThat(response.getStatusCode()).withFailMessage("Login failed").isEqualTo(200);
         return jsonPathEvaluator.getString("accessToken");
     }
 

@@ -6,9 +6,10 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HIPAPITest {
 
@@ -32,10 +33,10 @@ public class HIPAPITest {
 
         JsonPath jsonPathEvaluator = response.jsonPath();
 
-        Assert.assertEquals(response.getStatusCode(), 200);
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "RVH1004");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doe");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "NCP10091");
+        assertThat(response.getStatusCode()).isEqualTo(200);
+        assertThat(jsonPathEvaluator.getString("patient.referenceNumber")).isEqualTo("RVH1004");
+        assertThat(jsonPathEvaluator.getString("patient.display")).isEqualTo("John Doe");
+        assertThat(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber")).isEqualTo("NCP10091");
         jsonPathEvaluator.getString("patient.matchedBy").equals("[Mobile, Gender]");
     }
 }

@@ -4,12 +4,12 @@ import Tests.APITests.APIUtils.CMRequest.CreateConsentPIN;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreatePINAPITest {
 
@@ -40,7 +40,7 @@ public class CreatePINAPITest {
             request.header("Authorization", authToken);
             request.body(new CreateConsentPIN().getCreatePINRequestBody());
             Response generatePINResponse = request.post("/patients/pin");
-            Assert.assertEquals(generatePINResponse.getStatusCode(), 204);
+            assertThat(generatePINResponse.getStatusCode()).isEqualTo(204);
         }
     }
 

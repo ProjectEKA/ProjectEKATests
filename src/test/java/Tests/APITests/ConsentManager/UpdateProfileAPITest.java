@@ -4,12 +4,12 @@ import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.CMRequest.UpdateProfile;
 import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UpdateProfileAPITest {
 
@@ -33,7 +33,7 @@ public class UpdateProfileAPITest {
         request.body(new UpdateProfile().getUpdatePasswordRequestBody());
 
         Response updatePasswordResponse = request.put("/patients/profile/update-password");
-        Assert.assertEquals(updatePasswordResponse.getStatusCode(), 200);
+        assertThat(updatePasswordResponse.getStatusCode()).isEqualTo(200);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class UpdateProfileAPITest {
         request.body(new UpdateProfile().getVerifyPINRequestBody());
 
         Response verifyPINResponse = request.post("/patients/verify-pin");
-        Assert.assertEquals(verifyPINResponse.getStatusCode(), 200);
+        assertThat(verifyPINResponse.getStatusCode()).isEqualTo(200);
         pinAuthToken = verifyPINResponse.jsonPath().getString("temporaryToken");
     }
 
@@ -60,7 +60,7 @@ public class UpdateProfileAPITest {
         request.body(new UpdateProfile().getUpdatePINRequestBody());
 
         Response updatePINResponse = request.post("/patients/change-pin");
-        Assert.assertEquals(updatePINResponse.getStatusCode(), 200);
+        assertThat(updatePINResponse.getStatusCode()).isEqualTo(200);
     }
 
 //    @Test(dependsOnMethods = "updatePINAPI")

@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class LoginUser {
 
     public String getCMAuthToken() {
@@ -18,7 +20,7 @@ public class LoginUser {
 
         Response response = request.body(getCMLoginRequestBody()).post("/sessions");
         JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+        assertThat(response.getStatusCode()).withFailMessage("Login failed").isEqualTo(200);
         System.out.println("CM Login Successful");
         return jsonPathEvaluator.getString("accessToken");
     }
@@ -32,7 +34,7 @@ public class LoginUser {
 
         Response response = request.body(getCMLoginRequestBody()).post("/sessions");
         JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+        assertThat(response.getStatusCode()).withFailMessage("Login failed").isEqualTo(200);
         System.out.println("CM Login Successful");
         return jsonPathEvaluator.getString("refreshToken");
     }
@@ -61,7 +63,7 @@ public class LoginUser {
         Response response = request.body(getHIULoginRequestBody()).post("/sessions");
         JsonPath jsonPathEvaluator = response.jsonPath();
 
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+        assertThat(response.getStatusCode()).withFailMessage("Login failed").isEqualTo(200);
         System.out.println("HIU Login Successful");
         return jsonPathEvaluator.getString("accessToken");
     }

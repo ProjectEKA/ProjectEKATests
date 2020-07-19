@@ -11,6 +11,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class DiscoveryAPITest {
     String authToken;
 
@@ -29,10 +31,10 @@ public class DiscoveryAPITest {
         Response providersListresponse = request.header("Authorization", authToken)
                 .queryParam("name", "Tata").get("/providers");
 
-        Assert.assertEquals(providersListresponse.getStatusCode(), 200);
+        assertThat(providersListresponse.getStatusCode()).isEqualTo(200);
         JsonPath jsonPathEvaluator = providersListresponse.jsonPath();
-        Assert.assertEquals(jsonPathEvaluator.getString("identifier[0].name"), "Tata Memorial Hospital");
-        Assert.assertEquals(jsonPathEvaluator.getString("identifier[0].id"), "10000002");
+        assertThat(jsonPathEvaluator.getString("identifier[0].name")).isEqualTo("Tata Memorial Hospital");
+        assertThat(jsonPathEvaluator.getString("identifier[0].id")).isEqualTo("10000002");
     }
 
     @Test
@@ -45,10 +47,11 @@ public class DiscoveryAPITest {
         request.body(new CMPatientDiscovery().getPatientDiscoverRequestBody());
 
         Response discoverCareContextResponse = request.post("/v1/care-contexts/discover");
-        Assert.assertEquals(discoverCareContextResponse.getStatusCode(), 200);
+        assertThat(discoverCareContextResponse.getStatusCode()).isEqualTo(200);
         JsonPath jsonPathEvaluator = discoverCareContextResponse.jsonPath();
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "RVH1004");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doe");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "NCP10091");
+
+        assertThat(jsonPathEvaluator.getString("patient.referenceNumber")).isEqualTo("RVH1004");
+        assertThat(jsonPathEvaluator.getString("patient.display")).isEqualTo("John Doe");
+        assertThat(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber")).isEqualTo("NCP10091");
     }
 }

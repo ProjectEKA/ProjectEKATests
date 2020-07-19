@@ -34,6 +34,12 @@
             <artifactId>selenium-remote-driver</artifactId>
             <version>3.141.59</version>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.16.1</version>
+        </dependency>
+
         <!--Added Selenium dependency explicitly to avoid error see https://github.com/appium/java-client/issues/1297-->
     </dependencies>
     <properties>

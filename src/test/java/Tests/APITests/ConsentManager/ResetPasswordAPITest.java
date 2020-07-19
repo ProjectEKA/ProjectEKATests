@@ -6,9 +6,10 @@ import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResetPasswordAPITest {
 
@@ -32,7 +33,7 @@ public class ResetPasswordAPITest {
         request.body(new ResetPassword().getGenerateOTPRequestBody());
         Response generateOTPResponse = request.post("/patients/generateotp");
 
-        Assert.assertEquals(generateOTPResponse.getStatusCode(), 201);
+        assertThat(generateOTPResponse.getStatusCode()).isEqualTo(201);
         sessionId = generateOTPResponse.jsonPath().getString("sessionId");
     }
 
@@ -45,7 +46,7 @@ public class ResetPasswordAPITest {
         request.body(new ResetPassword().getVerifyOTPRequestBody(sessionId));
         Response verifyOTPResponse = request.post("/patients/verifyotp");
 
-        Assert.assertEquals(verifyOTPResponse.getStatusCode(), 200);
+        assertThat(verifyOTPResponse.getStatusCode()).isEqualTo(200);
         otpAuthToken = verifyOTPResponse.jsonPath().getString("temporaryToken");
     }
 
@@ -59,7 +60,7 @@ public class ResetPasswordAPITest {
         request.body(new ResetPassword().getResetPasswordRequestBody());
 
         Response resetPasswordResponse = request.put("/patients/profile/reset-password");
-        Assert.assertEquals(resetPasswordResponse.getStatusCode(), 200);
+        assertThat(resetPasswordResponse.getStatusCode()).isEqualTo(200);
     }
 
 }

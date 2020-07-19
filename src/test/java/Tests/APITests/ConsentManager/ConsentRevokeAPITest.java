@@ -1,16 +1,15 @@
 package Tests.APITests.ConsentManager;
 
-import Tests.APITests.APIUtils.*;
+import Tests.APITests.APIUtils.APIUtils;
 import Tests.APITests.APIUtils.CMRequest.ConsentRequest;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
-import Tests.APITests.APIUtils.CMRequest.VerifyConsentPIN;
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConsentRevokeAPITest {
 
@@ -23,14 +22,14 @@ public class ConsentRevokeAPITest {
         //create consent-request
         String patient = PropertiesCache.getInstance().getProperty("HIUPatient");
         Response createRequestResponse = new APIUtils().createConsent(patient);
-        Assert.assertEquals(createRequestResponse.getStatusCode(), 202);
+        assertThat(createRequestResponse.getStatusCode()).isEqualTo(202);
 
         //fetch consent-request id
         RequestSpecification request = RestAssured.given();
         Response fetchConsentsResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
                 .get("/v1/hiu/consent-requests");
         consentRequestId = new APIUtils().fetchConsentRequestId(fetchConsentsResponse, patient);
-        Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
+        assertThat(fetchConsentsResponse.getStatusCode()).isEqualTo(200);
     }
 
     @Test(dependsOnMethods = "HIUConsentRequestAPI")
@@ -45,7 +44,7 @@ public class ConsentRevokeAPITest {
         request.body(new ConsentRequest().getGrantConsentRequestBody());
         Response grantConsentResponse = request.post("/consent-requests/" + consentRequestId + "/approve");
         consentArtefactId = grantConsentResponse.jsonPath().getString("consents[0].id");
-        Assert.assertEquals(grantConsentResponse.getStatusCode(), 200);
+        assertThat(grantConsentResponse.getStatusCode()).isEqualTo(200);
     }
 
     @Test(dependsOnMethods = "grantConsentRequestAPI")
@@ -59,7 +58,7 @@ public class ConsentRevokeAPITest {
 
         request.body(new ConsentRequest().getRevokeConsentRequestBody(consentArtefactId));
         Response revokeConsentResponse = request.post("/consents/revoke");
-        Assert.assertEquals(revokeConsentResponse.getStatusCode(), 200);
+        assertThat(revokeConsentResponse.getStatusCode()).isEqualTo(200);
     }
 
     @Test(dependsOnMethods = "revokeConsentRequestAPI")
@@ -72,8 +71,8 @@ public class ConsentRevokeAPITest {
                 .get("/v1/hiu/consent-requests");
         String actualStatus = new APIUtils().fetchConsentStatus(consentStatusResponse, consentRequestId);
 
-        Assert.assertEquals(consentStatusResponse.getStatusCode(), 200);
-        Assert.assertEquals(actualStatus, "REVOKED");
+        assertThat(consentStatusResponse.getStatusCode()).isEqualTo(200);
+        assertThat(actualStatus).isEqualTo("REVOKED");
     }
 
 }
