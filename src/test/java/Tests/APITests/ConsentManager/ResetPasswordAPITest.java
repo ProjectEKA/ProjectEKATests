@@ -6,6 +6,7 @@ import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import model.request.VerifyOTPRequest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -43,7 +44,7 @@ public class ResetPasswordAPITest {
         //verify the otp
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.body(new ResetPassword().getVerifyOTPRequestBody(sessionId));
+        request.body(VerifyOTPRequest.builder().sessionId(sessionId).value("666666").build());
         Response verifyOTPResponse = request.post("/patients/verifyotp");
 
         assertThat(verifyOTPResponse.getStatusCode()).isEqualTo(200);

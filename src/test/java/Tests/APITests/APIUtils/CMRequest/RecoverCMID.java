@@ -30,7 +30,7 @@ public class RecoverCMID {
                 "}";
     }
 
-    public String getRecoverConfirmCMIDRequestBody(String sessionId) {
+    public String getRecoverConfirmCMIDRequestBody(String sessionId) { //TODO Remove these code
         return "{\n" +
                 "   \"sessionId\": \""+ sessionId +"\",\n" +
                 "   \"value\": \"666666\" \n" +

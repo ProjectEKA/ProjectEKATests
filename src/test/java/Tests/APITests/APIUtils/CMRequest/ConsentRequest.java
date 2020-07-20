@@ -39,7 +39,7 @@ public class ConsentRequest {
                 "}                                                          ";
     }
 
-    public String getRevokeConsentRequestBody(String consentArtefactId) {
+    public String getRevokeConsentRequestBody(String consentArtefactId) { //TODO Remove these code
         return " {                                        \n" +
                 "   \"consents\": [                       \n" +
                 "           \""+ consentArtefactId +"\"   \n" +

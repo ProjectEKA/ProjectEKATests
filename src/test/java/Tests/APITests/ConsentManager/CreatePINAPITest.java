@@ -6,6 +6,7 @@ import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import model.request.PINRequest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -25,6 +26,8 @@ public class CreatePINAPITest {
     @Test
     public void createPINAPI() {
 
+        String pin = "1234";
+        PINRequest pinRequest = PINRequest.builder().pin(pin).build();
         //checks if the patient has consent-pin created
         RequestSpecification request = RestAssured.given();
         Response patientDetailsResponse = request.header("Authorization", authToken).get("/patients/me");
@@ -38,7 +41,7 @@ public class CreatePINAPITest {
             //if consent-pin not created for patient
             request.header("Content-Type", "application/json");
             request.header("Authorization", authToken);
-            request.body(new CreateConsentPIN().getCreatePINRequestBody());
+            request.body(pinRequest);
             Response generatePINResponse = request.post("/patients/pin");
             assertThat(generatePINResponse.getStatusCode()).isEqualTo(204);
         }

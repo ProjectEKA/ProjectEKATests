@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class VerifyConsentPIN {
 
-    public String getVerifyGrantPINRequestBody() {
+    public String getVerifyGrantPINRequestBody() { //TODO Remove these code
         return "{\n" +
                 "   \"pin\": \"1234\",\n" +
                 "   \"requestId\": \"" + generateUUID() +"\""+",\n" +
@@ -12,7 +12,7 @@ public class VerifyConsentPIN {
                 "}";
     }
 
-    public String getVerifyRevokePINRequestBody() {
+    public String getVerifyRevokePINRequestBody() { //TODO Remove these code
         return "{\n" +
                 "   \"pin\": \"1234\",\n" +
                 "   \"requestId\": \"" + generateUUID() +"\""+",\n" +
@@ -20,7 +20,7 @@ public class VerifyConsentPIN {
                 "}";
     }
 
-    private String generateUUID() {
+    private String generateUUID() { //TODO Remove these code
         return String.valueOf(UUID.randomUUID());
     }
 

@@ -7,10 +7,15 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import model.request.PINRequest;
 
 import java.util.List;
+import java.util.UUID;
 
 public class APIUtils {
+
+    private final String requestId = String.valueOf(UUID.randomUUID());
+    private final String pin = "1234";
 
     public Response createConsent(String id) {
 
@@ -37,10 +42,10 @@ public class APIUtils {
         request.header("Authorization", authToken);
 
         if(consent.equalsIgnoreCase("grant")) {
-            request.body(new VerifyConsentPIN().getVerifyGrantPINRequestBody());
+            request.body(PINRequest.builder().pin(pin).requestId(requestId).scope("consentrequest.approve").build());
         }
         else if(consent.equalsIgnoreCase("revoke")) {
-            request.body(new VerifyConsentPIN().getVerifyRevokePINRequestBody());
+            request.body(PINRequest.builder().pin(pin).requestId(requestId).scope("consent.revoke").build());
         }
         Response response = request.post("/patients/verify-pin");
         JsonPath jsonPathEvaluator = response.jsonPath();

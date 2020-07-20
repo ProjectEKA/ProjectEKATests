@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConsentRequestGrantAPITest {
+public class ConsentRequestForConsentIdGrantAPITest {
 
     String consentRequestId;
 

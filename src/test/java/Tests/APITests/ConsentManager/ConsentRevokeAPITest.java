@@ -1,12 +1,14 @@
 package Tests.APITests.ConsentManager;
 
 import Tests.APITests.APIUtils.APIUtils;
-import Tests.APITests.APIUtils.CMRequest.ConsentRequest;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
+import Tests.APITests.APIUtils.CMRequest.ConsentRequest;
 import Tests.APITests.APIUtils.PropertiesCache;
+import com.google.common.collect.ImmutableList;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import model.request.ConsentRequestForConsentId;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -50,13 +52,14 @@ public class ConsentRevokeAPITest {
     @Test(dependsOnMethods = "grantConsentRequestAPI")
     public void revokeConsentRequestAPI() {
 
+        ConsentRequestForConsentId consentRequest = ConsentRequestForConsentId.builder().consents(ImmutableList.of(consentArtefactId)).build();
         //revoke consent-request
         String revokePINAuth = new APIUtils().verifyConsentPIN("revoke");
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", revokePINAuth);
 
-        request.body(new ConsentRequest().getRevokeConsentRequestBody(consentArtefactId));
+        request.body(consentRequest);
         Response revokeConsentResponse = request.post("/consents/revoke");
         assertThat(revokeConsentResponse.getStatusCode()).isEqualTo(200);
     }

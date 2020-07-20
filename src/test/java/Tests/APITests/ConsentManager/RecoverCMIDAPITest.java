@@ -7,6 +7,7 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import model.request.VerifyOTPRequest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -40,10 +41,11 @@ public class RecoverCMIDAPITest {
     @Test(dependsOnMethods = "initRecoveryAPI")
     public void confirmCMIDAPI() {
 
+        VerifyOTPRequest recoveryConfirmRequest = VerifyOTPRequest.builder().sessionId(sessionId).value("666666").build();
         //confirm recovered cm-id by entering otp
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.body(new RecoverCMID().getRecoverConfirmCMIDRequestBody(sessionId));
+        request.body(recoveryConfirmRequest);
         Response confirmRecoveryResponse = request.post("/patients/profile/recovery-confirm");
 
         assertThat(confirmRecoveryResponse.getStatusCode()).isEqualTo(200);
