@@ -8,13 +8,6 @@ public class ResetPassword {
                 "}";
     }
 
-    public String getVerifyOTPRequestBody(String sessionId) { //TODO Remove these code
-        return "{\n" +
-                "   \"sessionId\": \""+ sessionId +"\",\n" +
-                "   \"value\": \"666666\" \n" +
-                "}";
-    }
-
     public String getResetPasswordRequestBody() {
         return "{\n" +
                 "   \"password\": \"Test135@\" \n" +

@@ -1,7 +1,6 @@
 package Tests.APITests.APIUtils;
 
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
-import Tests.APITests.APIUtils.CMRequest.VerifyConsentPIN;
 import Tests.APITests.APIUtils.HIURequest.HIUConsentRequest;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;

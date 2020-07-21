@@ -1,15 +1,18 @@
 package Tests.APITests.ConsentManager;
 
-import Tests.APITests.APIUtils.CMRequest.CMPatientDiscovery;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.PropertiesCache;
+import com.google.common.collect.ImmutableList;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.testng.Assert;
+import model.request.DiscoverPatientRequest;
+import model.request.HIP;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,10 +44,12 @@ public class DiscoveryAPITest {
     public void discoverPatientsAPI() {
 
         //discovers the care-contexts for the patient
+        HIP hip = HIP.builder().id("10000005").build();
+        DiscoverPatientRequest discoverPatientRequest = DiscoverPatientRequest.builder().requestId(String.valueOf(UUID.randomUUID())).unverifiedIdentifiers(ImmutableList.of()).hip(hip).build();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);
-        request.body(new CMPatientDiscovery().getPatientDiscoverRequestBody());
+        request.body(discoverPatientRequest);
 
         Response discoverCareContextResponse = request.post("/v1/care-contexts/discover");
         assertThat(discoverCareContextResponse.getStatusCode()).isEqualTo(200);

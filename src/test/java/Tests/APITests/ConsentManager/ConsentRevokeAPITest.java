@@ -1,8 +1,8 @@
 package Tests.APITests.ConsentManager;
 
 import Tests.APITests.APIUtils.APIUtils;
-import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.CMRequest.ConsentRequest;
+import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.PropertiesCache;
 import com.google.common.collect.ImmutableList;
 import io.restassured.RestAssured;

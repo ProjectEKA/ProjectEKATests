@@ -62,7 +62,7 @@ public class LoginUser {
     }
 
     public String getHIUAuthToken() {
-        LoginRequest loginRequest = LoginRequest.builder().username(hiuUserName).password(hiuPassword).grantType("password").build();
+        LoginRequest loginRequest = LoginRequest.builder().username(hiuUserName).password(hiuPassword).build();
         RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
         RestAssured.useRelaxedHTTPSValidation();
         RequestSpecification request = RestAssured.given();
@@ -76,7 +76,7 @@ public class LoginUser {
         return jsonPathEvaluator.getString("accessToken");
     }
 
-    public String getCMLogoutRequestBody(String refreshToken) {
+    public String getCMLogoutRequestBody(String refreshToken) { //TODO Remove these code
         return "{\n" +
                 "    \"refreshToken\": \"" + refreshToken + "\"" +
                 "}";

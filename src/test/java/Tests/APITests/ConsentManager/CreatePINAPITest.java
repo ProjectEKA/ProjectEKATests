@@ -1,6 +1,5 @@
 package Tests.APITests.ConsentManager;
 
-import Tests.APITests.APIUtils.CMRequest.CreateConsentPIN;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;

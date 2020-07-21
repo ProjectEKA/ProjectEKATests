@@ -8,7 +8,6 @@ import Tests.MobileAppTests.Pages.RegistrationPage;
 import Tests.MobileAppTests.Utils.AppUtility;
 import Tests.MobileAppTests.Utils.BaseDriver;
 import Tests.MobileAppTests.Utils.Patient;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
