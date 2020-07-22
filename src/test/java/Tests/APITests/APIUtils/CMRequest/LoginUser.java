@@ -46,6 +46,14 @@ public class LoginUser {
         return jsonPathEvaluator.getString("refreshToken");
     }
 
+    public String getCMLoginRequestBody_RefreshToken(String refreshToken) {
+        return "{\n" +
+                "\"username\": \"" + PropertiesCache.getInstance().getProperty("userName") + "\",\n" + // card #669
+                "\t\"grantType\": \"refresh_token\",\n" +
+                "\t\"refreshToken\": \"" + refreshToken + "\"\n" +
+                "}";
+    }
+
     private String getCMLoginRequestBody() { //TODO Remove these code
         return "{\n" +
                 "    \"username\": \"" + userName + "\",\n" +
