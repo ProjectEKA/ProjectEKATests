@@ -24,7 +24,6 @@ public class HIUAPITest {
 
     @Test
     public void discoverPatientAPI() {
-
         //identifies patient by cm-id
         RequestSpecification request = RestAssured.given();
         String patientID = PropertiesCache.getInstance().getProperty("HIUPatient");
