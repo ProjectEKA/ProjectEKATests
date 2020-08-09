@@ -9,46 +9,48 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitUtils {
     public WebDriverWait wait;
-
-    public MobileElement waitForElement(AppiumDriver driver, MobileElement id) {
+    public AppiumDriver driver;
+    public IRunner runner;
+    
+    public WaitUtils(AppiumDriver driver) {
+        this.runner = RunnerFactory.runner;
+        this.driver = driver;
         wait = new WebDriverWait(driver, 30);
+    }
+
+    public MobileElement waitForElement(MobileElement id) {
         wait.until(ExpectedConditions
                 .elementToBeClickable(id));
         return id;
     }
 
-    public MobileElement waitForElementToBeVisible(AppiumDriver driver, MobileElement id) {
-        wait = new WebDriverWait(driver, 30);
+    public MobileElement waitForElementToBeVisible(MobileElement id) {
         wait.until(ExpectedConditions.visibilityOf(id));
         return id;
     }
-    public MobileElement refreshAndwaitForElementToBeVisible(AppiumDriver driver, MobileElement id) {
-        wait = new WebDriverWait(driver, 30);
+
+    public MobileElement refreshAndwaitForElementToBeVisible(MobileElement id) {
         wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(id)));
         return id;
     }
 
-    public MobileElement waitForTextToAppear(AppiumDriver driver, MobileElement id) {
-        wait = new WebDriverWait(driver, 30);
+    public MobileElement waitForTextToAppear(MobileElement id) {
         wait.until((ExpectedCondition<Boolean>) d -> id.getText().length() != 0);
         return id;
     }
 
-    public MobileElement waitForSpecificTextToBeDisplayed(AppiumDriver driver, MobileElement id, String text) {
-        wait = new WebDriverWait(driver, 30);
+    public MobileElement waitForSpecificTextToBeDisplayed(MobileElement id, String text) {
         wait.until(ExpectedConditions.refreshed((ExpectedCondition<Boolean>) d -> id.getText().contains(text)));
         return id;
     }
 
-    public MobileElement waitForElementToBeEnabled(AppiumDriver driver, MobileElement id) {
-        wait = new WebDriverWait(driver, 30);
+    public MobileElement waitForElementToBeEnabled(MobileElement id) {
         wait.until(ExpectedConditions.elementToBeClickable(id));
         return id;
     }
 
-    public boolean isElementPresent(AppiumDriver driver, MobileElement id) {
+    public boolean isElementPresent(MobileElement id) {
         try {
-            wait = new WebDriverWait(driver, 30);
             wait.until(ExpectedConditions.visibilityOf(id));
             return true;
         } catch (NoSuchElementException e) {

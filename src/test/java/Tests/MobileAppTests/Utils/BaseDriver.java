@@ -8,6 +8,7 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
@@ -16,6 +17,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
+import java.io.FileFilter;
 
 public class BaseDriver {
     private static String path = null;
@@ -43,8 +45,10 @@ public class BaseDriver {
 
     @BeforeMethod
     public void beforeMethod() {
-
-        File app = new File(path + "/app-ncg-debug.apk");//NCG APK
+        File dir = new File(path);
+        FileFilter fileFilter = new WildcardFileFilter("*.apk");
+        File[] files = dir.listFiles(fileFilter);
+        File app = new File(String.valueOf(files[0]));
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", "Android Emulator");
         capabilities.setCapability("app", app.getAbsolutePath());
@@ -52,12 +56,16 @@ public class BaseDriver {
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 700000);
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.projecteka.jataayu.LauncherActivity");
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.projecteka.jataayu.debug");
+//        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.ndhm.phr.LauncherActivity");
+//        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.ndhm.phr.debug");
         driver = new AndroidDriver<>(service.getUrl(), capabilities);
+
+        new RunnerFactory().instantiateRunner(driver);
         handleSplashScreen();
     }
 
     private void handleSplashScreen() {
-        new BasePage(this.driver).moveSplashScreens();
+        new BasePage(driver).moveSplashScreens();
     }
 
     @AfterMethod

@@ -9,13 +9,12 @@ import org.openqa.selenium.support.PageFactory;
 public class ConsentArtifactPage extends WaitUtils {
 
     ConsentArtifactPageObjects consentArtifactPageObjects;
-    AppiumDriver driver;
 
     public ConsentArtifactPage(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         consentArtifactPageObjects = new ConsentArtifactPageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), consentArtifactPageObjects);
-        new WaitUtils().waitForElement(driver, consentArtifactPageObjects.grantButton);
+        waitForElement(consentArtifactPageObjects.grantButton);
     }
 
     public OTPPage grantConsent() {

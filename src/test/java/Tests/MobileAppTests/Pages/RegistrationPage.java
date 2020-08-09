@@ -7,25 +7,25 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegistrationPage {
+public class RegistrationPage extends WaitUtils {
     RegistrationPageObjects registrationPageObjects;
-    AppiumDriver driver;
 
     public RegistrationPage(AppiumDriver driver) {
+        super(driver);
         this.driver = driver;
         registrationPageObjects = new RegistrationPageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), registrationPageObjects);
-        new WaitUtils().refreshAndwaitForElementToBeVisible(driver, registrationPageObjects.continueButton);
+        refreshAndwaitForElementToBeVisible(registrationPageObjects.continueButton);
     }
 
     public OTPPage enterContactNoAndContinue(String phoneNumber) {
         registrationPageObjects.mobileNo.sendKeys(phoneNumber);
-        new WaitUtils().waitForElement(driver, registrationPageObjects.continueButton).click();
+        waitForElement(registrationPageObjects.continueButton).click();
         return new OTPPage(driver);
     }
 
     public HomePage enterUserDetails(Patient patient, String username) {
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.patientName).sendKeys(patient.getPatientName());
+        waitForElementToBeVisible(registrationPageObjects.patientName).sendKeys(patient.getPatientName());
         if (patient.getGender().equals("male")) {
             registrationPageObjects.genderMale.click();
         } else if (patient.getGender().equals("female")) {
@@ -33,12 +33,12 @@ public class RegistrationPage {
         }
 
         registrationPageObjects.registerButton.click();
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.password).sendKeys("Test@135");
+        waitForElementToBeVisible(registrationPageObjects.password).sendKeys("Test@135");
         registrationPageObjects.cmID.clear();
         registrationPageObjects.cmID.sendKeys(username);
         registrationPageObjects.confirmPassword.sendKeys("Test@135");
         registrationPageObjects.confirmRegisterButton.click();
-        new WaitUtils().waitForElementToBeVisible(driver, registrationPageObjects.confirmationMessage);
+        waitForElementToBeVisible(registrationPageObjects.confirmationMessage);
         registrationPageObjects.confirmRegisterButton.click();
         return new HomePage(driver);
     }

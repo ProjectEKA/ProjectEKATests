@@ -1,5 +1,6 @@
 package Tests.MobileAppTests.Utils;
 
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.config.RedirectConfig;
 import io.restassured.config.RestAssuredConfig;
@@ -45,9 +46,10 @@ public class AppUtility {
 
         RequestSpecification request = RestAssured.given();
 
+        String repoURL = PropertiesCache.getInstance().getProperty("repoURL");
         //Auth Headers added to avoid the rate limiting
-        Response response = request.header("Authorization", System.getenv("Authorization"))
-                .get("/repos/ProjectEKA/Jataayu/actions/workflows/android.yml/runs?branch=master&status=completed");//NCG yml file
+        Response response = request.header("Authorization", "token " +System.getenv("Authorization"))
+                .get(repoURL);//NCG yml file
 
         JsonPath jsonPathEvaluator = response.jsonPath();
         String run_id = jsonPathEvaluator.getString("workflow_runs[0].id");
@@ -55,13 +57,13 @@ public class AppUtility {
         System.out.println("Getting artifacts for the run id - " + run_id);
 
         RequestSpecification request1 = RestAssured.given();
-        response = request1.header("Authorization", System.getenv("Authorization")).get(String.format("/repos/ProjectEKA/Jataayu/actions/runs/%s/artifacts", run_id));
+        response = request1.header("Authorization","token " + System.getenv("Authorization")).get(String.format(PropertiesCache.getInstance().getProperty("artifactURL"), run_id));
         jsonPathEvaluator = response.jsonPath();
         String artifactURL = jsonPathEvaluator.getString("artifacts[0].archive_download_url");
 
         RequestSpecification requestSpecification = RestAssured.given();
 
-        requestSpecification.header("Authorization", "Bearer "+System.getenv("Authorization"));
+        requestSpecification.header("Authorization", "Bearer " + System.getenv("Authorization"));
 
         requestSpecification.config(new RestAssuredConfig().redirect(new RedirectConfig().followRedirects(false)));
         response = requestSpecification.get(artifactURL);

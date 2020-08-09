@@ -6,23 +6,23 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
-public class BasePage {
+public class BasePage extends WaitUtils {
 
     BasePageObjects basePageObjects;
-    AppiumDriver driver;
 
     public BasePage(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         basePageObjects = new BasePageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), basePageObjects);
     }
 
     public LoginPage moveSplashScreens() {
-        if (new WaitUtils().isElementPresent(driver, basePageObjects.nextButton)) {
-            new WaitUtils().refreshAndwaitForElementToBeVisible(driver, basePageObjects.nextButton).click();
-            new WaitUtils().refreshAndwaitForElementToBeVisible(driver, basePageObjects.nextButton).click();
-            new WaitUtils().refreshAndwaitForElementToBeVisible(driver, basePageObjects.nextButton).click();
-            new WaitUtils().refreshAndwaitForElementToBeVisible(driver, basePageObjects.nextButton).click();
+//        runner.moveSplashScreens(basePageObjects);
+        if (isElementPresent(basePageObjects.nextButton)) {
+            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
+            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
+            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
+            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
         }
         return new LoginPage(driver);
     }
