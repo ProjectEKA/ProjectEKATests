@@ -4,7 +4,7 @@ import Tests.MobileAppTests.Flows.NCGFlow;
 import Tests.MobileAppTests.Flows.NHAFlow;
 import io.appium.java_client.AppiumDriver;
 
-public class RunnerFactory extends BaseDriver {
+public class RunnerFactory {
     public static IRunner runner;
 
     public void instantiateRunner(AppiumDriver driver) {
