@@ -1,6 +1,7 @@
 package Tests.MobileAppTests.Utils;
 
 
+import Tests.APITests.APIUtils.PropertiesCache;
 import Tests.MobileAppTests.Pages.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -57,10 +58,10 @@ public class BaseDriver {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("automationName", "UIAutomator2");
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 700000);
-        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.projecteka.jataayu.LauncherActivity");
-        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.projecteka.jataayu.debug");
-//        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "in.ndhm.phr.LauncherActivity");
-//        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "in.ndhm.phr.debug");
+
+        capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, PropertiesCache.getInstance().getProperty("APP_ACTIVITY"));
+        capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, PropertiesCache.getInstance().getProperty("APP_PACKAGE"));
+
         driver = new AndroidDriver<>(service.getUrl(), capabilities);
 
         new RunnerFactory().instantiateRunner(driver);
