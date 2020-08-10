@@ -8,6 +8,7 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -26,13 +27,15 @@ public class BaseDriver {
 
     @BeforeClass
     public void setUp() {
-//        service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-//                .usingAnyFreePort()
-//                .usingDriverExecutable(new File(
-//                        "/usr/local/bin/node"))
-//                .withAppiumJS(new File("/usr/local/bin/appium")));
+        service = AppiumDriverLocalService.buildService(
+                new AppiumServiceBuilder()
+                .usingAnyFreePort()
+                .usingDriverExecutable(new File(
+                        "/Users/shridhk/.nvm/versions/node/v12.4.0/bin/node")).withAppiumJS(
 
-        service = AppiumDriverLocalService.buildDefaultService();
+                        new File("/usr/local/bin/appium")));
+
+//        service =AppiumDriverLocalService.buildDefaultService();
 
         service.start();
 

@@ -14,6 +14,7 @@ public class HomePage extends WaitUtils {
         super(driver);
         homePageObjects = new HomePageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), homePageObjects);
+        waitForElement(homePageObjects.consentTab);
     }
 
     public SearchLinkProviderPage clickAddNewProvider() {

@@ -20,23 +20,12 @@ public class LoginPage extends WaitUtils {
     public HomePage loginUser() {
         String userName = PropertiesCache.getInstance().getProperty("mobileUser");
         String password = PropertiesCache.getInstance().getProperty("mobilePassword");
-
-        loginPageObjects.userName.sendKeys(userName);
-        waitForElementToBeEnabled(loginPageObjects.nextButton).click();
-        waitForElement(loginPageObjects.password).sendKeys(password);
-
-        //TODO - To enable the login button. Temp fix to pass test
-        loginPageObjects.showPasswordButton.click();
-        loginPageObjects.loginButton.click();
-
+        runner.login(loginPageObjects, userName, password);
         return new HomePage(driver);
     }
 
     public HomePage loginUser(String username, String password) {
-        loginPageObjects.userName.sendKeys(username);
-        waitForElementToBeEnabled(loginPageObjects.nextButton).click();
-        waitForElement(loginPageObjects.password).sendKeys(password);
-        loginPageObjects.loginButton.click();
+        runner.login(loginPageObjects, username, password);
         return new HomePage(driver);
     }
 

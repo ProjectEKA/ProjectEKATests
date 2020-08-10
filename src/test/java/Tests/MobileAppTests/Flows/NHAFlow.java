@@ -1,6 +1,7 @@
 package Tests.MobileAppTests.Flows;
 
 import Tests.MobileAppTests.Objects.BasePageObjects;
+import Tests.MobileAppTests.Objects.LoginPageObjects;
 import Tests.MobileAppTests.Utils.IRunner;
 import Tests.MobileAppTests.Utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
@@ -15,11 +16,16 @@ public class NHAFlow extends WaitUtils implements IRunner {
 
     @Override
     public void moveSplashScreens(BasePageObjects basePageObjects) {
-        if (isElementPresent(basePageObjects.nextButton)) {
-            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
-            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
-            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
-            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
+        if (isElementPresent(basePageObjects.skipButton)) {
+            refreshAndwaitForElementToBeVisible(basePageObjects.skipButton).click();
         }
+    }
+
+    @Override
+    public void login(LoginPageObjects loginPageObjects, String username, String password) {
+        loginPageObjects.userName.sendKeys(username);
+        loginPageObjects.password.sendKeys(password);
+        loginPageObjects.loginButton.click();
+        waitForElement(loginPageObjects.allowPermission).click();
     }
 }
