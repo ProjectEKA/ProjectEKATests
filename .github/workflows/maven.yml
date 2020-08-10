@@ -23,6 +23,7 @@ jobs:
         env:
           ConsentManagerSecret: ${{ secrets.ConsentManagerSecret }} # required
           HIPSecret: ${{ secrets.HIPSecret }} # required
+          env: ncg # required
       - name: Print Run id
         run: echo $GITHUB_RUN_ID
       - uses: 8398a7/action-slack@v2
