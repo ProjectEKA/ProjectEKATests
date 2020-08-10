@@ -35,7 +35,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always()
 
-  mobile-test:
+  mobile-test-ncg:
     runs-on: macOS-latest
     steps:
       - name: checkout
@@ -49,7 +49,7 @@ jobs:
           node-version: '10.16'
           java-version: 1.8
       - run: npm install -g appium
-      - name: run tests
+      - name: run mobile tests on NCG
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
@@ -60,13 +60,49 @@ jobs:
         uses: 8398a7/action-slack@v2
         with:
           status: ${{ job.status }}
-          author_name: Functional Tests
-          text: Functional Mobile Tests
+          author_name: Functional Tests on NCG
+          text: Functional Mobile Tests on NCG
           channel: '#botcave'
           only_mention_fail: USXBM5WPQ,here
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          env: ncg # required
+        if: always()
+
+  mobile-test-nha-sandbox:
+    runs-on: macOS-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: set up node
+        uses: actions/setup-node@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          fetch-depth: 1
+          node-version: '10.16'
+          java-version: 1.8
+      - run: npm install -g appium
+      - name: run mobile tests on NHA Sandbox
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: mvn clean "-Dtest=/**/MobileAppTests/Tests/LoginTest" test
+        env:
+          Authorization: ${{ secrets.Authorization }}
+      - name: Notify on Slack
+        uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+          author_name: Functional Tests on NHA Sandbox
+          text: Functional Mobile Tests on NHA Sandbox
+          channel: '#botcave'
+          only_mention_fail: USXBM5WPQ,here
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          env: nha # required
         if: always()
 
 #curl -H "Accept: application/vnd.github.everest-preview+json" \
