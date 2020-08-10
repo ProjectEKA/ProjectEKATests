@@ -17,13 +17,7 @@ public class BasePage extends WaitUtils {
     }
 
     public LoginPage moveSplashScreens() {
-//        runner.moveSplashScreens(basePageObjects);
-        if (isElementPresent(basePageObjects.nextButton)) {
-            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
-            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
-            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
-            refreshAndwaitForElementToBeVisible(basePageObjects.nextButton).click();
-        }
+        runner.moveSplashScreens(basePageObjects);
         return new LoginPage(driver);
     }
 }
