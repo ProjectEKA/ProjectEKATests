@@ -11,6 +11,7 @@ public class PropertiesCache {
     private PropertiesCache() {
         //Private constructor to restrict new instances
         InputStream in;
+        System.out.println(System.getenv("env") + "asdasdas");
         if (System.getenv("env").equals("ncg")) {
             in = this.getClass().getClassLoader().getResourceAsStream("config.properties");
         } else

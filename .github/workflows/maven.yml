@@ -56,6 +56,7 @@ jobs:
           script: mvn clean "-Dtest=/**/MobileAppTests/Tests/*Test" test
         env:
           Authorization: ${{ secrets.Authorization }}
+          env: ncg # required
       - name: Notify on Slack
         uses: 8398a7/action-slack@v2
         with:
@@ -67,7 +68,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-          env: ncg # required
         if: always()
 
   mobile-test-nha-sandbox:
@@ -91,6 +91,7 @@ jobs:
           script: mvn clean "-Dtest=/**/MobileAppTests/Tests/LoginTest" test
         env:
           Authorization: ${{ secrets.Authorization }}
+          env: nha # required
       - name: Notify on Slack
         uses: 8398a7/action-slack@v2
         with:
@@ -102,7 +103,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-          env: nha # required
         if: always()
 
 #curl -H "Accept: application/vnd.github.everest-preview+json" \
