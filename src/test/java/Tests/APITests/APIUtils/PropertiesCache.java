@@ -10,7 +10,18 @@ public class PropertiesCache {
 
     private PropertiesCache() {
         //Private constructor to restrict new instances
-        InputStream in = this.getClass().getClassLoader().getResourceAsStream("config.properties");
+        InputStream in;
+        if ("ncg".equalsIgnoreCase(System.getenv("env"))) {
+            in = this.getClass().getClassLoader().getResourceAsStream("config.properties");
+        } else if( "nhsDev".equalsIgnoreCase(System.getenv("env"))){
+            in = this.getClass().getClassLoader().getResourceAsStream("config-nhs-dev.properties");
+        } else if ("nhsUAT".equalsIgnoreCase(System.getenv("env"))) {
+            in = this.getClass().getClassLoader().getResourceAsStream("config-nhs-UAT.properties");
+        } else if ("nhsSandbox".equalsIgnoreCase(System.getenv("env"))) {
+            in = this.getClass().getClassLoader().getResourceAsStream("config-nhs-Sandbox.properties");
+        }
+        else
+            in = this.getClass().getClassLoader().getResourceAsStream("config-nhs-dev.properties");
         System.out.println("Read all properties from file");
         try {
             configProp.load(in);

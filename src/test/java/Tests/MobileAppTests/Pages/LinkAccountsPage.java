@@ -6,16 +6,15 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
-public class LinkAccountsPage {
+public class LinkAccountsPage extends WaitUtils {
 
     LinkAccountsPageObjects linkAccountsPageObjects;
-    AppiumDriver driver;
 
     public LinkAccountsPage(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         linkAccountsPageObjects = new LinkAccountsPageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), linkAccountsPageObjects);
-        new WaitUtils().waitForElement(driver, linkAccountsPageObjects.patientName);
+        waitForElement(linkAccountsPageObjects.patientName);
     }
 
     public String getPatientName() {
@@ -23,7 +22,7 @@ public class LinkAccountsPage {
     }
 
     public OTPPage linkCareContext() {
-         linkAccountsPageObjects.linkSelected.click();
-         return new OTPPage(driver);
+        linkAccountsPageObjects.linkSelected.click();
+        return new OTPPage(driver);
     }
 }

@@ -7,43 +7,26 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
-
-
+public class LoginPage extends WaitUtils {
     LoginPageObjects loginPageObjects;
-    AppiumDriver driver;
 
     public LoginPage(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         loginPageObjects = new LoginPageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), loginPageObjects);
-        new WaitUtils().waitForElement(driver, loginPageObjects.userName);
+        waitForElement(loginPageObjects.userName);
     }
 
     public HomePage loginUser() {
         String userName = PropertiesCache.getInstance().getProperty("mobileUser");
         String password = PropertiesCache.getInstance().getProperty("mobilePassword");
-
-        loginPageObjects.userName.sendKeys(userName);
-        new WaitUtils().waitForElementToBeEnabled(driver, loginPageObjects.nextButton).click();
-        new WaitUtils().waitForElement(driver, loginPageObjects.password).sendKeys(password);
-
-        //TODO - To enable the login button. Temp fix to pass test
-        loginPageObjects.showPasswordButton.click();
-        loginPageObjects.loginButton.click();
-
+        runner.login(loginPageObjects, userName, password);
         return new HomePage(driver);
     }
 
     public HomePage loginUser(String username, String password) {
-        loginPageObjects.userName.sendKeys(username);
-        new WaitUtils().waitForElementToBeEnabled(driver, loginPageObjects.nextButton).click();
-
-        new WaitUtils().waitForElement(driver, loginPageObjects.password).sendKeys(password);
-        loginPageObjects.loginButton.click();
-
+        runner.login(loginPageObjects, username, password);
         return new HomePage(driver);
-
     }
 
     public RegistrationPage navigateToCreateAccount() {

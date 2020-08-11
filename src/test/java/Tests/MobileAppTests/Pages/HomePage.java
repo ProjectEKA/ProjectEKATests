@@ -9,26 +9,25 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage extends WaitUtils {
 
     HomePageObjects homePageObjects;
-    AppiumDriver driver;
 
     public HomePage(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         homePageObjects = new HomePageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), homePageObjects);
     }
 
     public SearchLinkProviderPage clickAddNewProvider() {
-        new WaitUtils().waitForElement(driver, homePageObjects.addProvider).click();
+        waitForElement(homePageObjects.addProvider).click();
         return new SearchLinkProviderPage(driver);
     }
 
     public String getPatientName() {
-        return new WaitUtils().refreshAndwaitForElementToBeVisible(driver, homePageObjects.patientName).getText();
+        return refreshAndwaitForElementToBeVisible(homePageObjects.patientName).getText();
     }
 
     public HomePage navigateToConsentsTab() {
-        new WaitUtils().waitForElement(driver, homePageObjects.consentTab).click();
-        new WaitUtils().waitForTextToAppear(driver, homePageObjects.requestedDate);
+        waitForElement(homePageObjects.consentTab).click();
+        waitForTextToAppear(homePageObjects.requestedDate);
         return this;
     }
 
@@ -38,10 +37,14 @@ public class HomePage extends WaitUtils {
     }
 
     public String getSnackBarText() {
-        return new WaitUtils().waitForTextToAppear(driver, homePageObjects.snackBar).getText();
+        return waitForTextToAppear(homePageObjects.snackBar).getText();
     }
 
     public boolean isRequestedDateDisplayed() {
-        return new WaitUtils().isElementPresent(driver, homePageObjects.requestedDate);
+        return isElementPresent(homePageObjects.requestedDate);
+    }
+
+    public boolean validateHomePage() {
+        return isElementPresent(homePageObjects.consentTab);
     }
 }

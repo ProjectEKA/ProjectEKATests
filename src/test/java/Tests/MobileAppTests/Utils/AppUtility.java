@@ -1,11 +1,13 @@
 package Tests.MobileAppTests.Utils;
 
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.config.RedirectConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import net.minidev.json.JSONArray;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +33,6 @@ public class AppUtility {
         if (instance == null)
             instance = new AppUtility();
 
-
         return instance;
     }
 
@@ -45,23 +46,21 @@ public class AppUtility {
 
         RequestSpecification request = RestAssured.given();
 
+        String repoURL = PropertiesCache.getInstance().getProperty("repoURL");
         //Auth Headers added to avoid the rate limiting
-        Response response = request.header("Authorization", System.getenv("Authorization"))
-                .get("/repos/ProjectEKA/Jataayu/actions/workflows/android.yml/runs?branch=master&status=completed");//NCG yml file
+        Response response = request.header("Authorization", "token " + System.getenv("Authorization"))
+                .get(repoURL);//NCG yml file
 
         JsonPath jsonPathEvaluator = response.jsonPath();
         String run_id = jsonPathEvaluator.getString("workflow_runs[0].id");
 
         System.out.println("Getting artifacts for the run id - " + run_id);
 
-        RequestSpecification request1 = RestAssured.given();
-        response = request1.header("Authorization", System.getenv("Authorization")).get(String.format("/repos/ProjectEKA/Jataayu/actions/runs/%s/artifacts", run_id));
-        jsonPathEvaluator = response.jsonPath();
-        String artifactURL = jsonPathEvaluator.getString("artifacts[0].archive_download_url");
+        String artifactURL = getArtifactURL(run_id);
 
         RequestSpecification requestSpecification = RestAssured.given();
 
-        requestSpecification.header("Authorization", "Bearer "+System.getenv("Authorization"));
+        requestSpecification.header("Authorization", "token " + System.getenv("Authorization"));
 
         requestSpecification.config(new RestAssuredConfig().redirect(new RedirectConfig().followRedirects(false)));
         response = requestSpecification.get(artifactURL);
@@ -69,6 +68,20 @@ public class AppUtility {
         System.out.println("Artifact will be downloaded from URL - " + response.getHeader("Location"));
 
         return response.getHeader("Location");
+    }
+
+    private String getArtifactURL(String run_id) {
+        Response response;
+        JsonPath jsonPathEvaluator;
+        RequestSpecification request1 = RestAssured.given();
+        response = request1.header("Authorization", "token " + System.getenv("Authorization")).get(String.format(PropertiesCache.getInstance().getProperty("artifactURL") +"actions/runs/%s/artifacts", run_id));
+        jsonPathEvaluator = response.jsonPath();
+        if (System.getenv("env").equals("ncg"))
+            return jsonPathEvaluator.getString("artifacts[0].archive_download_url");
+        else {
+            JSONArray artifact = com.jayway.jsonpath.JsonPath.read(response.getBody().asString(), "$.artifacts[?(@.name=~ /^.*" + System.getenv("env") + ".*$/)].archive_download_url");
+            return artifact.get(0).toString();
+        }
     }
 
     public String getPath() {
