@@ -8,3 +8,8 @@
 Env variable for local debugging
 `Authorization` : `Bearer <Auth Token> ` with public_repo and workflow scope
 `ConsentManagerSecret` : `Secret to generate JWT token with HIP service`
+
+Environments
+
+`env = ncg`
+`env = nhsDev, nhsUAT, nhsSandbox `

@@ -13,7 +13,7 @@ public class RunnerFactory {
             case "ncg":
                 runner = new NCGFlow(driver);
                 break;
-            case "nha":
+            case "nhsDev":
                 runner = new NHAFlow(driver);
                 break;
             default:
