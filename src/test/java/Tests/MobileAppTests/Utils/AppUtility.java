@@ -7,6 +7,8 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import net.minidev.json.JSONArray;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -58,7 +60,7 @@ public class AppUtility {
 
         RequestSpecification requestSpecification = RestAssured.given();
 
-        requestSpecification.header("Authorization", "Bearer " + System.getenv("Authorization"));
+        requestSpecification.header("Authorization", "token " + System.getenv("Authorization"));
 
         requestSpecification.config(new RestAssuredConfig().redirect(new RedirectConfig().followRedirects(false)));
         response = requestSpecification.get(artifactURL);
@@ -72,13 +74,13 @@ public class AppUtility {
         Response response;
         JsonPath jsonPathEvaluator;
         RequestSpecification request1 = RestAssured.given();
-        response = request1.header("Authorization","token " + System.getenv("Authorization")).get(String.format("/repos/I-NHA/Jan-Aarogya-Setu-Android/actions/runs/%s/artifacts", run_id));
+        response = request1.header("Authorization", "token " + System.getenv("Authorization")).get(String.format("/repos/I-NHA/Jan-Aarogya-Setu-Android/actions/runs/%s/artifacts", run_id));
         jsonPathEvaluator = response.jsonPath();
-        if(System.getenv("env").equals("ncg"))
-        return jsonPathEvaluator.getString("artifacts[0].archive_download_url");
-        else{
-            Object artifact = com.jayway.jsonpath.JsonPath.read(response.getBody().asString(), "$.artifacts[?(@.name=~ /^.*" + System.getenv("artifact") + ".*$/)].archive_download_url");
-            return artifact.toString();
+        if (System.getenv("env").equals("ncg"))
+            return jsonPathEvaluator.getString("artifacts[0].archive_download_url");
+        else {
+            JSONArray artifact = com.jayway.jsonpath.JsonPath.read(response.getBody().asString(), "$.artifacts[?(@.name=~ /^.*" + System.getenv("env") + ".*$/)].archive_download_url");
+            return artifact.get(0).toString();
         }
     }
 
