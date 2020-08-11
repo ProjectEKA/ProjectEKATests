@@ -2,7 +2,6 @@ package Tests.APITests.ConsentManager;
 
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.CMRequest.ResetPassword;
-import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -21,7 +20,7 @@ public class ResetPasswordAPITest {
         authToken = new LoginUser().getCMAuthToken();
     }
 
-    @Test
+    @Test(priority = 0)
     public void generateOTPAPI() {
 
         //generate otp for enter phone #
@@ -34,7 +33,7 @@ public class ResetPasswordAPITest {
         sessionId = generateOTPResponse.jsonPath().getString("sessionId");
     }
 
-    @Test(dependsOnMethods = "generateOTPAPI")
+    @Test(dependsOnMethods = "generateOTPAPI", priority = 1)
     public void verifyOTPAPI() {
 
         //verify the otp
@@ -47,7 +46,7 @@ public class ResetPasswordAPITest {
         otpAuthToken = verifyOTPResponse.jsonPath().getString("temporaryToken");
     }
 
-    @Test(dependsOnMethods = "verifyOTPAPI")
+    @Test(dependsOnMethods = "verifyOTPAPI", priority = 2)
     public void resetPasswordAPI() {
 
         //reset-password after otp confirmation
@@ -58,7 +57,7 @@ public class ResetPasswordAPITest {
         System.out.println(new ResetPassword().getResetPasswordRequestBody() + "ppppp");
         Response resetPasswordResponse = request.put("/patients/profile/reset-password");
 
-        System.out.println(resetPasswordResponse.toString() + "mmmmmm");
+        System.out.println(resetPasswordResponse.getBody().asString() + "mmmmmm");
 
         Assert.assertEquals(resetPasswordResponse.getStatusCode(), 200);
     }
