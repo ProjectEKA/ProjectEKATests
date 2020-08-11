@@ -85,7 +85,6 @@ public class AppUtility {
     }
 
     public String getPath() {
-        System.out.println(path + "ASDASdasdas");
         return path;
     }
 
