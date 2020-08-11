@@ -53,7 +53,7 @@ public class WaitUtils {
         try {
             wait.until(ExpectedConditions.visibilityOf(id));
             return true;
-        } catch (NoSuchElementException e) {
+        } catch (Exception e) {
             return false;
         }
 

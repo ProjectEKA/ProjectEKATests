@@ -54,6 +54,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
+          profile: Nexus 6
           script: mvn clean "-Dtest=/**/MobileAppTests/Tests/*Test" test
         env:
           Authorization: ${{ secrets.Authorization }}
@@ -88,7 +89,8 @@ jobs:
       - name: run mobile tests on NHA Sandbox
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 28
+          api-level: 29
+          profile: Nexus 6
           script: mvn clean "-Dtest=/**/MobileAppTests/Tests/LoginTest" test
         env:
           Authorization: ${{ secrets.Authorization }}
