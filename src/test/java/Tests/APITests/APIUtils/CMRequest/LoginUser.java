@@ -20,7 +20,7 @@ public class LoginUser {
         JsonPath jsonPathEvaluator = response.jsonPath();
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
         System.out.println("CM Login Successful");
-        return jsonPathEvaluator.getString("accessToken");
+        return "Bearer " + jsonPathEvaluator.getString("accessToken");
     }
 
     public String getCMRefreshToken() {
@@ -61,7 +61,7 @@ public class LoginUser {
     }
 
     public String getHIUAuthToken() {
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBaseURL");
         RestAssured.useRelaxedHTTPSValidation();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");

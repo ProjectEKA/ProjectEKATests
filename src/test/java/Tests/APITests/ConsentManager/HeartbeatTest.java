@@ -5,15 +5,14 @@ import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class LoginAPITest {
-    String refreshToken;
+public class HeartbeatTest {
+
     RequestSpecification specification;
 
     @BeforeClass
@@ -27,15 +26,14 @@ public class LoginAPITest {
     }
 
     @Test
-    public void loginWithRefreshTokenAPI() {
-        LoginUser loginUser = new LoginUser();
-        refreshToken = loginUser.getCMRefreshToken();
-        RequestSpecification request = RestAssured.given().spec(specification);
-        request.header("Content-Type", "application/json");
-        Response response = request.body(loginUser.getCMLoginRequestBody_RefreshToken(refreshToken)).post("/sessions");
+    public void heartbeatAPI() {
 
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
-        JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertNotNull(jsonPathEvaluator.getString("accessToken"));
+        //check status of redis cache and db with heartbeat call
+        RequestSpecification request = RestAssured.given();
+        Response heartbeatResponse = request.header("Authorization", new LoginUser().getCMAuthToken())
+                .get("/v0.5/heartbeat");
+        Assert.assertEquals(heartbeatResponse.getStatusCode(), 200);
+        Assert.assertEquals(heartbeatResponse.jsonPath().getString("status"), "UP");
     }
+
 }

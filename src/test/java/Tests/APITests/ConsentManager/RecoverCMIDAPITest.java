@@ -18,12 +18,10 @@ public class RecoverCMIDAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        authToken = "Bearer " + new LoginUser().getCMAuthToken();
+        authToken = new LoginUser().getCMAuthToken();
     }
 
-    @Test
+    @Test(enabled = false)
     public void initRecoveryAPI() {
 
         //initiate the cm-id recovery process
@@ -36,7 +34,7 @@ public class RecoverCMIDAPITest {
         sessionId = initRecoveryResponse.jsonPath().getString("sessionId");
     }
 
-    @Test(dependsOnMethods = "initRecoveryAPI")
+    @Test(enabled = false)
     public void confirmCMIDAPI() {
 
         //confirm recovered cm-id by entering otp
@@ -47,8 +45,7 @@ public class RecoverCMIDAPITest {
 
         Assert.assertEquals(confirmRecoveryResponse.getStatusCode(), 200);
         JsonPath jsonPathEvaluator = confirmRecoveryResponse.jsonPath();
-        Assert.assertEquals(jsonPathEvaluator.getString("cmId"), "apidemotest101@ncg");
-        System.out.println(jsonPathEvaluator.getString("cmId"));
+        Assert.assertEquals(jsonPathEvaluator.getString("cmId"), "apidemotest30@ncg");
     }
 
 }

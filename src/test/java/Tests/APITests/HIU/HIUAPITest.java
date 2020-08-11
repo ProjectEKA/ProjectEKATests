@@ -1,10 +1,8 @@
 package Tests.APITests.HIU;
 
-import Tests.APITests.APIUtils.APIUtils;
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;

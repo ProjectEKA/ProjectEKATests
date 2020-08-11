@@ -16,9 +16,7 @@ public class DiscoveryAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        authToken = "Bearer " + new LoginUser().getCMAuthToken();
+        authToken = new LoginUser().getCMAuthToken();
     }
 
     @Test
@@ -26,11 +24,11 @@ public class DiscoveryAPITest {
 
         //fetches the list of providers
         RequestSpecification request = RestAssured.given();
-        Response providersListresponse = request.header("Authorization", authToken)
+        Response providersListResponse = request.header("Authorization", authToken)
                 .queryParam("name", "Tata").get("/providers");
 
-        Assert.assertEquals(providersListresponse.getStatusCode(), 200);
-        JsonPath jsonPathEvaluator = providersListresponse.jsonPath();
+        Assert.assertEquals(providersListResponse.getStatusCode(), 200);
+        JsonPath jsonPathEvaluator = providersListResponse.jsonPath();
         Assert.assertEquals(jsonPathEvaluator.getString("identifier[0].name"), "Tata Memorial Hospital");
         Assert.assertEquals(jsonPathEvaluator.getString("identifier[0].id"), "10000002");
     }
@@ -47,8 +45,9 @@ public class DiscoveryAPITest {
         Response discoverCareContextResponse = request.post("/v1/care-contexts/discover");
         Assert.assertEquals(discoverCareContextResponse.getStatusCode(), 200);
         JsonPath jsonPathEvaluator = discoverCareContextResponse.jsonPath();
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "RVH1004");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "John Doe");
-        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "NCP10091");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.referenceNumber"), "RVH/WBH-10002");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.display"), "Navjot Singh");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[0].referenceNumber"), "WBCP1007");
+        Assert.assertEquals(jsonPathEvaluator.getString("patient.careContexts[1].referenceNumber"), "WB-MHD-01.17.0024");
     }
 }

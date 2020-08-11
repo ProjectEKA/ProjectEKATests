@@ -33,7 +33,7 @@ public class APIUtils {
     public String verifyConsentPIN(String consent) {
 
         //verify consent-pin and generate pin-authorization token
-        String authToken = "Bearer " + new LoginUser().getCMAuthToken();
+        String authToken = new LoginUser().getCMAuthToken();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);

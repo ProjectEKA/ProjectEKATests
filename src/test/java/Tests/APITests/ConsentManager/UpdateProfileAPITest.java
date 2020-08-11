@@ -18,9 +18,7 @@ public class UpdateProfileAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        authToken = "Bearer " + new LoginUser().getCMAuthToken();
+        authToken = new LoginUser().getCMAuthToken();
     }
 
     @Test
@@ -30,6 +28,7 @@ public class UpdateProfileAPITest {
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);
+        System.out.println(authToken);
         request.body(new UpdateProfile().getUpdatePasswordRequestBody());
 
         Response updatePasswordResponse = request.put("/patients/profile/update-password");
@@ -62,6 +61,7 @@ public class UpdateProfileAPITest {
         Response updatePINResponse = request.post("/patients/change-pin");
         Assert.assertEquals(updatePINResponse.getStatusCode(), 200);
     }
+    
 
 //    @Test(dependsOnMethods = "updatePINAPI")
 //    public void logoutAPI() {

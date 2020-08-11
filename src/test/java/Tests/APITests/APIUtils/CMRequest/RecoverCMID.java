@@ -5,26 +5,26 @@ public class RecoverCMID {
     public String getRecoverInitCMIDRequestBody() {
         return "{\n" +
                 "   \"name\": { \n" +
-                "       \"first\": \"John\", \n" +
-                "       \"last\": \"\", \n" +
-                "       \"middle\": \"Doe\" \n" +
+                "       \"first\": \"navjot\", \n" +
+                "       \"middle\": \"\", \n" +
+                "       \"last\": \"singh\" \n" +
                 "   }, \n" +
-                "   \"gender\": \"M\", \n" +
+                "   \"gender\": \"F\", \n" +
                 "   \"dateOfBirth\": { \n" +
-                "       \"date\": 1, \n" +
-                "       \"month\": 1, \n" +
-                "       \"year\": 1966 \n" +
+                "       \"date\": null, \n" +
+                "       \"month\": null, \n" +
+                "       \"year\": 2001 \n" +
                 "   }, \n" +
                 "   \"verifiedIdentifiers\": [ \n" +
                 "       {\n" +
                 "           \"type\": \"MOBILE\", \n" +
-                "           \"value\": \"+91-9999999999\" \n" +
+                "           \"value\": \"+91-7777777777\" \n" +
                 "       } \n" +
                 "   ], \n" +
                 "   \"unverifiedIdentifiers\": [ \n" +
                 "       {\n" +
                 "           \"type\": \"ABPMJAYID\", \n" +
-                "           \"value\": \"PAPITEST1\" \n" +
+                "           \"value\": \"PTEST20NS\" \n" +
                 "       }\n" +
                 "   ]\n" +
                 "}";
