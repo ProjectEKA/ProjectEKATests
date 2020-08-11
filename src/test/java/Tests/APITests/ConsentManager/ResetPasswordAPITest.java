@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 
 public class ResetPasswordAPITest {
 
-    String authToken;
-    String sessionId;
-    String otpAuthToken;
+    private String authToken;
+    private String sessionId;
+    private String otpAuthToken;
 
     @BeforeClass
     public void setup() {
