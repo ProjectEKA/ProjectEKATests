@@ -22,7 +22,7 @@ public class ResetPasswordAPITest {
 
     @Test(priority = 0)
     public void generateOTPAPI() {
-
+        System.out.println("generateOTPAPI");
         //generate otp for enter phone #
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -35,7 +35,7 @@ public class ResetPasswordAPITest {
 
     @Test(dependsOnMethods = "generateOTPAPI", priority = 1)
     public void verifyOTPAPI() {
-
+        System.out.println("verifyOTPAPI");
         //verify the otp
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
