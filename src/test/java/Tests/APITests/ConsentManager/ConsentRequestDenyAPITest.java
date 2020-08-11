@@ -36,7 +36,7 @@ public class ConsentRequestDenyAPITest {
     public void denyConsentRequestAPI() {
 
         //deny consent request at consent-manager
-        String authToken = "Bearer " + new LoginUser().getCMAuthToken();
+        String authToken = new LoginUser().getCMAuthToken();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);

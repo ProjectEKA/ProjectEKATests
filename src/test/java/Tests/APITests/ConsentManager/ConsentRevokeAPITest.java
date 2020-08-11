@@ -9,6 +9,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.util.List;
 
@@ -16,6 +17,12 @@ public class ConsentRevokeAPITest {
 
     String consentArtefactId;
     String consentRequestId;
+    String hiuAuthToken;
+
+    @BeforeClass
+    public void setup() {
+        hiuAuthToken = new LoginUser().getHIUAuthToken();
+    }
 
     @Test
     public void HIUConsentRequestAPI() {
@@ -27,7 +34,7 @@ public class ConsentRevokeAPITest {
 
         //fetch consent-request id
         RequestSpecification request = RestAssured.given();
-        Response fetchConsentsResponse = request.header("Authorization", new LoginUser().getHIUAuthToken())
+        Response fetchConsentsResponse = request.header("Authorization", hiuAuthToken)
                 .get("/v1/hiu/consent-requests");
         consentRequestId = new APIUtils().fetchConsentRequestId(fetchConsentsResponse, patient);
         Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);

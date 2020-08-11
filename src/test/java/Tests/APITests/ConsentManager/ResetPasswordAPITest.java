@@ -18,9 +18,7 @@ public class ResetPasswordAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        authToken = "Bearer " + new LoginUser().getCMAuthToken();
+        authToken = new LoginUser().getCMAuthToken();
     }
 
     @Test

@@ -9,7 +9,7 @@ public class CMPatientDiscovery {
                 "\"requestId\":\"" + generateUUID() +"\""+",\n" +
                 "\"unverifiedIdentifiers\": [],\n" +
                 "    \"hip\": {\n" +
-                "        \"id\": \"10000005\"\n" +
+                "        \"id\": \"10019843\"\n" +
                 "    }\n" +
                "}";
     }

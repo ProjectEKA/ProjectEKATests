@@ -4,7 +4,7 @@ public class ResetPassword {
 
     public String getGenerateOTPRequestBody() {
         return "{\n" +
-                "   \"username\": \"apidemotest10@ncg\" \n" +
+                "   \"username\": \"apidemotest30@ncg\" \n" +
                 "}";
     }
 

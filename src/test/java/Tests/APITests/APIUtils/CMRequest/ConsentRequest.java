@@ -8,15 +8,16 @@ public class ConsentRequest {
                 "       {                                                   \n" +
                 "           \"careContexts\": [                             \n" +
                 "                {                                          \n" +
-                "                    \"careContextReference\": \"NCP10093\",    \n" +
-                "                    \"patientReference\": \"RVH1004\"      \n" +
+                "                    \"careContextReference\": \"NCP1007\",    \n" +
+                "                    \"patientReference\": \"RVH1002\"      \n" +
+                "                },                                         \n" +
+                "                {                                          \n" +
+                "                    \"careContextReference\": \"RV-MHD-01.17.0024\",    \n" +
+                "                    \"patientReference\": \"RVH1002\"      \n" +
                 "                }                                          \n" +
                 "           ],                                              \n" +
                 "           \"hiTypes\": [                                  \n" +
-                "               \"Condition\",                              \n" +
-                "               \"Observation\",                            \n" +
-                "               \"DiagnosticReport\",                       \n" +
-                "               \"MedicationRequest\"                       \n" +
+                "               \"Prescription\"                            \n" +
                 "           ],                                              \n" +
                 "           \"hip\": {                                      \n" +
                 "               \"id\": \"10000005\"                        \n" +
