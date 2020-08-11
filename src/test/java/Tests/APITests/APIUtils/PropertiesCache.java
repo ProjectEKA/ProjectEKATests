@@ -14,7 +14,10 @@ public class PropertiesCache {
         System.out.println(System.getenv("env") + "asdasdas");
         if ("ncg".equals(System.getenv("env"))) {
             in = this.getClass().getClassLoader().getResourceAsStream("config.properties");
-        } else
+        } else if( "nhsdev".equals(System.getenv("env"))){
+            in = this.getClass().getClassLoader().getResourceAsStream("config-dev.properties");
+        }
+        else
             in = this.getClass().getClassLoader().getResourceAsStream("config-dev.properties");
         System.out.println("Read all properties from file");
         try {

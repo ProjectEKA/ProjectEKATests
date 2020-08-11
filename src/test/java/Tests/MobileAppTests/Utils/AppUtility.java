@@ -7,7 +7,6 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +31,6 @@ public class AppUtility {
         if (instance == null)
             instance = new AppUtility();
 
-
         return instance;
     }
 
@@ -48,7 +46,7 @@ public class AppUtility {
 
         String repoURL = PropertiesCache.getInstance().getProperty("repoURL");
         //Auth Headers added to avoid the rate limiting
-        Response response = request.header("Authorization", "token " +System.getenv("Authorization"))
+        Response response = request.header("Authorization", "token " + System.getenv("Authorization"))
                 .get(repoURL);//NCG yml file
 
         JsonPath jsonPathEvaluator = response.jsonPath();
@@ -56,10 +54,7 @@ public class AppUtility {
 
         System.out.println("Getting artifacts for the run id - " + run_id);
 
-        RequestSpecification request1 = RestAssured.given();
-        response = request1.header("Authorization","token " + System.getenv("Authorization")).get(String.format(PropertiesCache.getInstance().getProperty("artifactURL"), run_id));
-        jsonPathEvaluator = response.jsonPath();
-        String artifactURL = jsonPathEvaluator.getString("artifacts[0].archive_download_url");
+        String artifactURL = getArtifactURL(run_id);
 
         RequestSpecification requestSpecification = RestAssured.given();
 
@@ -73,7 +68,22 @@ public class AppUtility {
         return response.getHeader("Location");
     }
 
+    private String getArtifactURL(String run_id) {
+        Response response;
+        JsonPath jsonPathEvaluator;
+        RequestSpecification request1 = RestAssured.given();
+        response = request1.header("Authorization","token " + System.getenv("Authorization")).get(String.format("/repos/I-NHA/Jan-Aarogya-Setu-Android/actions/runs/%s/artifacts", run_id));
+        jsonPathEvaluator = response.jsonPath();
+        if(System.getenv("env").equals("ncg"))
+        return jsonPathEvaluator.getString("artifacts[0].archive_download_url");
+        else{
+            Object artifact = com.jayway.jsonpath.JsonPath.read(response.getBody().asString(), "$.artifacts[?(@.name=~ /^.*" + System.getenv("artifact") + ".*$/)].archive_download_url");
+            return artifact.toString();
+        }
+    }
+
     public String getPath() {
+        System.out.println(path + "ASDASdasdas");
         return path;
     }
 
