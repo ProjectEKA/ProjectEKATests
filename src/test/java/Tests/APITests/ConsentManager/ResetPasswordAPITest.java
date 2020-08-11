@@ -2,6 +2,7 @@ package Tests.APITests.ConsentManager;
 
 import Tests.APITests.APIUtils.CMRequest.LoginUser;
 import Tests.APITests.APIUtils.CMRequest.ResetPassword;
+import Tests.APITests.APIUtils.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -14,17 +15,19 @@ public class ResetPasswordAPITest {
     private static String authToken;
     private static String sessionId;
     private static String otpAuthToken;
+    RequestSpecification request;
 
     @BeforeClass
     public void setup() {
-        authToken = new LoginUser().getCMAuthToken();
+        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
+        RestAssured.useRelaxedHTTPSValidation();
+        request = RestAssured.given();
     }
 
     @Test(priority = 0)
     public void generateOTPAPI() {
         System.out.println("generateOTPAPI");
         //generate otp for enter phone #
-        RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.body(new ResetPassword().getGenerateOTPRequestBody());
         Response generateOTPResponse = request.post("/patients/generateotp");
@@ -38,7 +41,6 @@ public class ResetPasswordAPITest {
     public void verifyOTPAPI() {
         System.out.println("verifyOTPAPI");
         //verify the otp
-        RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         System.out.println(sessionId + " Seession ID next");
         request.body(new ResetPassword().getVerifyOTPRequestBody(sessionId));
@@ -53,7 +55,7 @@ public class ResetPasswordAPITest {
     public void resetPasswordAPI() {
 
         //reset-password after otp confirmation
-        RequestSpecification request = RestAssured.given();
+
         request.header("Content-Type", "application/json");
         System.out.println(otpAuthToken + "0987654321");
         request.header("Authorization", otpAuthToken);
