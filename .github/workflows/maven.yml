@@ -88,7 +88,7 @@ jobs:
       - name: run mobile tests on NHA Sandbox
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          api-level: 28
           script: mvn clean "-Dtest=/**/MobileAppTests/Tests/LoginTest" test
         env:
           Authorization: ${{ secrets.Authorization }}

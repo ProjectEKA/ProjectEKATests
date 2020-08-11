@@ -74,7 +74,7 @@ public class AppUtility {
         Response response;
         JsonPath jsonPathEvaluator;
         RequestSpecification request1 = RestAssured.given();
-        response = request1.header("Authorization", "token " + System.getenv("Authorization")).get(String.format("/repos/I-NHA/Jan-Aarogya-Setu-Android/actions/runs/%s/artifacts", run_id));
+        response = request1.header("Authorization", "token " + System.getenv("Authorization")).get(String.format(System.getenv("artifactURL") +"actions/runs/%s/artifacts", run_id));
         jsonPathEvaluator = response.jsonPath();
         if (System.getenv("env").equals("ncg"))
             return jsonPathEvaluator.getString("artifacts[0].archive_download_url");
