@@ -3,6 +3,7 @@ package Tests.MobileAppTests.Tests;
 import Tests.APITests.APIUtils.PropertiesCache;
 import Tests.MobileAppTests.Pages.LoginPage;
 import Tests.MobileAppTests.Utils.BaseDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseDriver {
@@ -12,6 +13,8 @@ public class LoginTest extends BaseDriver {
 
     @Test
     public void loginUser() {
-        new LoginPage(driver).loginUser(userName, password);
+
+        boolean status = new LoginPage(driver).loginUser(userName, password).validateHomePage();
+        Assert.assertTrue(status);
     }
 }

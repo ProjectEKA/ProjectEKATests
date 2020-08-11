@@ -19,7 +19,8 @@ public class RegistrationTest extends BaseDriver {
         Patient patient = new Patient("Hina Patel", "8888888888", "female");
         HomePage homePage = new LoginPage(driver).navigateToCreateAccount().enterContactNoAndContinue(patient.getMobile())
                 .enterOTP(new RegistrationPage(driver)).enterUserDetails(patient, userName).clickAddNewProvider()
-                .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext().enterOTP(new HomePage(driver));
+                .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext()
+                .enterOTP(new HomePage(driver));
 
         Assert.assertTrue(homePage.getPatientName().length() > 0, "Patient Name not displayed on Link Provider screen");
     }

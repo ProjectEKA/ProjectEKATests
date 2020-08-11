@@ -14,7 +14,6 @@ public class HomePage extends WaitUtils {
         super(driver);
         homePageObjects = new HomePageObjects();
         PageFactory.initElements(new AppiumFieldDecorator(driver), homePageObjects);
-        waitForElement(homePageObjects.consentTab);
     }
 
     public SearchLinkProviderPage clickAddNewProvider() {
@@ -43,5 +42,9 @@ public class HomePage extends WaitUtils {
 
     public boolean isRequestedDateDisplayed() {
         return isElementPresent(homePageObjects.requestedDate);
+    }
+
+    public boolean validateHomePage() {
+        return isElementPresent(homePageObjects.consentTab);
     }
 }
