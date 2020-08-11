@@ -31,6 +31,7 @@ public class ResetPasswordAPITest {
 
         Assert.assertEquals(generateOTPResponse.getStatusCode(), 201);
         sessionId = generateOTPResponse.jsonPath().getString("sessionId");
+        System.out.println(sessionId + " Seession ID");
     }
 
     @Test(dependsOnMethods = "generateOTPAPI", priority = 1)
@@ -39,11 +40,13 @@ public class ResetPasswordAPITest {
         //verify the otp
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
+        System.out.println(sessionId + " Seession ID next");
         request.body(new ResetPassword().getVerifyOTPRequestBody(sessionId));
         Response verifyOTPResponse = request.post("/patients/verifyotp");
 
         Assert.assertEquals(verifyOTPResponse.getStatusCode(), 200);
         otpAuthToken = verifyOTPResponse.jsonPath().getString("temporaryToken");
+        System.out.println(otpAuthToken + "1234567890");
     }
 
     @Test(dependsOnMethods = "verifyOTPAPI", priority = 2)
@@ -52,6 +55,7 @@ public class ResetPasswordAPITest {
         //reset-password after otp confirmation
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
+        System.out.println(otpAuthToken + "0987654321");
         request.header("Authorization", otpAuthToken);
         request.body(new ResetPassword().getResetPasswordRequestBody());
         System.out.println(new ResetPassword().getResetPasswordRequestBody() + "ppppp");
