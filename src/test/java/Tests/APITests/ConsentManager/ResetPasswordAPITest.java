@@ -55,8 +55,11 @@ public class ResetPasswordAPITest {
         request.header("Content-Type", "application/json");
         request.header("Authorization", otpAuthToken);
         request.body(new ResetPassword().getResetPasswordRequestBody());
-
+        System.out.println(new ResetPassword().getResetPasswordRequestBody() + "ppppp");
         Response resetPasswordResponse = request.put("/patients/profile/reset-password");
+
+        System.out.println(resetPasswordResponse.toString() + "mmmmmm");
+
         Assert.assertEquals(resetPasswordResponse.getStatusCode(), 200);
     }
 
