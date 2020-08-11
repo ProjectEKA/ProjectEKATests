@@ -11,11 +11,13 @@ import org.testng.annotations.Test;
 
 public class ResetPasswordAPITest {
 
+    private static String authToken;
     private static String sessionId;
     private static String otpAuthToken;
 
     @BeforeClass
     public void setup() {
+        authToken = new LoginUser().getCMAuthToken();
     }
 
     @Test(priority = 0)
