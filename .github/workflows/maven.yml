@@ -92,7 +92,7 @@ jobs:
           script: mvn clean "-Dtest=/**/MobileAppTests/Tests/LoginTest" test
         env:
           Authorization: ${{ secrets.Authorization }}
-          env: nha # required
+          env: nhsDev # required
       - name: Notify on Slack
         uses: 8398a7/action-slack@v2
         with:
