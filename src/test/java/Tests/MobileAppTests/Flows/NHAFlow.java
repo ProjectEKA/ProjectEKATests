@@ -5,7 +5,6 @@ import Tests.MobileAppTests.Objects.LoginPageObjects;
 import Tests.MobileAppTests.Utils.IRunner;
 import Tests.MobileAppTests.Utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.WebElement;
 
 public class NHAFlow extends WaitUtils implements IRunner {
 
@@ -32,7 +31,7 @@ public class NHAFlow extends WaitUtils implements IRunner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(driver.getPageSource());
+//        System.out.println(driver.getPageSource());
         waitForElement(loginPageObjects.allowPermission).click();
     }
 }
