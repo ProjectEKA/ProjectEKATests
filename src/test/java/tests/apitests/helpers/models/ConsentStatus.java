@@ -8,5 +8,4 @@ public enum ConsentStatus {
     DENIED,
     REVOKED,
     EXPIRED
-    //
 }

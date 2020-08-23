@@ -52,13 +52,18 @@ public class ConsentRequest {
         String consentRequestId = "";
         JsonPath jsonPathEvaluator = response.jsonPath();
         List<String> patientList = jsonPathEvaluator.getList("patient.id");
-        for(int i=0; i<(patientList.size()-1);i++) {
-            if(patientList.get(i).equalsIgnoreCase(patient)) {
-                if((jsonPathEvaluator.getString("status[" + i + "]")).equalsIgnoreCase("REQUESTED")) {
-                    consentRequestId = jsonPathEvaluator.getString("consentRequestId[" + i + "]");
-                    break;
+        if(patientList != null) {
+            for (int i = 0; i < (patientList.size() - 1); i++) {
+                if (patientList.get(i).equalsIgnoreCase(patient)) {
+                    if ((jsonPathEvaluator.getString("status[" + i + "]")).equalsIgnoreCase("REQUESTED")) {
+                        consentRequestId = jsonPathEvaluator.getString("consentRequestId[" + i + "]");
+                        break;
+                    }
                 }
             }
+        }
+        else {
+            System.out.println("patient list is null");
         }
         return consentRequestId;
     }
@@ -69,11 +74,16 @@ public class ConsentRequest {
         String status="";
         JsonPath jsonPathEvaluator = response.jsonPath();
         List<String> consentRequestIds = jsonPathEvaluator.getList("consentRequestId");
-        for(int i=0; i<(consentRequestIds.size()-1);i++) {
-            if(consentRequestIds.get(i).equalsIgnoreCase(consentRequestId)) {
-                status = jsonPathEvaluator.getString("status[" + i + "]");
-                break;
+        if(consentRequestIds != null) {
+            for (int i = 0; i < (consentRequestIds.size() - 1); i++) {
+                if (consentRequestIds.get(i).equalsIgnoreCase(consentRequestId)) {
+                    status = jsonPathEvaluator.getString("status[" + i + "]");
+                    break;
+                }
             }
+        }
+        else {
+            System.out.println("Consent-request id is null");
         }
         return status;
     }

@@ -1,15 +1,13 @@
 package tests.apitests.consentmanager.tests;
 
-import tests.apitests.consentmanager.utils.ConsentRequest;
-import tests.apitests.helpers.utils.Login;
-import tests.apitests.helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static tests.apitests.helpers.utils.Login.getHIUAuthToken;
+import tests.apitests.consentmanager.utils.ConsentRequest;
+import tests.apitests.helpers.PropertiesCache;
+import tests.apitests.helpers.utils.Login;
 
 public class ConsentRequestDenyAPITest {
 
@@ -48,9 +46,10 @@ public class ConsentRequestDenyAPITest {
     public void checkHIUConsentStatusAPI() {
 
         //fetch the consents list and fetch the status
+        String authToken = new Login().getHIUAuthToken();
         RequestSpecification request = RestAssured.given();
 
-        Response consentStatusResponse = request.header("Authorization", getHIUAuthToken())
+        Response consentStatusResponse = request.header("Authorization", authToken)
                 .get("/v1/hiu/consent-requests");
         String actualStatus = new ConsentRequest().fetchConsentStatus(consentStatusResponse, consentRequestId);
 
