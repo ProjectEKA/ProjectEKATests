@@ -1,5 +1,7 @@
-package Tests.APITests.Helpers;
+package Tests.APITests.Consent_Manager.Utils;
 
+import Tests.APITests.Helpers.PropertiesCache;
+import Tests.APITests.Helpers.Utils.LoginUtil;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -9,7 +11,7 @@ import static Tests.APITests.Consent_Manager.TestBuildersCM.grantPINPayload;
 import static Tests.APITests.Consent_Manager.TestBuildersCM.revokePINPayload;
 import static Tests.APITests.Health_Information_User.TestBuildersHIU.createConsentRequestPayload;
 
-public class APIUtils {
+public class ConsentUtil {
 
     public Response createConsent(String id) {
 
@@ -18,7 +20,7 @@ public class APIUtils {
         RestAssured.useRelaxedHTTPSValidation();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", new LoginUser().getHIUAuthToken());
+        request.header("Authorization", new LoginUtil().getHIUAuthToken());
 
         request.body(createConsentRequestPayload(id));
         Response response = request.post("/v1/hiu/consent-requests");
@@ -28,7 +30,7 @@ public class APIUtils {
     public String verifyConsentPIN(String consent) {
 
         //verify consent-pin and generate pin-authorization token
-        String authToken = new LoginUser().getCMAuthToken();
+        String authToken = new LoginUtil().getCMAuthToken();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);

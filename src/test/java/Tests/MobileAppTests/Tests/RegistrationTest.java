@@ -1,6 +1,6 @@
 package Tests.MobileAppTests.Tests;
 
-import Tests.APITests.Helpers.APIUtils;
+import Tests.APITests.Consent_Manager.Utils.ConsentUtil;
 import Tests.MobileAppTests.Pages.HomePage;
 import Tests.MobileAppTests.Pages.LoginPage;
 import Tests.MobileAppTests.Pages.OTPPage;
@@ -34,7 +34,7 @@ public class RegistrationTest extends BaseDriver {
                 .searchAndSelectProvider("Max").clickConfirmProvider().linkCareContext()
                 .enterOTP(new HomePage(driver));
 
-        new APIUtils().createConsent(userName + "@ncg"); //Create Consent Request
+        new ConsentUtil().createConsent(userName + "@ncg"); //Create Consent Request
 
         String snackBarText = homePage.navigateToConsentsTab().clickConsent().grantConsent()
                 .enterPin(new OTPPage(driver), "Create")

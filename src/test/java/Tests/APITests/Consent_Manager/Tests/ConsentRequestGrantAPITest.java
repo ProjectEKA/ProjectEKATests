@@ -1,7 +1,7 @@
 package Tests.APITests.Consent_Manager.Tests;
 
-import Tests.APITests.Helpers.APIUtils;
-import Tests.APITests.Helpers.LoginUser;
+import Tests.APITests.Consent_Manager.Utils.ConsentUtil;
+import Tests.APITests.Helpers.Utils.LoginUtil;
 import Tests.APITests.Helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -19,7 +19,7 @@ public class ConsentRequestGrantAPITest {
 
     @BeforeClass
     public void setup() {
-        hiuAuthToken = new LoginUser().getHIUAuthToken();
+        hiuAuthToken = new LoginUtil().getHIUAuthToken();
     }
 
     @Test(groups= {"All"})
@@ -27,14 +27,14 @@ public class ConsentRequestGrantAPITest {
 
         //create consent-request
         String patient = PropertiesCache.getInstance().getProperty("HIUPatient");
-        Response createRequestResponse = new APIUtils().createConsent(patient);
+        Response createRequestResponse = new ConsentUtil().createConsent(patient);
         Assert.assertEquals(createRequestResponse.getStatusCode(), 202);
 
         //fetch consent-request id
             RequestSpecification request = RestAssured.given();
             Response fetchConsentsResponse = request.header("Authorization", hiuAuthToken)
                     .get("/v1/hiu/consent-requests");
-            consentRequestId = new APIUtils().fetchConsentRequestId(fetchConsentsResponse, patient);
+            consentRequestId = new ConsentUtil().fetchConsentRequestId(fetchConsentsResponse, patient);
             Assert.assertNotNull(consentRequestId);
             Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
@@ -43,7 +43,7 @@ public class ConsentRequestGrantAPITest {
     public void grantConsentRequestAPI() {
 
         //grant consent-request
-        String pinAuth = new APIUtils().verifyConsentPIN("grant");
+        String pinAuth = new ConsentUtil().verifyConsentPIN("grant");
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", pinAuth);
@@ -57,11 +57,11 @@ public class ConsentRequestGrantAPITest {
     public void checkHIUConsentStatusAPI() {
 
         //fetch the consents list and fetch the status
-        String authToken = new LoginUser().getHIUAuthToken();
+        String authToken = new LoginUtil().getHIUAuthToken();
         RequestSpecification request = RestAssured.given();
         Response consentStatusResponse = request.header("Authorization", authToken)
                 .get("/v1/hiu/consent-requests");
-        String actualStatus = new APIUtils().fetchConsentStatus(consentStatusResponse, consentRequestId);
+        String actualStatus = new ConsentUtil().fetchConsentStatus(consentStatusResponse, consentRequestId);
 
         Assert.assertEquals(consentStatusResponse.getStatusCode(), 200);
         Assert.assertEquals(actualStatus, "GRANTED");

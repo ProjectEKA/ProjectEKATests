@@ -7,8 +7,10 @@ import Tests.APITests.Health_Information_User.Models.CreateConsentRequest.Consen
 import Tests.APITests.Health_Information_User.Models.CreateConsentRequest.CreateConsentRequest;
 import Tests.APITests.Health_Information_User.Models.CreateConsentRequest.Patient;
 import Tests.APITests.Health_Information_User.Models.LoginDoctor;
+import Tests.APITests.Helpers.Models.HealthInfoType;
+import Tests.APITests.Helpers.Models.PurposeType;
 import Tests.APITests.Helpers.PropertiesCache;
-
+import Tests.APITests.Helpers.TestDataLiterals;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -19,8 +21,8 @@ import java.util.UUID;
 public class TestBuildersHIU {
 
     public static LoginDoctor loginDoctorPayload() {
-        return LoginDoctor.builder().username(PropertiesCache.getInstance().getProperty("HIUuserName"))
-                .password(PropertiesCache.getInstance().getProperty("HIUpassword"))
+        return LoginDoctor.builder().username(PropertiesCache.getInstance().getProperty("HIUUsername"))
+                .password(PropertiesCache.getInstance().getProperty("HIUPassword"))
                 .build();
     }
 
@@ -33,7 +35,7 @@ public class TestBuildersHIU {
 
     public static Permission permission() {
         return Permission.builder()
-                .accessMode("VIEW")
+                .accessMode(TestDataLiterals.VIEW)
                 .dataEraseAt("2020-10-30T12:30:00.352")
                 .dateRange(dateRange())
                 .build();
@@ -45,13 +47,13 @@ public class TestBuildersHIU {
     }
 
     public static Purpose purpose() {
-        return Purpose.builder().code("PUBHLTH").build();
+        return Purpose.builder().code(PurposeType.PUBHLTH.toString()).build();
     }
 
     // END of Sub-Objects List ---------------------------------------------------------------------------->
 
     public static CreateConsentRequest createConsentRequestPayload(String id) {
-        List<String> hiTypes = List.of("Prescription");
+        List<String> hiTypes = List.of(HealthInfoType.Prescription.toString());
         Consent consent = Consent.builder().patient(patient(id))
                 .purpose(purpose())
                 .hiTypes(hiTypes)
@@ -68,7 +70,7 @@ public class TestBuildersHIU {
     private String dateFormatter() {
 
         Date currentDate = new Date();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TestDataLiterals.DATE_FORMAT);
         LocalDateTime localDateTime = currentDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         return formatter.format(localDateTime);
     }

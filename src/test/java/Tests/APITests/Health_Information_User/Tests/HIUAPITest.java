@@ -1,6 +1,6 @@
 package Tests.APITests.Health_Information_User.Tests;
 
-import Tests.APITests.Helpers.LoginUser;
+import Tests.APITests.Helpers.Utils.LoginUtil;
 import Tests.APITests.Helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -15,7 +15,7 @@ public class HIUAPITest {
 
     @BeforeClass
     public void setup() {
-        authToken = new LoginUser().getHIUAuthToken();
+        authToken = new LoginUtil().getHIUAuthToken();
     }
 
     @Test(groups= {"All"})

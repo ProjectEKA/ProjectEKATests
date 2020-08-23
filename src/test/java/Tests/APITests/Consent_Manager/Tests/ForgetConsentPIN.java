@@ -1,6 +1,6 @@
 package Tests.APITests.Consent_Manager.Tests;
 
-import Tests.APITests.Helpers.LoginUser;
+import Tests.APITests.Helpers.Utils.LoginUtil;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -20,7 +20,7 @@ public class ForgetConsentPIN {
 
     @BeforeClass
     public void setup() {
-        authToken = new LoginUser().getCMAuthToken();
+        authToken = new LoginUtil().getCMAuthToken();
     }
 
     @Test
