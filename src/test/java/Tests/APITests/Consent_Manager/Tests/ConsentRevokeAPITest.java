@@ -1,8 +1,8 @@
 package Tests.APITests.Consent_Manager.Tests;
 
-import Tests.APITests.APIUtils;
-import Tests.APITests.LoginUser;
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.APIUtils;
+import Tests.APITests.Helpers.LoginUser;
+import Tests.APITests.Helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -24,7 +24,7 @@ public class ConsentRevokeAPITest {
         hiuAuthToken = new LoginUser().getHIUAuthToken();
     }
 
-    @Test
+    @Test(groups= {"All"})
     public void HIUConsentRequestAPI() {
 
         //create consent-request
@@ -40,7 +40,7 @@ public class ConsentRevokeAPITest {
         Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "HIUConsentRequestAPI")
+    @Test(dependsOnMethods = "HIUConsentRequestAPI", groups= {"All"})
     public void grantConsentRequestAPI() {
 
         //grant consent-request
@@ -55,7 +55,7 @@ public class ConsentRevokeAPITest {
         Assert.assertEquals(grantConsentResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "grantConsentRequestAPI")
+    @Test(dependsOnMethods = "grantConsentRequestAPI", groups= {"All"})
     public void revokeConsentRequestAPI() {
 
         //revoke consent-request

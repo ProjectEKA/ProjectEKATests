@@ -1,7 +1,7 @@
 package Tests.APITests.Health_Information_User.Tests;
 
-import Tests.APITests.LoginUser;
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.LoginUser;
+import Tests.APITests.Helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -15,12 +15,10 @@ public class HIUAPITest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBackendURL");
-        RestAssured.useRelaxedHTTPSValidation();
         authToken = new LoginUser().getHIUAuthToken();
     }
 
-    @Test
+    @Test(groups= {"All"})
     public void discoverPatientAPI() {
 
         //identifies patient by cm-id

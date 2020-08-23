@@ -1,6 +1,6 @@
 package Tests.MobileAppTests.Pages;
 
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.PropertiesCache;
 import Tests.MobileAppTests.Objects.LoginPageObjects;
 import Tests.MobileAppTests.Utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;

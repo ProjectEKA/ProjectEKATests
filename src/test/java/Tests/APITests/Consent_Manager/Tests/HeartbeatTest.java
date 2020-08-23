@@ -1,7 +1,7 @@
 package Tests.APITests.Consent_Manager.Tests;
 
-import Tests.APITests.LoginUser;
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.LoginUser;
+import Tests.APITests.Helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;

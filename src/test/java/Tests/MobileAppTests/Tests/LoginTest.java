@@ -1,6 +1,6 @@
 package Tests.MobileAppTests.Tests;
 
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.PropertiesCache;
 import Tests.MobileAppTests.Pages.LoginPage;
 import Tests.MobileAppTests.Utils.BaseDriver;
 import org.testng.Assert;

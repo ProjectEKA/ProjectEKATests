@@ -7,7 +7,7 @@ import Tests.APITests.Health_Information_User.Models.CreateConsentRequest.Consen
 import Tests.APITests.Health_Information_User.Models.CreateConsentRequest.CreateConsentRequest;
 import Tests.APITests.Health_Information_User.Models.CreateConsentRequest.Patient;
 import Tests.APITests.Health_Information_User.Models.LoginDoctor;
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.PropertiesCache;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

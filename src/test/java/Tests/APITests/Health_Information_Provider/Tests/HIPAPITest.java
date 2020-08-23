@@ -1,6 +1,6 @@
 package Tests.APITests.Health_Information_Provider.Tests;
 
-import Tests.APITests.CentralRegistry;
+import Tests.APITests.Central_Registry.CentralRegistry;
 import Tests.APITests.Health_Information_Provider.Models.HIPPatientDiscovery;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;

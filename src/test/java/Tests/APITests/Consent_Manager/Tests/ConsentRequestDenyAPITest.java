@@ -1,8 +1,8 @@
 package Tests.APITests.Consent_Manager.Tests;
 
-import Tests.APITests.APIUtils;
-import Tests.APITests.LoginUser;
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.APIUtils;
+import Tests.APITests.Helpers.LoginUser;
+import Tests.APITests.Helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -13,7 +13,7 @@ public class ConsentRequestDenyAPITest {
 
     String consentRequestId;
 
-    @Test
+    @Test(groups= {"All"})
     public void HIUConsentRequestAPI() {
 
         //create consent-request
@@ -29,7 +29,7 @@ public class ConsentRequestDenyAPITest {
         Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "HIUConsentRequestAPI")
+    @Test(dependsOnMethods = "HIUConsentRequestAPI",groups= {"All"})
     public void denyConsentRequestAPI() {
 
         //deny consent request at consent-manager
@@ -42,7 +42,7 @@ public class ConsentRequestDenyAPITest {
         Assert.assertEquals(denyConsentResponse.getStatusCode(), 204);
     }
 
-    @Test(dependsOnMethods = "denyConsentRequestAPI")
+    @Test(dependsOnMethods = "denyConsentRequestAPI",groups= {"All"})
     public void checkHIUConsentStatusAPI() {
 
         //fetch the consents list and fetch the status

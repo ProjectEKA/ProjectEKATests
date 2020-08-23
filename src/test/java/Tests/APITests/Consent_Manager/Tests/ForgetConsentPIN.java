@@ -1,6 +1,6 @@
 package Tests.APITests.Consent_Manager.Tests;
 
-import Tests.APITests.LoginUser;
+import Tests.APITests.Helpers.LoginUser;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

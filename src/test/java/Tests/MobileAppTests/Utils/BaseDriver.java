@@ -1,7 +1,7 @@
 package Tests.MobileAppTests.Utils;
 
 
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.PropertiesCache;
 import Tests.MobileAppTests.Pages.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -9,7 +9,6 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
-import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;

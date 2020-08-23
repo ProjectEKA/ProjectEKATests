@@ -1,4 +1,4 @@
-package Tests.APITests;
+package Tests.APITests.Helpers;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;

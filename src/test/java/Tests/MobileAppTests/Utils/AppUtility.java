@@ -1,6 +1,6 @@
 package Tests.MobileAppTests.Utils;
 
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.config.RedirectConfig;
 import io.restassured.config.RestAssuredConfig;

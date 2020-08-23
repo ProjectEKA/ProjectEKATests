@@ -1,4 +1,4 @@
-package Tests.APITests;
+package Tests.APITests.Helpers;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +22,7 @@ public class PropertiesCache {
         }
         else
             in = this.getClass().getClassLoader().getResourceAsStream("config-nhs-dev.properties");
-        System.out.println("Read all properties from file");
+            System.out.println("Read all properties from file");
         try {
             configProp.load(in);
         } catch (IOException e) {

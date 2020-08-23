@@ -3,7 +3,7 @@ package Tests.APITests.Consent_Manager;
 import Tests.APITests.Consent_Manager.Models.*;
 import Tests.APITests.Consent_Manager.Models.GrantConsent.*;
 import Tests.APITests.Consent_Manager.Models.RecoverHealthID.*;
-import Tests.APITests.PropertiesCache;
+import Tests.APITests.Helpers.PropertiesCache;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -15,14 +15,14 @@ import java.util.UUID;
 public class TestBuildersCM {
 
     public static LoginPatient loginPayload() {
-        return LoginPatient.builder().username(PropertiesCache.getInstance().getProperty("userName"))
+        return LoginPatient.builder().username(PropertiesCache.getInstance().getProperty("username"))
                 .password(PropertiesCache.getInstance().getProperty("password"))
                 .grantType("password")
                 .build();
     }
 
     public static LoginWithRefreshToken loginRefreshTokenPayload(String refreshToken) {
-        return LoginWithRefreshToken.builder().username(PropertiesCache.getInstance().getProperty("userName"))
+        return LoginWithRefreshToken.builder().username(PropertiesCache.getInstance().getProperty("username"))
                 .grantType("refresh_token")
                 .refreshToken(refreshToken)
                 .build();
