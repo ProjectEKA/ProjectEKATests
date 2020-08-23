@@ -1,7 +1,7 @@
 package tests.apitests.consentmanager.tests;
 
 import tests.apitests.consentmanager.utils.ConsentRequest;
-import tests.apitests.helpers.Utils.LoginUtil;
+import tests.apitests.helpers.utils.Login;
 import tests.apitests.helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -9,7 +9,7 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static tests.apitests.helpers.Utils.LoginUtil.getHIUAuthToken;
+import static tests.apitests.helpers.utils.Login.getHIUAuthToken;
 
 public class ConsentRequestDenyAPITest {
 
@@ -24,7 +24,7 @@ public class ConsentRequestDenyAPITest {
 
         //fetch consent-request id
         RequestSpecification request = RestAssured.given();
-        Response fetchConsentsResponse = request.header("Authorization", new LoginUtil().getHIUAuthToken())
+        Response fetchConsentsResponse = request.header("Authorization", new Login().getHIUAuthToken())
                 .get("/v1/hiu/consent-requests");
         consentRequestId = new ConsentRequest().fetchConsentRequestId(fetchConsentsResponse, patient);
         Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
@@ -34,7 +34,7 @@ public class ConsentRequestDenyAPITest {
     public void denyConsentRequestAPI() {
 
         //deny consent request at consent-manager
-        String authToken = new LoginUtil().getCMAuthToken();
+        String authToken = new Login().getCMAuthToken();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);

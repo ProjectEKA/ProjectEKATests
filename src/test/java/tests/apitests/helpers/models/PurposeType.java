@@ -1,4 +1,4 @@
-package tests.apitests.helpers.Models;
+package tests.apitests.helpers.models;
 
 public enum PurposeType {
     PUBHLTH,

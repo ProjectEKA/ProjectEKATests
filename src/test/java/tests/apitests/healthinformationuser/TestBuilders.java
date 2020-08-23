@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import static tests.apitests.helpers.Models.HealthInfoType.Prescription;
-import static tests.apitests.helpers.Models.PurposeType.PUBHLTH;
+import static tests.apitests.helpers.models.HealthInfoType.Prescription;
+import static tests.apitests.helpers.models.PurposeType.PUBHLTH;
 import static tests.apitests.helpers.TestDataLiterals.DATE_FORMAT;
 import static tests.apitests.helpers.TestDataLiterals.VIEW;
 

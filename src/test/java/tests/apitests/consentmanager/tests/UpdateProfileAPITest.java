@@ -1,6 +1,6 @@
 package tests.apitests.consentmanager.tests;
 
-import tests.apitests.helpers.Utils.LoginUtil;
+import tests.apitests.helpers.utils.Login;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -17,7 +17,7 @@ public class UpdateProfileAPITest {
 
     @BeforeClass
     public void setup() {
-        authToken = new LoginUtil().getCMAuthToken();
+        authToken = new Login().getCMAuthToken();
     }
 
     @Test

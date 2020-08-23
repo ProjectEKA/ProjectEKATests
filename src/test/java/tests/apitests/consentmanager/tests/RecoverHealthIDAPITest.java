@@ -1,6 +1,6 @@
 package tests.apitests.consentmanager.tests;
 
-import tests.apitests.helpers.Utils.LoginUtil;
+import tests.apitests.helpers.utils.Login;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -19,7 +19,7 @@ public class RecoverHealthIDAPITest {
 
     @BeforeClass
     public void setup() {
-        authToken = new LoginUtil().getCMAuthToken();
+        authToken = new Login().getCMAuthToken();
     }
 
     @Test(enabled = false)

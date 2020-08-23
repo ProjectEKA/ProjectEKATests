@@ -1,7 +1,7 @@
 package tests.apitests.consentmanager.utils;
 
 import tests.apitests.helpers.PropertiesCache;
-import tests.apitests.helpers.Utils.LoginUtil;
+import tests.apitests.helpers.utils.Login;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -20,7 +20,7 @@ public class ConsentRequest {
         RestAssured.useRelaxedHTTPSValidation();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        request.header("Authorization", new LoginUtil().getHIUAuthToken());
+        request.header("Authorization", new Login().getHIUAuthToken());
 
         request.body(createConsentRequestPayload(id));
         Response response = request.post("/v1/hiu/consent-requests");
@@ -30,7 +30,7 @@ public class ConsentRequest {
     public String verifyConsentPIN(String consent) {
 
         //verify consent-pin and generate pin-authorization token
-        String authToken = new LoginUtil().getCMAuthToken();
+        String authToken = new Login().getCMAuthToken();
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", authToken);

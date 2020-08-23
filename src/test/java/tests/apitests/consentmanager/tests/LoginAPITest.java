@@ -1,6 +1,6 @@
 package tests.apitests.consentmanager.tests;
 
-import tests.apitests.helpers.Utils.LoginUtil;
+import tests.apitests.helpers.utils.Login;
 import tests.apitests.helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -30,7 +30,7 @@ public class LoginAPITest {
 
     @Test
     public void loginWithRefreshTokenAPI() {
-        LoginUtil loginUser = new LoginUtil();
+        Login loginUser = new Login();
         refreshToken = loginUser.getCMRefreshToken();
         RequestSpecification request = RestAssured.given().spec(specification);
         request.header("Content-Type", "application/json");

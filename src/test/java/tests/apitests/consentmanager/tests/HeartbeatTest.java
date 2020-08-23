@@ -1,6 +1,6 @@
 package tests.apitests.consentmanager.tests;
 
-import tests.apitests.helpers.Utils.LoginUtil;
+import tests.apitests.helpers.utils.Login;
 import tests.apitests.helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -30,7 +30,7 @@ public class HeartbeatTest {
         //check status of redis cache and db with heartbeat call
         RequestSpecification request = RestAssured.given();
 
-        Response heartbeatResponse = request.header("Authorization", new LoginUtil().getCMAuthToken())
+        Response heartbeatResponse = request.header("Authorization", new Login().getCMAuthToken())
                 .get("/v0.5/heartbeat");
 
         Assert.assertEquals(heartbeatResponse.getStatusCode(), 200);

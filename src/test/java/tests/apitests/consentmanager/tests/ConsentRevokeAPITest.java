@@ -1,7 +1,7 @@
 package tests.apitests.consentmanager.tests;
 
 import tests.apitests.consentmanager.utils.ConsentRequest;
-import tests.apitests.helpers.Utils.LoginUtil;
+import tests.apitests.helpers.utils.Login;
 import tests.apitests.helpers.PropertiesCache;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -21,7 +21,7 @@ public class ConsentRevokeAPITest {
 
     @BeforeClass
     public void setup() {
-        hiuAuthToken = new LoginUtil().getHIUAuthToken();
+        hiuAuthToken = new Login().getHIUAuthToken();
     }
 
     @Test
@@ -74,7 +74,7 @@ public class ConsentRevokeAPITest {
     public void checkHIUConsentStatusAPI() {
 
         //fetch the consents list and fetch the status
-        String authToken = new LoginUtil().getHIUAuthToken();
+        String authToken = new Login().getHIUAuthToken();
         RequestSpecification request = RestAssured.given();
         Response consentStatusResponse = request.header("Authorization", authToken)
                 .get("/v1/hiu/consent-requests");

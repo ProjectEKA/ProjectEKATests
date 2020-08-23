@@ -1,4 +1,4 @@
-package tests.apitests.helpers.Utils;
+package tests.apitests.helpers.utils;
 
 import tests.apitests.helpers.PropertiesCache;
 import io.restassured.RestAssured;
@@ -9,7 +9,7 @@ import org.testng.Assert;
 import static tests.apitests.consentmanager.TestBuilders.loginPayload;
 import static tests.apitests.healthinformationuser.TestBuilders.loginDoctorPayload;
 
-public class LoginUtil {
+public class Login {
 
     public String getCMAuthToken() {
 
