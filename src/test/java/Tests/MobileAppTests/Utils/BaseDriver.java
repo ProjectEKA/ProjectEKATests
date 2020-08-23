@@ -1,7 +1,7 @@
 package Tests.MobileAppTests.Utils;
 
 
-import Tests.APITests.APIUtils.PropertiesCache;
+import Tests.APITests.PropertiesCache;
 import Tests.MobileAppTests.Pages.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;

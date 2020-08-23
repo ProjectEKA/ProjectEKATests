@@ -1,6 +1,6 @@
 package Tests.MobileAppTests.Tests;
 
-import Tests.APITests.APIUtils.APIUtils;
+import Tests.APITests.APIUtils;
 import Tests.MobileAppTests.Pages.HomePage;
 import Tests.MobileAppTests.Pages.LoginPage;
 import Tests.MobileAppTests.Pages.OTPPage;
