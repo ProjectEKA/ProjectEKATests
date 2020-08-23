@@ -13,7 +13,7 @@ public class ConsentRequestDenyAPITest {
 
     String consentRequestId;
 
-    @Test(groups= {"All"})
+    @Test
     public void HIUConsentRequestAPI() {
 
         //create consent-request
@@ -29,7 +29,7 @@ public class ConsentRequestDenyAPITest {
         Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "HIUConsentRequestAPI",groups= {"All"})
+    @Test(dependsOnMethods = "HIUConsentRequestAPI")
     public void denyConsentRequestAPI() {
 
         //deny consent request at consent-manager
@@ -42,7 +42,7 @@ public class ConsentRequestDenyAPITest {
         Assert.assertEquals(denyConsentResponse.getStatusCode(), 204);
     }
 
-    @Test(dependsOnMethods = "denyConsentRequestAPI",groups= {"All"})
+    @Test(dependsOnMethods = "denyConsentRequestAPI")
     public void checkHIUConsentStatusAPI() {
 
         //fetch the consents list and fetch the status

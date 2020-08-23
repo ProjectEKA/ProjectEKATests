@@ -28,7 +28,7 @@ public class LoginAPITest {
         specification = builder.build();
     }
 
-    @Test(groups= {"All"})
+    @Test
     public void loginWithRefreshTokenAPI() {
         LoginUtil loginUser = new LoginUtil();
         refreshToken = loginUser.getCMRefreshToken();

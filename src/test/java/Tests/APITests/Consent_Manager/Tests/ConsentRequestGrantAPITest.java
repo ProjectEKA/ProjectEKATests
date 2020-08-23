@@ -22,7 +22,7 @@ public class ConsentRequestGrantAPITest {
         hiuAuthToken = new LoginUtil().getHIUAuthToken();
     }
 
-    @Test(groups= {"All"})
+    @Test
     public void HIUConsentRequestAPI() {
 
         //create consent-request
@@ -39,7 +39,7 @@ public class ConsentRequestGrantAPITest {
             Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "HIUConsentRequestAPI", groups= {"All"})
+    @Test(dependsOnMethods = "HIUConsentRequestAPI")
     public void grantConsentRequestAPI() {
 
         //grant consent-request
@@ -53,7 +53,7 @@ public class ConsentRequestGrantAPITest {
         Assert.assertEquals(grantConsentResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "grantConsentRequestAPI", groups= {"All"})
+    @Test(dependsOnMethods = "grantConsentRequestAPI")
     public void checkHIUConsentStatusAPI() {
 
         //fetch the consents list and fetch the status

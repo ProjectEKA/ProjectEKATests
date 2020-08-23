@@ -24,7 +24,7 @@ public class ConsentRevokeAPITest {
         hiuAuthToken = new LoginUtil().getHIUAuthToken();
     }
 
-    @Test(groups= {"All"})
+    @Test
     public void HIUConsentRequestAPI() {
 
         //create consent-request
@@ -36,11 +36,12 @@ public class ConsentRevokeAPITest {
         RequestSpecification request = RestAssured.given();
         Response fetchConsentsResponse = request.header("Authorization", hiuAuthToken)
                 .get("/v1/hiu/consent-requests");
+
         consentRequestId = new ConsentUtil().fetchConsentRequestId(fetchConsentsResponse, patient);
         Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "HIUConsentRequestAPI", groups= {"All"})
+    @Test(dependsOnMethods = "HIUConsentRequestAPI")
     public void grantConsentRequestAPI() {
 
         //grant consent-request
@@ -55,7 +56,7 @@ public class ConsentRevokeAPITest {
         Assert.assertEquals(grantConsentResponse.getStatusCode(), 200);
     }
 
-    @Test(dependsOnMethods = "grantConsentRequestAPI", groups= {"All"})
+    @Test(dependsOnMethods = "grantConsentRequestAPI")
     public void revokeConsentRequestAPI() {
 
         //revoke consent-request
