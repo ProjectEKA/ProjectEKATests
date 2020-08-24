@@ -6,4 +6,5 @@ public enum PurposeType {
     BTG,
     DSRCH,
     PATRQT
+    //
 }
