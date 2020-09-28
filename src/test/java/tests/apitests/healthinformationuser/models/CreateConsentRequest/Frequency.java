@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Frequency {
-        public int value;
-        public String unit;
-        public int repeats;
-    }
+  public int value;
+  public String unit;
+  public int repeats;
+}

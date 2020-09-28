@@ -9,6 +9,5 @@ import lombok.ToString;
 @ToString
 public class CreateConsentRequest {
 
-    public Consent consent;
-
+  public Consent consent;
 }

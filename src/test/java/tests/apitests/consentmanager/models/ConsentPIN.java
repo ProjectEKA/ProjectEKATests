@@ -7,6 +7,5 @@ import lombok.Data;
 @Builder
 public class ConsentPIN {
 
-    String pin;
-
+  String pin;
 }

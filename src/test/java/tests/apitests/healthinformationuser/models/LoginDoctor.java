@@ -7,7 +7,6 @@ import lombok.Data;
 @Builder
 public class LoginDoctor {
 
-    String username;
-    String password;
-
+  String username;
+  String password;
 }

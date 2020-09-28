@@ -7,8 +7,7 @@ import lombok.Data;
 @Builder
 public class VerifyConsentPIN {
 
-    String pin;
-    String requestId;
-    String scope;
-
+  String pin;
+  String requestId;
+  String scope;
 }

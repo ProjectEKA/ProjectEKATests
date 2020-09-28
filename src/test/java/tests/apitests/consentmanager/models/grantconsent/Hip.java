@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Hip{
-        public String id;
-    }
+public class Hip {
+  public String id;
+}

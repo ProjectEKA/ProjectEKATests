@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Patient {
-    public String patientName;
-    public String mobile;
-    public String gender;
+  public String patientName;
+  public String mobile;
+  public String gender;
 }

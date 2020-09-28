@@ -7,8 +7,7 @@ import lombok.Data;
 @Builder
 public class DateOfBirth {
 
-    public int date;
-    public int month;
-    public int year;
-
+  public int date;
+  public int month;
+  public int year;
 }

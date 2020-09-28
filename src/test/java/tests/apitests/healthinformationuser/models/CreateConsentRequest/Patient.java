@@ -7,6 +7,5 @@ import lombok.Data;
 @Builder
 public class Patient {
 
-    public String id;
-
+  public String id;
 }

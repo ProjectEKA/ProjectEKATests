@@ -2,6 +2,7 @@ package tests.mobiletests.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import tests.apitests.consentmanager.utils.ConsentRequest;
 import tests.mobiletests.pages.HomePage;
 import tests.mobiletests.pages.LoginPage;
 import tests.mobiletests.pages.OTPPage;
@@ -9,7 +10,6 @@ import tests.mobiletests.pages.RegistrationPage;
 import tests.mobiletests.utils.AppUtility;
 import tests.mobiletests.utils.BaseDriver;
 import tests.mobiletests.utils.Patient;
-import tests.apitests.consentmanager.utils.ConsentRequest;
 
 public class RegistrationTest extends BaseDriver {
 

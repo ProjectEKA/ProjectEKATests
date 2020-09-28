@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class UpdatePassword {
 
-    String newPassword;
-    String oldPassword;
+  String newPassword;
+  String oldPassword;
 }

@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class Purpose {
-    public String code;
+  public String code;
 }
