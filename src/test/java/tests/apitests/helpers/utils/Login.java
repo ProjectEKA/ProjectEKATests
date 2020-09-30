@@ -13,6 +13,7 @@ public class Login {
 
     public String getCMAuthToken() {
 
+        String authToken = "";
         RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
         RestAssured.useRelaxedHTTPSValidation();
         RequestSpecification request = RestAssured.given();
@@ -22,7 +23,13 @@ public class Login {
         JsonPath jsonPathEvaluator = response.jsonPath();
         Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
         System.out.println("CM Login Successful");
-        return "Bearer " + jsonPathEvaluator.getString("accessToken");
+        if((PropertiesCache.getInstance().getProperty("ENVIRONMENT")).equalsIgnoreCase("nhaDev")) {
+            authToken = jsonPathEvaluator.getString(PropertiesCache.getInstance().getProperty("accessKey"));
+        }
+        else if((PropertiesCache.getInstance().getProperty("ENVIRONMENT")).equalsIgnoreCase("ncg")) {
+            authToken = "Bearer " + jsonPathEvaluator.getString(PropertiesCache.getInstance().getProperty("accessKey"));
+        }
+        return authToken;
     }
 
     public String getCMRefreshToken() {

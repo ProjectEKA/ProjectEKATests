@@ -7,7 +7,6 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import static tests.apitests.consentmanager.TestBuilders.*;
 
 public class UpdateProfileAPITest {
@@ -15,12 +14,12 @@ public class UpdateProfileAPITest {
     String authToken;
     String pinAuthToken;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setup() {
         authToken = new Login().getCMAuthToken();
     }
 
-    @Test
+    @Test(groups= {"nhaDev"})
     public void updatePasswordAPI() {
 
         //update password from profile
@@ -33,7 +32,7 @@ public class UpdateProfileAPITest {
         Assert.assertEquals(updatePasswordResponse.getStatusCode(), 200);
     }
 
-    @Test
+    @Test(groups= {"nhaDev"})
     public void verifyPINAPI() {
 
         //verify-pin for update-pin
@@ -47,7 +46,7 @@ public class UpdateProfileAPITest {
         pinAuthToken = verifyPINResponse.jsonPath().getString("temporaryToken");
     }
 
-    @Test(dependsOnMethods = "verifyPINAPI")
+    @Test(dependsOnMethods = "verifyPINAPI", groups= {"nhaDev"})
     public void updatePINAPI() {
 
         //update PIN from profile
