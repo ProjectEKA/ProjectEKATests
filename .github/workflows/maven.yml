@@ -7,7 +7,7 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:
       - master
-      - lombok-payloadss
+      - nha-devv-changes
 jobs:
   API-test-ncg:
     runs-on: ubuntu-latest
