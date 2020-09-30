@@ -9,7 +9,7 @@ on:
       - master
       - lombok-payloadss
 jobs:
-  API-test:
+  API-test-ncg:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -19,6 +19,32 @@ jobs:
           java-version: 11
       - name: Run tests
         run: mvn clean "-Dtest=*APITest" test
+        env:
+          ConsentManagerSecret: ${{ secrets.ConsentManagerSecret }} # required
+          HIPSecret: ${{ secrets.HIPSecret }} # required
+          env: ncg # required
+      - name: Print Run id
+        run: echo $GITHUB_RUN_ID
+      - uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+          text: Functional API Tests
+          channel: '#botcave'
+          only_mention_fail: USXBM5WPQ,here
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always()
+
+  API-test-nhaDev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Run tests
+        run: mvn clean "-Dgroups=nhaDev" test
         env:
           ConsentManagerSecret: ${{ secrets.ConsentManagerSecret }} # required
           HIPSecret: ${{ secrets.HIPSecret }} # required
