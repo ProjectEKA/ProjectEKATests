@@ -25,8 +25,8 @@ public class RegistrationPage extends WaitUtils {
   }
 
   public HomePage enterUserDetails(Patient patient, String username) {
-    waitForElementToBeVisible(registrationPageObjects.patientName)
-        .sendKeys(patient.getPatientName());
+    waitForElementToBeVisible(registrationPageObjects.firstName)
+        .sendKeys(patient.getFirstName());
     if (patient.getGender().equals("male")) {
       registrationPageObjects.genderMale.click();
     } else if (patient.getGender().equals("female")) {

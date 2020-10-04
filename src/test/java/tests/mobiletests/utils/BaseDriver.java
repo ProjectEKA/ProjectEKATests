@@ -8,6 +8,9 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import java.io.File;
+import java.io.FileFilter;
+
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
@@ -53,6 +56,7 @@ public class BaseDriver {
     capabilities.setCapability("deviceName", "Android Emulator");
     capabilities.setCapability("app", app.getAbsolutePath());
     capabilities.setCapability("automationName", "UIAutomator2");
+    capabilities.setCapability("autoGrantPermissions", "true");
     capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 700000);
 
     capabilities.setCapability(
