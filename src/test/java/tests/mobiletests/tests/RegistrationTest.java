@@ -13,10 +13,16 @@ import tests.mobiletests.utils.Patient;
 
 public class RegistrationTest extends BaseDriver {
 
-  @Test
-  public void registerLinkCareContext() {
+  @Test(enabled = false)
+  public void registerUser() {
     String userName = "TestUser" + AppUtility.generateRandomNo();
-    Patient patient = new Patient("Hina Patel", "8888888888", "female");
+    Patient patient =
+        Patient.builder()
+            .firstName("Hina")
+            .lastName("Patel")
+            .mobile("8888888888")
+            .gender("female")
+            .build();
     HomePage homePage =
         new LoginPage(driver)
             .navigateToCreateAccount()
@@ -34,10 +40,16 @@ public class RegistrationTest extends BaseDriver {
         "Patient Name not displayed on Link Provider screen");
   }
 
-  @Test
+  @Test(enabled = false)
   public void grantConsent() {
     String userName = "TestUser" + AppUtility.generateRandomNo();
-    Patient patient = new Patient("John  Doe", "9999999999", "male");
+    Patient patient =
+        Patient.builder()
+            .firstName("John")
+            .lastName("Doe")
+            .mobile("9999999999")
+            .gender("male")
+            .build();
     HomePage homePage =
         new LoginPage(driver)
             .navigateToCreateAccount()

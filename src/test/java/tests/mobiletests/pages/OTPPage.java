@@ -14,11 +14,10 @@ public class OTPPage extends WaitUtils {
     super(driver);
     otpPageObjects = new OTPPageObjects();
     PageFactory.initElements(new AppiumFieldDecorator(driver), otpPageObjects);
-    refreshAndwaitForElementToBeVisible(otpPageObjects.continueButton);
   }
 
   public <T> T enterOTP(T nextPage) {
-    waitForElement(otpPageObjects.otpField).sendKeys("666666");
+    otpPageObjects.otpField.sendKeys("666666");
     otpPageObjects.continueButton.click();
     return nextPage;
   }

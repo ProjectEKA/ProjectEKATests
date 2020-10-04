@@ -14,7 +14,6 @@ public class LinkAccountsPage extends WaitUtils {
     super(driver);
     linkAccountsPageObjects = new LinkAccountsPageObjects();
     PageFactory.initElements(new AppiumFieldDecorator(driver), linkAccountsPageObjects);
-    waitForElement(linkAccountsPageObjects.patientName);
   }
 
   public String getPatientName() {

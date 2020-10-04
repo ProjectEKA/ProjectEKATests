@@ -26,12 +26,5 @@ public class NHAFlow extends WaitUtils implements IRunner {
     loginPageObjects.userName.sendKeys(username);
     loginPageObjects.password.sendKeys(password);
     loginPageObjects.loginButton.click();
-    try {
-      Thread.sleep(10000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    //        System.out.println(driver.getPageSource());
-    waitForElement(loginPageObjects.allowPermission).click();
   }
 }

@@ -7,8 +7,12 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.HowToUseLocators;
 
 public class HomePageObjects {
-
+  @HowToUseLocators(androidAutomation = ALL_POSSIBLE)
   @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/fab")
+  @AndroidFindBy(id = "in.ndhm.phr.debug:id/action_accounts")
+  public MobileElement providerScreenPane;
+
+  @AndroidFindBy(id = "in.ndhm.phr.debug:id/fab")
   public MobileElement addProvider;
 
   @AndroidFindBy(id = "in.projecteka.jataayu.debug:id/tv_patient_name")
