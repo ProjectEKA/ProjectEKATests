@@ -1,5 +1,7 @@
 package tests.apitests.consentmanager.tests;
 
+import static tests.apitests.consentmanager.TestBuilders.*;
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -7,8 +9,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import tests.apitests.helpers.utils.Login;
-
-import static tests.apitests.consentmanager.TestBuilders.*;
 
 public class UpdateProfileAPITest {
 

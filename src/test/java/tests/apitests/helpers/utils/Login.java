@@ -14,51 +14,52 @@ public class Login {
 
   public String getCMAuthToken() {
 
-        String authToken = "";
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json");
+    String authToken = "";
+    RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
+    RestAssured.useRelaxedHTTPSValidation();
+    RequestSpecification request = RestAssured.given();
+    request.header("Content-Type", "application/json");
 
-        Response response = request.body(loginPayload()).post("/sessions");
-        JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
-        System.out.println("CM Login Successful");
-        if((PropertiesCache.getInstance().getProperty("ENVIRONMENT")).equalsIgnoreCase("nhaDev")) {
-            authToken = jsonPathEvaluator.getString(PropertiesCache.getInstance().getProperty("accessKey"));
-        }
-        else if((PropertiesCache.getInstance().getProperty("ENVIRONMENT")).equalsIgnoreCase("ncg")) {
-            authToken = "Bearer " + jsonPathEvaluator.getString(PropertiesCache.getInstance().getProperty("accessKey"));
-        }
-        return authToken;
+    Response response = request.body(loginPayload()).post("/sessions");
+    JsonPath jsonPathEvaluator = response.jsonPath();
+    Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+    System.out.println("CM Login Successful");
+    if ((PropertiesCache.getInstance().getProperty("ENVIRONMENT")).equalsIgnoreCase("nhaDev")) {
+      authToken =
+          jsonPathEvaluator.getString(PropertiesCache.getInstance().getProperty("accessKey"));
+    } else if ((PropertiesCache.getInstance().getProperty("ENVIRONMENT")).equalsIgnoreCase("ncg")) {
+      authToken =
+          "Bearer "
+              + jsonPathEvaluator.getString(PropertiesCache.getInstance().getProperty("accessKey"));
     }
+    return authToken;
+  }
 
-    public String getCMRefreshToken() {
+  public String getCMRefreshToken() {
 
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json");
+    RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
+    RestAssured.useRelaxedHTTPSValidation();
+    RequestSpecification request = RestAssured.given();
+    request.header("Content-Type", "application/json");
 
-        Response response = request.body(loginPayload()).post("/sessions");
-        JsonPath jsonPathEvaluator = response.jsonPath();
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
-        System.out.println("CM Login Successful");
-        return jsonPathEvaluator.getString("refreshToken");
-    }
+    Response response = request.body(loginPayload()).post("/sessions");
+    JsonPath jsonPathEvaluator = response.jsonPath();
+    Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+    System.out.println("CM Login Successful");
+    return jsonPathEvaluator.getString("refreshToken");
+  }
 
-    public static String getHIUAuthToken() {
-        RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBaseURL");
-        RestAssured.useRelaxedHTTPSValidation();
-        RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json");
+  public static String getHIUAuthToken() {
+    RestAssured.baseURI = PropertiesCache.getInstance().getProperty("HIUBaseURL");
+    RestAssured.useRelaxedHTTPSValidation();
+    RequestSpecification request = RestAssured.given();
+    request.header("Content-Type", "application/json");
 
-        Response response = request.body(loginDoctorPayload()).post("/sessions");
-        JsonPath jsonPathEvaluator = response.jsonPath();
+    Response response = request.body(loginDoctorPayload()).post("/sessions");
+    JsonPath jsonPathEvaluator = response.jsonPath();
 
-        Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
-        System.out.println("HIU Login Successful");
-        return jsonPathEvaluator.getString("accessToken");
-    }
-
+    Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
+    System.out.println("HIU Login Successful");
+    return jsonPathEvaluator.getString("accessToken");
+  }
 }

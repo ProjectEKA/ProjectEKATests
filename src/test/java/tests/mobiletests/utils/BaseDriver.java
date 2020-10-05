@@ -9,7 +9,6 @@ import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyE
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import java.io.File;
 import java.io.FileFilter;
-
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
