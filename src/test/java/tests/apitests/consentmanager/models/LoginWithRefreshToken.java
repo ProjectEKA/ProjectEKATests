@@ -7,8 +7,7 @@ import lombok.Data;
 @Builder
 public class LoginWithRefreshToken {
 
-    String username;
-    String grantType;
-    String refreshToken;
-
+  String username;
+  String grantType;
+  String refreshToken;
 }

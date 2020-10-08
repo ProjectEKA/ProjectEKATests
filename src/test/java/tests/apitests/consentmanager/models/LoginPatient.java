@@ -7,8 +7,7 @@ import lombok.Data;
 @Builder
 public class LoginPatient {
 
-    String username;
-    String password;
-    String grantType;
-
+  String username;
+  String password;
+  String grantType;
 }

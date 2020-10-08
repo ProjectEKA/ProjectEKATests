@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CareContext{
-    public String careContextReference;
-    public String patientReference;
+public class CareContext {
+  public String careContextReference;
+  public String patientReference;
 }

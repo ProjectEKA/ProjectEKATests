@@ -7,8 +7,7 @@ import lombok.Data;
 @Builder
 public class Name {
 
-    public String first;
-    public String middle;
-    public String last;
-
+  public String first;
+  public String middle;
+  public String last;
 }

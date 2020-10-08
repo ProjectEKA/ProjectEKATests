@@ -1,13 +1,12 @@
 package tests.apitests.consentmanager.models;
 
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
-import java.util.List;
 
 @Data
 @Builder
 public class ConsentRequestFetchStatus {
 
-    public List<Object> requestIds;
-
+  public List<Object> requestIds;
 }

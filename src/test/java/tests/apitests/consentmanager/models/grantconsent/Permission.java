@@ -8,8 +8,8 @@ import lombok.ToString;
 @Builder
 @ToString
 public class Permission {
-    public String accessMode;
-    public String dataEraseAt;
-    public DateRange dateRange;
-    public Frequency frequency;
+  public String accessMode;
+  public String dataEraseAt;
+  public DateRange dateRange;
+  public Frequency frequency;
 }

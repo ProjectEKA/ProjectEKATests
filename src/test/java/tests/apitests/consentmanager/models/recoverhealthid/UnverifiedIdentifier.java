@@ -7,7 +7,6 @@ import lombok.Data;
 @Builder
 public class UnverifiedIdentifier {
 
-    public String type;
-    public String value;
-
+  public String type;
+  public String value;
 }

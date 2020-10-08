@@ -7,6 +7,5 @@ import lombok.Data;
 @Builder
 public class Logout {
 
-    String refreshToken;
-
+  String refreshToken;
 }

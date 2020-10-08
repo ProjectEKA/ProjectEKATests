@@ -7,6 +7,5 @@ import lombok.Data;
 @Builder
 public class ResetPasswordInit {
 
-    String username;
-
+  String username;
 }
