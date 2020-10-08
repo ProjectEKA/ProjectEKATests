@@ -25,16 +25,16 @@ public class BaseDriver {
 
   @BeforeClass
   public void setUp() {
-    //    service =
-    //        AppiumDriverLocalService.buildService(
-    //            new AppiumServiceBuilder()
-    //                .usingAnyFreePort()
-    //                .usingDriverExecutable(
-    //                    new
-    // File("/Users/gopishankarharidas/.nvm/versions/node/v10.16.3/bin/node"))
-    //                .withAppiumJS(
-    //                    new
-    // File("/Users/gopishankarharidas/.nvm/versions/node/v10.16.3/bin/appium")));
+    //        service =
+    //            AppiumDriverLocalService.buildService(
+    //                new AppiumServiceBuilder()
+    //                    .usingAnyFreePort()
+    //                    .usingDriverExecutable(
+    //                        new
+    //     File("/Users/gopishankarharidas/.nvm/versions/node/v10.16.3/bin/node"))
+    //                    .withAppiumJS(
+    //                        new
+    //     File("/Users/gopishankarharidas/.nvm/versions/node/v10.16.3/bin/appium")));
 
     service = AppiumDriverLocalService.buildDefaultService();
 
