@@ -15,7 +15,7 @@ public class NHAFlow extends WaitUtils implements IRunner {
 
   @Override
   public void moveSplashScreens(BasePageObjects basePageObjects) {
-
+    System.out.println("INSIDE NHA SPLASH SCREEN");
     if (isElementPresent(basePageObjects.skipButton)) {
       refreshAndwaitForElementToBeVisible(basePageObjects.skipButton).click();
     }

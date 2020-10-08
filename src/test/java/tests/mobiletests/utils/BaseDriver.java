@@ -73,6 +73,7 @@ public class BaseDriver {
   }
 
   private void handleSplashScreen() {
+    System.out.println("INSIDE HANDLE SPLASH SCREEN METHOD");
     new BasePage(driver).moveSplashScreens();
   }
 

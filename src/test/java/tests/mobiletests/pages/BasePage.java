@@ -17,6 +17,7 @@ public class BasePage extends WaitUtils {
   }
 
   public LoginPage moveSplashScreens() {
+    System.out.println("INSIDE MOVE SPLASH SCREEN"+runner);
     runner.moveSplashScreens(basePageObjects);
     return new LoginPage(driver);
   }
