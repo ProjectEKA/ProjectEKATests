@@ -18,6 +18,9 @@
         <rest-assured.version>4.2.0</rest-assured.version>
         <spotless-maven-plugin.version>2.3.0</spotless-maven-plugin.version>
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+        <checkstyle-configuration>/config/checkstyle/checkstyle.xml</checkstyle-configuration>
+        <maven-pmd-plugin>3.13.0</maven-pmd-plugin>
+        <pmd-ruleset-path>/config/pmd/pmd-ruleset.xml</pmd-ruleset-path>
     </properties>
 
     <dependencies>
@@ -102,7 +105,30 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <configLocation>/config/checkstyle/checkstyle.xml</configLocation>
+                        <configLocation>${checkstyle-configuration}</configLocation>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${maven-pmd-plugin}</version>
+                    <executions>
+                        <execution>
+                            <id>report</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <linkXRef>true</linkXRef>
+                        <rulesets>
+                            <ruleset>${pmd-ruleset-path}</ruleset>
+                        </rulesets>
+                        <sourceEncoding>utf-8</sourceEncoding>
+                        <targetJdk>${java.version}</targetJdk>
+                        <outputDirectory>target/reports/pmd.html</outputDirectory>
                     </configuration>
                 </plugin>
             </plugins>
