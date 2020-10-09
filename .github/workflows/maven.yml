@@ -116,8 +116,8 @@ jobs:
         with:
           arch: x86_64
           api-level: 29
-          avd-name: system-images/android-29/google_apis_playstore/x86/
-#          playstore.enabled: true
+          avd-name: emulator
+          playstore.enabled: true
           script: mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
         env:
           Authorization: ${{ secrets.Authorization }}
