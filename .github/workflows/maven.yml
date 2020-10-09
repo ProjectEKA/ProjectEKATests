@@ -114,8 +114,10 @@ jobs:
       - name: run mobile tests on NHS Dev
         uses: reactivecircus/android-emulator-runner@v2
         with:
+          arch: x86_64
           api-level: 29
-          profile: Pixel 2
+          avd-name: system-images/android-29/google_apis_playstore/x86/
+#          playstore.enabled: true
           script: mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
         env:
           Authorization: ${{ secrets.Authorization }}
