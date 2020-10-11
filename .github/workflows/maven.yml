@@ -7,7 +7,7 @@ on:
     # Sequence of patterns matched against refs/heads
     branches:
       - master
-      - nha-devv-changes
+      - pipeline-fixed
 jobs:
   API-test-ncg:
     runs-on: ubuntu-latest
