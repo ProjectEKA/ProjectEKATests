@@ -1,7 +1,5 @@
 package tests.apitests.consentmanager.tests;
 
-import static tests.apitests.consentmanager.TestBuilders.*;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -9,6 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import tests.apitests.helpers.PropertiesCache;
+
+import static tests.apitests.consentmanager.TestBuilders.*;
 
 public class ResetPasswordAPITest {
 
@@ -23,7 +23,7 @@ public class ResetPasswordAPITest {
     request = RestAssured.given();
   }
 
-  @Test
+  @Test(alwaysRun = true)
   public void generateOTPAPI() {
     // generate otp for enter phone #
     request.header("Content-Type", "application/json");

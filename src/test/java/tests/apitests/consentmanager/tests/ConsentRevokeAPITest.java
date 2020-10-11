@@ -1,8 +1,5 @@
 package tests.apitests.consentmanager.tests;
 
-import static tests.apitests.consentmanager.TestBuilders.grantConsentPayload;
-import static tests.apitests.consentmanager.TestBuilders.revokeConsentPayload;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -13,13 +10,16 @@ import tests.apitests.consentmanager.utils.ConsentRequest;
 import tests.apitests.helpers.PropertiesCache;
 import tests.apitests.helpers.utils.Login;
 
+import static tests.apitests.consentmanager.TestBuilders.grantConsentPayload;
+import static tests.apitests.consentmanager.TestBuilders.revokeConsentPayload;
+
 public class ConsentRevokeAPITest {
 
   String consentArtefactId;
   String consentRequestId;
   String hiuAuthToken;
 
-  @BeforeClass
+  @BeforeClass(alwaysRun = true)
   public void setup() {
     hiuAuthToken = new Login().getHIUAuthToken();
   }

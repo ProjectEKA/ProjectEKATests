@@ -1,7 +1,5 @@
 package tests.apitests.consentmanager.tests;
 
-import static tests.apitests.consentmanager.TestBuilders.discoverProviderPayload;
-
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -11,10 +9,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import tests.apitests.helpers.utils.Login;
 
+import static tests.apitests.consentmanager.TestBuilders.discoverProviderPayload;
+
 public class DiscoveryAPITest {
   String authToken;
 
-  @BeforeClass
+  @BeforeClass(alwaysRun = true)
   public void setup() {
     authToken = new Login().getCMAuthToken();
   }

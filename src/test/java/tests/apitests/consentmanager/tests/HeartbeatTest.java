@@ -15,7 +15,7 @@ public class HeartbeatTest {
 
   RequestSpecification specification;
 
-  @BeforeClass
+  @BeforeClass(alwaysRun = true)
   public void setup() {
 
     RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
@@ -25,7 +25,7 @@ public class HeartbeatTest {
     specification = builder.build();
   }
 
-  @Test
+  @Test(groups = {"nhsDev"})
   public void heartbeatAPI() {
     // check status of redis cache and db with heartbeat call
     RequestSpecification request = RestAssured.given();

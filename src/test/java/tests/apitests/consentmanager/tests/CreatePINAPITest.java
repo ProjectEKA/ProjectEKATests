@@ -1,7 +1,5 @@
 package tests.apitests.consentmanager.tests;
 
-import static tests.apitests.consentmanager.TestBuilders.consentPINPayload;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -9,17 +7,18 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import tests.apitests.helpers.utils.Login;
+import static tests.apitests.consentmanager.TestBuilders.consentPINPayload;
 
 public class CreatePINAPITest {
 
   String authToken;
 
-  @BeforeClass
+  @BeforeClass(alwaysRun = true)
   public void setup() {
     authToken = new Login().getCMAuthToken();
   }
 
-  @Test
+  @Test(groups = {"nhsDev"})
   public void createPINAPI() {
 
     // checks if the patient has consent-pin created
