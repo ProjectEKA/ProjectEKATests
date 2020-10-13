@@ -1,7 +1,5 @@
 package tests.apitests.consentmanager.tests;
 
-import static tests.apitests.consentmanager.TestBuilders.loginRefreshTokenPayload;
-
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -14,11 +12,13 @@ import org.testng.annotations.Test;
 import tests.apitests.helpers.PropertiesCache;
 import tests.apitests.helpers.utils.Login;
 
+import static tests.apitests.consentmanager.TestBuilders.loginRefreshTokenPayload;
+
 public class LoginAPITest {
   String refreshToken;
   RequestSpecification specification;
 
-  @BeforeClass
+  @BeforeClass(alwaysRun = true)
   public void setup() {
 
     RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");

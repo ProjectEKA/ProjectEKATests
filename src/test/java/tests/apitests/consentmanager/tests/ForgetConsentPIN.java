@@ -1,7 +1,5 @@
 package tests.apitests.consentmanager.tests;
 
-import static tests.apitests.consentmanager.TestBuilders.*;
-
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -11,6 +9,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import tests.apitests.helpers.utils.Login;
 
+import static tests.apitests.consentmanager.TestBuilders.resetPINPayload;
+import static tests.apitests.consentmanager.TestBuilders.verifyOTP;
+
 public class ForgetConsentPIN {
 
   String authToken;
@@ -18,7 +19,7 @@ public class ForgetConsentPIN {
   RequestSpecification request;
   JsonPath jsonPathEvaluator;
 
-  @BeforeClass
+  @BeforeClass(alwaysRun = true)
   public void setup() {
     authToken = new Login().getCMAuthToken();
   }
