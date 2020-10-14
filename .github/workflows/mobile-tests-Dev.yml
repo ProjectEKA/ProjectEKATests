@@ -1,13 +1,8 @@
 name: Java CI
 
 on:
-  repository_dispatch:
-    types: run-tests
-  push:
-    # Sequence of patterns matched against refs/heads
-    branches:
-      - master
-      - nha-devv-changes
+  workflow_dispatch:
+
 jobs:
   mobile-test-nhs-dev:
     runs-on: macOS-latest
