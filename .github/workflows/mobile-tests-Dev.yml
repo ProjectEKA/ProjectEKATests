@@ -1,4 +1,4 @@
-name: Java CI
+name: Manual workflow on Dev
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           arch: x86_64
-          api-level: 29
+          api-level: 27
           avd-name: emulator
           playstore.enabled: true
           script: mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
