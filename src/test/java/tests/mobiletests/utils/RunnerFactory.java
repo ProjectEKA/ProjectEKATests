@@ -8,6 +8,8 @@ public class RunnerFactory {
   public static IRunner runner;
 
   public void instantiateRunner(AppiumDriver driver) {
+    System.out.println("ENVIRONMENT ---> " + System.getenv("env"));
+    System.out.println("DRIVER ---> " + driver.getClass().getName());
     String env = System.getenv("env");
     switch (env) {
       case "ncg":
