@@ -114,7 +114,7 @@ jobs:
       - name: run mobile tests on NHS Dev
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          arch: x86_64
+          arch: x86
           api-level: 27
           script: mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
         env:
