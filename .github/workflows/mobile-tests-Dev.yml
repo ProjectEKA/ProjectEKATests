@@ -24,7 +24,6 @@ jobs:
           arch: x86_64
           api-level: 27
           avd-name: emulator
-          playstore.enabled: true
           script: mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
         env:
           Authorization: ${{ secrets.Authorization }}
