@@ -23,7 +23,7 @@ jobs:
         with:
           api-level: 29
           profile: Nexus 6
-          script: mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
+          script: avdmanager list && mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
         env:
           Authorization: ${{ secrets.Authorization }}
           env: nhsDev # required
