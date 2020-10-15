@@ -26,7 +26,8 @@ jobs:
       - name: run mobile tests on NHS Dev
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
+          arch: x86
+          api-level: 27
           target: google_apis
           profile: pixel_2
           script: avdmanager list && mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
