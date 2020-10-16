@@ -102,7 +102,7 @@ public class AppUtility {
               response.getBody().asString(),
               "$.artifacts[?(@.name=~ /^.*" + System.getenv("env") + ".*$/)].archive_download_url");
       System.out.println("INSIDE NHA BLOCK ENV ---> "+ System.getenv("env"));
-      System.out.println("INSIDE NHA BLOCK artifact ---> "+ artifact.get(0));
+      System.out.println("INSIDE NHA BLOCK artifact ---> "+ artifact);
       return artifact.get(0).toString();
     }
   }
