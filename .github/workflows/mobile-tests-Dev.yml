@@ -29,7 +29,7 @@ jobs:
           api-level: 29
           target: playstore
           profile: pixel_2
-          script: avdmanager list && mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
+          script: mvn clean "-Dtest=/**/mobiletests/tests/*Test" test
         env:
           Authorization: ${{ secrets.Authorization }}
           env: nhsDev # required
