@@ -28,7 +28,8 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          profile: Nexus 6
+          target: playstore
+          profile: pixel_2
           script: mvn clean "-Dtest=/**/mobiletests/tests/*Test" test
         env:
           Authorization: ${{ secrets.Authorization }}
