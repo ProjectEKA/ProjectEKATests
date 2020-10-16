@@ -2,6 +2,11 @@ name: Manual workflow on Dev
 
 on:
   workflow_dispatch:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - master
+      - refactor-mobile-tests
 
 jobs:
   mobile-test-nhs-dev:
@@ -22,8 +27,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          profile: Pixel 2
-          script: avdmanager list && mvn clean "-Dtest=/**/mobiletests/tests/LoginTest" test
+          target: playstore
+          profile: pixel_2
+          script: mvn clean "-Dtest=/**/mobiletests/tests/*Test" test
         env:
           Authorization: ${{ secrets.Authorization }}
           env: nhsDev # required
