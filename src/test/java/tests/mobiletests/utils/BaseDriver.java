@@ -6,8 +6,7 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
-import java.io.File;
-import java.io.FileFilter;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,6 +16,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import tests.apitests.helpers.PropertiesCache;
 import tests.mobiletests.pages.BasePage;
+
+import java.io.File;
+import java.io.FileFilter;
 
 public class BaseDriver {
   private static String path = null;
@@ -48,13 +50,9 @@ public class BaseDriver {
 
   @BeforeMethod
   public void beforeMethod() {
-    File dir = new File(path);
-    FileFilter fileFilter = new WildcardFileFilter("*.apk");
-    File[] files = dir.listFiles(fileFilter);
-    File app = new File(String.valueOf(files[0]));
     DesiredCapabilities capabilities = new DesiredCapabilities();
     capabilities.setCapability("deviceName", "Android Emulator");
-    capabilities.setCapability("app", app.getAbsolutePath());
+    capabilities.setCapability("app", getAppFromPath().getAbsolutePath());
     capabilities.setCapability("automationName", "UIAutomator2");
     capabilities.setCapability("autoGrantPermissions", "true");
     capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 700000);
@@ -72,11 +70,6 @@ public class BaseDriver {
     handleSplashScreen();
   }
 
-  private void handleSplashScreen() {
-    System.out.println("INSIDE HANDLE SPLASH SCREEN METHOD");
-    new BasePage(driver).moveSplashScreens();
-  }
-
   @AfterMethod
   public void quitApp() {
     if (driver != null) {
@@ -89,5 +82,16 @@ public class BaseDriver {
     if (service != null) {
       service.stop();
     }
+  }
+
+  private File getAppFromPath() {
+    File dir = new File(path);
+    FileFilter fileFilter = new WildcardFileFilter("*.apk");
+    File[] files = dir.listFiles(fileFilter);
+    return new File(String.valueOf(files[0]));
+  }
+
+  private void handleSplashScreen() {
+    new BasePage(driver).moveSplashScreens();
   }
 }
