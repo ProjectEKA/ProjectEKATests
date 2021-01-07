@@ -38,7 +38,6 @@ public class RegistrationPage extends WaitUtils {
     registrationPageObjects.cmID.sendKeys(username);
     registrationPageObjects.confirmPassword.sendKeys("Test@135");
     registrationPageObjects.confirmRegisterButton.click();
-    waitForElementToBeVisible(registrationPageObjects.confirmationMessage);
     registrationPageObjects.confirmRegisterButton.click();
     return new HomePage(driver);
   }

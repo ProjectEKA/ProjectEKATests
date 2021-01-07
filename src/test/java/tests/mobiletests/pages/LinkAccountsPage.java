@@ -15,13 +15,4 @@ public class LinkAccountsPage extends WaitUtils {
     linkAccountsPageObjects = new LinkAccountsPageObjects();
     PageFactory.initElements(new AppiumFieldDecorator(driver), linkAccountsPageObjects);
   }
-
-  public String getPatientName() {
-    return linkAccountsPageObjects.patientName.getText();
-  }
-
-  public OTPPage linkCareContext() {
-    linkAccountsPageObjects.linkSelected.click();
-    return new OTPPage(driver);
-  }
 }

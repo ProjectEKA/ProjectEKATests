@@ -24,11 +24,6 @@ public class LoginPage extends WaitUtils {
     return new HomePage(driver);
   }
 
-  public HomePage loginUser(String username, String password) {
-    runner.login(loginPageObjects, username, password);
-    return new HomePage(driver);
-  }
-
   public RegistrationPage navigateToCreateAccount() {
     driver.hideKeyboard();
     loginPageObjects.registerButton.click();

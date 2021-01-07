@@ -23,8 +23,6 @@ public class OTPPage extends WaitUtils {
   }
 
   public <T> T enterPin(T nextPage, String text) {
-    waitForSpecificTextToBeDisplayed(otpPageObjects.consentPinLabel, text);
-    otpPageObjects.consentPin.sendKeys("1234");
     otpPageObjects.continueButton.click();
     return nextPage;
   }

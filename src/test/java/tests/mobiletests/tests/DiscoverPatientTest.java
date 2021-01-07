@@ -11,8 +11,9 @@ public class DiscoverPatientTest extends BaseDriver {
   public void discoverPatientTest() {
     new LoginPage(driver)
         .loginUser()
+        .agreeTermsAndConditions()
         .clickAddNewProvider()
-        .searchAndSelectProvider("Max")
+        .searchAndSelectProvider("max")
         .clickConfirmProvider();
   }
 

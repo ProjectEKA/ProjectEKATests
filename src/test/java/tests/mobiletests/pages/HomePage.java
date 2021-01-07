@@ -41,8 +41,10 @@ public class HomePage extends WaitUtils {
     return waitForTextToAppear(homePageObjects.snackBar).getText();
   }
 
-  public boolean isRequestedDateDisplayed() {
-    return isElementPresent(homePageObjects.requestedDate);
+  public HomePage agreeTermsAndConditions() {
+    waitForElement(homePageObjects.agreeTermsAndConditions);
+    homePageObjects.agreeTermsAndConditions.click();
+    return new HomePage(driver);
   }
 
   public boolean validateHomePage() {

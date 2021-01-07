@@ -9,7 +9,7 @@ public class LoginTest extends BaseDriver {
 
   @Test
   public void loginUser() {
-    boolean status = new LoginPage(driver).loginUser().validateHomePage();
+    boolean status = new LoginPage(driver).loginUser().agreeTermsAndConditions().validateHomePage();
     Assert.assertTrue(status);
   }
 }
