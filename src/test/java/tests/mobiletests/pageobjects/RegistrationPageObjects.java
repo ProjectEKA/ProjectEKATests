@@ -2,7 +2,6 @@ package tests.mobiletests.pageobjects;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-
 import java.util.List;
 
 public class RegistrationPageObjects {
@@ -65,5 +64,4 @@ public class RegistrationPageObjects {
 
   @AndroidFindBy(id = "in.ndhm.phr.debug:id/btn_confirm_registration")
   public MobileElement confirmRegisterButton;
-
 }

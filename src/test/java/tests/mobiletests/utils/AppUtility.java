@@ -6,14 +6,12 @@ import io.restassured.config.RestAssuredConfig;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import net.minidev.json.JSONArray;
-import tests.apitests.helpers.PropertiesCache;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Random;
+import net.minidev.json.JSONArray;
+import tests.apitests.helpers.PropertiesCache;
 
 public class AppUtility {
 
@@ -32,7 +30,7 @@ public class AppUtility {
   // static method to create instance of Singleton class
   public static AppUtility getInstance() {
     if (instance == null) instance = new AppUtility();
-      System.out.println("INSIDE GET INSTANCE");
+    System.out.println("INSIDE GET INSTANCE");
 
     return instance;
   }
@@ -54,11 +52,11 @@ public class AppUtility {
             .header("Authorization", "token " + System.getenv("Authorization"))
             .get(repoURL); // NCG yml file
 
-    System.out.println("INSIDE RESPONSE BODY ------> "+ response.getBody());
-    System.out.println("INSIDE RESPONSE STATUS CODE ------> "+ response.getStatusCode());
+    System.out.println("INSIDE RESPONSE BODY ------> " + response.getBody());
+    System.out.println("INSIDE RESPONSE STATUS CODE ------> " + response.getStatusCode());
     JsonPath jsonPathEvaluator = response.jsonPath();
     String run_id = jsonPathEvaluator.getString("workflow_runs[0].id");
-    System.out.println("INSIDE RUN_ID" +run_id);
+    System.out.println("INSIDE RUN_ID" + run_id);
 
     System.out.println("Getting artifacts for the run id - " + run_id);
 
@@ -78,7 +76,7 @@ public class AppUtility {
   }
 
   private String getArtifactURL(String run_id) {
-    System.out.println("INSIDE GET ARTIFACT ULR method -->"+run_id);
+    System.out.println("INSIDE GET ARTIFACT ULR method -->" + run_id);
     Response response;
     JsonPath jsonPathEvaluator;
     RequestSpecification request1 = RestAssured.given();
@@ -90,20 +88,19 @@ public class AppUtility {
                     PropertiesCache.getInstance().getProperty("artifactURL")
                         + "actions/runs/%s/artifacts",
                     run_id));
-      System.out.println("INSIDE GET ARTIFACT response body -->"+response.getBody());
-      System.out.println("INSIDE GET ARTIFACT response url -->"+response.getStatusCode());
+    System.out.println("INSIDE GET ARTIFACT response body -->" + response.getBody());
+    System.out.println("INSIDE GET ARTIFACT response url -->" + response.getStatusCode());
     jsonPathEvaluator = response.jsonPath();
     if (System.getenv("env").equals("ncg")) {
-      System.out.println("INSIDE NCG BLOCK --> "+ jsonPathEvaluator);
+      System.out.println("INSIDE NCG BLOCK --> " + jsonPathEvaluator);
       return jsonPathEvaluator.getString("artifacts[0].archive_download_url");
-      }
-    else {
+    } else {
       JSONArray artifact =
           com.jayway.jsonpath.JsonPath.read(
               response.getBody().asString(),
               "$.artifacts[?(@.name=~ /^.*" + System.getenv("env") + ".*$/)].archive_download_url");
-      System.out.println("INSIDE NHA BLOCK ENV ---> "+ System.getenv("env"));
-      System.out.println("INSIDE NHA BLOCK artifact ---> "+ artifact);
+      System.out.println("INSIDE NHA BLOCK ENV ---> " + System.getenv("env"));
+      System.out.println("INSIDE NHA BLOCK artifact ---> " + artifact);
       return artifact.get(0).toString();
     }
   }

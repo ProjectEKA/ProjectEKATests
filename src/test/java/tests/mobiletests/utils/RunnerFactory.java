@@ -1,6 +1,7 @@
 package tests.mobiletests.utils;
 
 import io.appium.java_client.AppiumDriver;
+import tests.mobiletests.exceptions.InvalidEnvironmentException;
 import tests.mobiletests.flows.NHAFlow;
 
 public class RunnerFactory {
@@ -13,7 +14,7 @@ public class RunnerFactory {
         runner = new NHAFlow(driver);
         break;
       default:
-        runner = new NHAFlow(driver);
+        new InvalidEnvironmentException("The environment specified is not available.");
     }
   }
 }
