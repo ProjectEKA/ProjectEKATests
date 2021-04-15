@@ -17,12 +17,12 @@ public class RecoverHealthIDAPITest {
   String authToken;
   String sessionId;
 
-  @BeforeClass
+  //@BeforeClass
   public void setup() {
     authToken = new Login().getCMAuthToken();
   }
 
-  @Test(enabled = false)
+  //@Test(enabled = false)
   public void initRecoveryAPI() {
 
     // initiate the cm-id recovery process
@@ -35,7 +35,7 @@ public class RecoverHealthIDAPITest {
     sessionId = initRecoveryResponse.jsonPath().getString("sessionId");
   }
 
-  @Test(enabled = false)
+  //@Test(enabled = false)
   // @Test(dependsOnMethods = "initRecoveryAPI")
   public void confirmHealthIDAPI() {
 

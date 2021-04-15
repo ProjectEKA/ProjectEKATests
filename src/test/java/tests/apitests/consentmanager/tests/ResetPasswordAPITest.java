@@ -16,14 +16,14 @@ public class ResetPasswordAPITest {
   private static String otpAuthToken;
   RequestSpecification request;
 
-  @BeforeClass
+  //@BeforeClass
   public void setup() {
     RestAssured.baseURI = PropertiesCache.getInstance().getProperty("consentManagerURL");
     RestAssured.useRelaxedHTTPSValidation();
     request = RestAssured.given();
   }
 
-  @Test(alwaysRun = true)
+  //@Test(alwaysRun = true)
   public void generateOTPAPI() {
     // generate otp for enter phone #
     request.header("Content-Type", "application/json");
@@ -33,7 +33,7 @@ public class ResetPasswordAPITest {
     sessionId = generateOTPResponse.jsonPath().getString("sessionId");
   }
 
-  @Test(dependsOnMethods = "generateOTPAPI")
+  //@Test(dependsOnMethods = "generateOTPAPI")
   public void verifyOTPAPI() {
     // verify the otp
     request.header("Content-Type", "application/json");
@@ -43,7 +43,7 @@ public class ResetPasswordAPITest {
     otpAuthToken = verifyOTPResponse.jsonPath().getString("temporaryToken");
   }
 
-  @Test(dependsOnMethods = "verifyOTPAPI")
+  //@Test(dependsOnMethods = "verifyOTPAPI")
   public void resetPasswordAPI() {
     // reset-password after otp confirmation
     request.header("Content-Type", "application/json");

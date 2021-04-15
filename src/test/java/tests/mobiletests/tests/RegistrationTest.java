@@ -13,7 +13,7 @@ import tests.mobiletests.utils.Patient;
 
 public class RegistrationTest extends BaseDriver {
 
-  @Test(enabled = false)
+  //@Test(enabled = false)
   public void registerUser() {
     String userName = "TestUser" + AppUtility.generateRandomNo();
     Patient patient =
@@ -40,7 +40,7 @@ public class RegistrationTest extends BaseDriver {
         "Patient Name not displayed on Link Provider screen");
   }
 
-  @Test(enabled = false)
+  //@Test(enabled = false)
   public void grantConsent() {
     String userName = "TestUser" + AppUtility.generateRandomNo();
     Patient patient =

@@ -22,7 +22,7 @@ public class ConsentRequestGrantAPITest {
     hiuAuthToken = new Login().getHIUAuthToken();
   }
 
-  @Test
+  //@Test
   public void HIUConsentRequestAPI() {
 
     // create consent-request
@@ -41,7 +41,7 @@ public class ConsentRequestGrantAPITest {
     Assert.assertEquals(fetchConsentsResponse.getStatusCode(), 200);
   }
 
-  @Test(dependsOnMethods = "HIUConsentRequestAPI")
+  //@Test(dependsOnMethods = "HIUConsentRequestAPI")
   public void grantConsentRequestAPI() {
     // grant consent-request
     String pinAuth = new ConsentRequest().verifyConsentPIN("grant");
@@ -56,7 +56,7 @@ public class ConsentRequestGrantAPITest {
     Assert.assertEquals(grantConsentResponse.getStatusCode(), 200);
   }
 
-  @Test(dependsOnMethods = "grantConsentRequestAPI")
+  //@Test(dependsOnMethods = "grantConsentRequestAPI")
   public void checkHIUConsentStatusAPI() {
 
     // fetch the consents list and fetch the status

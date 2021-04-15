@@ -19,12 +19,12 @@ public class ForgetConsentPIN {
   RequestSpecification request;
   JsonPath jsonPathEvaluator;
 
-  @BeforeClass(alwaysRun = true)
+  //@BeforeClass(alwaysRun = true)
   public void setup() {
     authToken = new Login().getCMAuthToken();
   }
 
-  @Test
+  //@Test
   public void generateVerifyOTPAPI() {
 
     // generate otp for reset consent-pin
@@ -50,7 +50,7 @@ public class ForgetConsentPIN {
     temperoryToken = jsonPathEvaluator.getString("temporaryToken");
   }
 
-  @Test(dependsOnMethods = "generateVerifyOTPAPI")
+  //@Test(dependsOnMethods = "generateVerifyOTPAPI")
   public void resetConsentPINAPI() {
 
     // reset consent-pin
