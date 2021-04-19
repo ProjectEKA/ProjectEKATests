@@ -7,7 +7,7 @@ import tests.mobiletests.utils.BaseDriver;
 
 public class DiscoverPatientTest extends BaseDriver {
 
-  @Test
+  //@Test
   public void discoverPatientTest() {
     new LoginPage(driver)
         .loginUser()
@@ -16,7 +16,7 @@ public class DiscoverPatientTest extends BaseDriver {
         .clickConfirmProvider();
   }
 
-  @Test(enabled = false) // Disabled as the test user is not there yet for this flow
+  //@Test(enabled = false) // Disabled as the test user is not there yet for this flow
   public void registrationTest() {
     new HomePage(driver)
         .clickAddNewProvider()

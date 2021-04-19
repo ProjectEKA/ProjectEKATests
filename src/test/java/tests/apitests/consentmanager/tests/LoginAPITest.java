@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import tests.apitests.helpers.PropertiesCache;
 import tests.apitests.helpers.utils.Login;
 
-import static tests.apitests.consentmanager.TestBuilders.loginRefreshTokenPayload;
+import static tests.apitests.consentmanager.TestBuilders.loginPayload;
 
 public class LoginAPITest {
   String refreshToken;
@@ -29,15 +29,15 @@ public class LoginAPITest {
   }
 
   @Test
-  public void loginWithRefreshTokenAPI() {
+  public void loginWithAPI() {
     Login loginUser = new Login();
-    refreshToken = loginUser.getCMRefreshToken();
+    refreshToken = loginUser.getCMAuthToken();
     RequestSpecification request = RestAssured.given().spec(specification);
     request.header("Content-Type", "application/json");
-    Response response = request.body(loginRefreshTokenPayload(refreshToken)).post("/sessions");
+    Response response = request.body(loginPayload()).post("/sessions");
 
     Assert.assertEquals(response.getStatusCode(), 200, "Login failed");
     JsonPath jsonPathEvaluator = response.jsonPath();
-    Assert.assertNotNull(jsonPathEvaluator.getString("accessToken"));
+    Assert.assertNotNull(jsonPathEvaluator.getString("token"));
   }
 }

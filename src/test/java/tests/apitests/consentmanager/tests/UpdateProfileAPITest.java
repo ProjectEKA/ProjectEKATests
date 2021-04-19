@@ -16,12 +16,12 @@ public class UpdateProfileAPITest {
   String authToken;
   String pinAuthToken;
 
-  @BeforeClass(alwaysRun = true)
+  //@BeforeClass(alwaysRun = true)
   public void setup() {
     authToken = new Login().getCMAuthToken();
   }
 
-  @Test(groups = {"nhsDev"})
+  //@Test(groups = {"nhsDev"})
   public void updatePasswordAPI() {
 
     // update password from profile
@@ -34,7 +34,7 @@ public class UpdateProfileAPITest {
     Assert.assertEquals(updatePasswordResponse.getStatusCode(), 200);
   }
 
-  @Test(groups = {"nhsDev"})
+  //@Test(groups = {"nhsDev"})
   public void verifyPINAPI() {
 
     // verify-pin for update-pin
@@ -48,9 +48,9 @@ public class UpdateProfileAPITest {
     pinAuthToken = verifyPINResponse.jsonPath().getString("temporaryToken");
   }
 
-  @Test(
-      dependsOnMethods = "verifyPINAPI",
-      groups = {"nhsDev"})
+  //@Test(
+     // dependsOnMethods = "verifyPINAPI",
+     // groups = {"nhsDev"})
   public void updatePINAPI() {
 
     // update PIN from profile

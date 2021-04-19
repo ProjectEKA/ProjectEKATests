@@ -13,12 +13,12 @@ public class HIUAPITest {
 
   String authToken;
 
-  @BeforeClass
+  //@BeforeClass
   public void setup() {
     authToken = new Login().getHIUAuthToken();
   }
 
-  @Test(groups = {"All"})
+  //@Test(groups = {"All"})
   public void discoverPatientAPI() {
 
     // identifies patient by cm-id

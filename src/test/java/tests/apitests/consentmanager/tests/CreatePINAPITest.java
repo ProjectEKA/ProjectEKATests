@@ -13,12 +13,12 @@ public class CreatePINAPITest {
 
   String authToken;
 
-  @BeforeClass(alwaysRun = true)
+  //@BeforeClass(alwaysRun = true)
   public void setup() {
     authToken = new Login().getCMAuthToken();
   }
 
-  @Test(groups = {"nhsDev"})
+  //@Test(groups = {"nhsDev"})
   public void createPINAPI() {
 
     // checks if the patient has consent-pin created

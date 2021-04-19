@@ -12,13 +12,13 @@ import tests.apitests.healthinformationprovider.models.HIPPatientDiscovery;
 
 public class HIPAPITest {
 
-  @BeforeClass
+  //@BeforeClass
   public void setup() {
     RestAssured.baseURI = "https://ncg-dev.projecteka.in/hip";
     RestAssured.useRelaxedHTTPSValidation();
   }
 
-  @Test(enabled = false)
+  //@Test(enabled = false)
   public void discoverPatient() {
 
     RequestSpecification request = RestAssured.given();

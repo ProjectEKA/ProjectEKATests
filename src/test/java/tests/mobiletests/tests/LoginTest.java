@@ -7,9 +7,10 @@ import tests.mobiletests.utils.BaseDriver;
 
 public class LoginTest extends BaseDriver {
 
-  @Test
+  //@Test
   public void loginUser() {
     boolean status = new LoginPage(driver).loginUser().validateHomePage();
+    System.out.println(status);
     Assert.assertTrue(status);
   }
 }
